@@ -2,14 +2,18 @@
 import { getPageSlug } from "../../utils/pages";
 export async function getStaticPaths() {
   const FRAMEWORK_SLUGS = ["javascript", "react", "angular", "vue"];
-  const pages = await Astro.glob("../../../content/docs/*.mdx");
+  const DOCS_FOLDER = "content/docs";
+  const pages = await Astro.glob("../../../content/docs/**/*.mdx");
 
   return FRAMEWORK_SLUGS.map((framework) => {
     return pages?.map((page) => {
       return {
         params: {
           framework,
-          page: getPageSlug(page.url!),
+          page: getPageSlug({
+            rootFolder: DOCS_FOLDER,
+            url: page.url!,
+          }),
         },
         props: {
           ...page,
@@ -21,11 +25,11 @@ export async function getStaticPaths() {
 
 const {
   Content,
-  frontmatter: { title },
+  frontmatter: { title, enterprise },
 } = Astro.props;
 
 const { framework } = Astro.params;
 ---
 
-<h1>[{framework}]: {title}</h1>
+<h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
 <Content />

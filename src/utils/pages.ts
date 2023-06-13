@@ -1,6 +1,14 @@
-export function getPageSlug(url: string) {
-  const page = url.split("/").pop();
-  const slug = page?.split(".")[0];
+export function getPageSlug({
+  rootFolder,
+  url,
+}: {
+  rootFolder: string;
+  url: string;
+}) {
+  const folder = url
+    .replace(rootFolder, "")
+    .split("/")
+    .filter((path) => path !== "")[0];
 
-  return slug;
+  return folder;
 }

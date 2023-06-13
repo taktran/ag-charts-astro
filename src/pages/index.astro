@@ -1,21 +1,39 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="AG Charts">
-	<main>
-		<h1>Welcome to AG Charts</h1>
-</Layout>
+  <main>
+    <h1>Welcome to AG Charts</h1>
+    <p>Sample pages</p>
+    <h2>Line series</h2>
+    <ul>
+      <li><a href="/javascript/line-series/">[javascript]: Line series</a></li>
+      <li><a href="/react/line-series/">[react]: Line series</a></li>
+      <li><a href="/angular/line-series/">[angular]: Line series</a></li>
+      <li><a href="/vue/line-series/">[vue]: Line series</a></li>
+    </ul>
+    <h2>Heatmap series</h2>
+    <ul>
+      <li>
+        <a href="/javascript/heatmap-series/">[javascript]: Heatmap series</a>
+      </li>
+      <li><a href="/react/heatmap-series/">[react]: Heatmap series</a></li>
+      <li><a href="/angular/heatmap-series/">[angular]: Heatmap series</a></li>
+      <li><a href="/vue/heatmap-series/">[vue]: Heatmap series</a></li>
+    </ul>
+  </main>
 
-<style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-</style>
+  <style>
+    main {
+      margin: auto;
+      padding: 1.5rem;
+      max-width: 60ch;
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 0;
+    }
+  </style>
+</Layout>
