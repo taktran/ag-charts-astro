@@ -1,40 +1,18 @@
 ---
-import { getPageSlug } from "../../utils/pages";
-export async function getStaticPaths() {
-  const FRAMEWORK_SLUGS = ["javascript", "react", "angular", "vue"];
-  const DOCS_FOLDER = "content/docs";
-  const pages = await Astro.glob("../../../content/docs/**/*.mdx");
+import { getCollection } from "astro:content";
+import { getDocPages } from "../../utils/pages";
 
-  return FRAMEWORK_SLUGS.map((framework) => {
-    return pages?.map((page) => {
-      return {
-        params: {
-          framework,
-          page: getPageSlug({
-            rootFolder: DOCS_FOLDER,
-            url: page.url!,
-          }),
-        },
-        props: {
-          ...page,
-        },
-      };
-    });
-  }).flat();
+export async function getStaticPaths() {
+  const pages = await getCollection("docs");
+  return getDocPages(pages);
 }
 
-const {
-  Content,
-  frontmatter: { title, enterprise },
-} = Astro.props;
-
+const { page } = Astro.props;
 const { framework } = Astro.params;
+const { title, enterprise } = page.data;
 
-import { TestReact } from "../../components/TestReact";
-import TestAstro from "../../components/TestAstro.astro";
+const { Content } = await page.render();
 ---
 
 <h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
-<TestReact text="Within [page].astro" />
-<TestAstro text="Within [page].astro" />
 <Content />

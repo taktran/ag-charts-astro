@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import { getDocPages } from "../utils/pages";
+
+const docs = await getCollection("docs");
+const docPages = getDocPages(docs);
+---
+
+<h1>All generated docs pages</h1>
+<ul>
+  {
+    docPages.map((docPage: any) => (
+      <li>
+        <p>params.framework: {docPage.params.framework}</p>
+        <p>params.page: {docPage.params.page}</p>
+        <div>
+          props.page:
+          <pre>{JSON.stringify(docPage.props.page, null, 2)}</pre>
+        </div>
+      </li>
+    ))
+  }
+</ul>

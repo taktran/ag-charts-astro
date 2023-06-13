@@ -1,14 +1,17 @@
-export function getPageSlug({
-  rootFolder,
-  url,
-}: {
-  rootFolder: string;
-  url: string;
-}) {
-  const folder = url
-    .replace(rootFolder, "")
-    .split("/")
-    .filter((path) => path !== "")[0];
+import { FRAMEWORK_SLUGS } from "../constants";
 
-  return folder;
+export function getDocPages(pages: any) {
+  return FRAMEWORK_SLUGS.map((framework) => {
+    return pages.map((page: any) => {
+      return {
+        params: {
+          framework,
+          page: page.slug,
+        },
+        props: {
+          page,
+        },
+      };
+    });
+  }).flat();
 }
