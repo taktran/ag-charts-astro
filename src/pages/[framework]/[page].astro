@@ -29,7 +29,12 @@ const {
 } = Astro.props;
 
 const { framework } = Astro.params;
+
+import { TestReact } from "../../components/TestReact";
+import TestAstro from "../../components/TestAstro.astro";
 ---
 
 <h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
+<TestReact text="Within [page].astro" />
+<TestAstro text="Within [page].astro" />
 <Content />
