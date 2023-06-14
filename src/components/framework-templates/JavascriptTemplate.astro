@@ -1,9 +1,6 @@
 ---
 const {
   isDev,
-  framework,
-  page,
-  exampleName,
   modifiedTimeMs,
   isExecuting,
   options,
@@ -13,17 +10,16 @@ const {
   appLocation,
 } = Astro.props;
 
-import MetaData from "./components/MetaData";
-import Styles from "./components/Styles";
-import Scripts from "./components/Scripts";
+import MetaData from "./lib/MetaData";
+import ExampleStyle from "./lib/ExampleStyle";
+import Styles from "./lib/Styles";
+import Scripts from "./lib/Scripts";
+import { getChartScriptPath } from "../../utils/pages";
 
 const getCacheBustingUrl = (url: string, timestamp: string) =>
   `${url}?t=${timestamp}`;
 
-// TODO: Figure out how to get proper paths
-const chartScriptPath = options.enterprise
-  ? `https://build.ag-grid.com/dev/ag-charts-enterprise/dist/ag-charts-enterprise.min.js`
-  : `https://build.ag-grid.com/dev/ag-charts-enterprise/dist/ag-charts-community.min.js`;
+const chartScriptPath = getChartScriptPath(options.enterprise);
 ---
 
 <html lang="en">
@@ -35,29 +31,7 @@ const chartScriptPath = options.enterprise
       isExecuting={isExecuting}
       options={options}
     />
-    <style media="only screen">
-      html,
-      body {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        box-sizing: border-box;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      html {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 0;
-        overflow: auto;
-      }
-
-      body {
-        padding: 1rem;
-        overflow: auto;
-      }
-    </style>
+    <ExampleStyle />
     <Styles
       files={isDev
         ? styleFiles

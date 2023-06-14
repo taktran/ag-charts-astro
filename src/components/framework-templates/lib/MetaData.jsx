@@ -12,7 +12,7 @@ export const MetaData = ({
   title,
   modifiedTimeMs,
   isExecuting,
-  options: { metaCSP },
+  options: { metaCSP } = {},
 }) => (
   <>
     <title>{title}</title>
