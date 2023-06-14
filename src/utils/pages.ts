@@ -12,6 +12,10 @@ export const getChartScriptPath = (isEnterprise: boolean) => {
     : `https://build.ag-grid.com/dev/ag-charts-community/dist/ag-charts-community.min.js`;
 };
 
+// TODO: Figure out how to get proper paths
+export const getChartReactScriptPath = () =>
+  "https://build.ag-grid.com/dev/ag-charts-react/lib/agChartsReact.js";
+
 export function getDocPages(pages: any) {
   return FRAMEWORK_SLUGS.map((framework) => {
     return pages.map((page: any) => {
@@ -36,6 +40,41 @@ export function isScriptFile(file: string) {
 export function isStyleFile(file: string) {
   return file.endsWith(".css");
 }
+
+export const getEntryFileName = ({
+  framework,
+  internalFramework,
+}: {
+  framework: string;
+  internalFramework: string;
+}) => {
+  const entryFile = {
+    react:
+      internalFramework === "reactFunctionalTs" ? "index.tsx" : "index.jsx",
+    angular: "app/app.component.ts",
+    javascript: internalFramework === "typescript" ? "main.ts" : "main.js",
+  };
+
+  return entryFile[framework] || "main.js";
+};
+
+// TODO: Find a better way to determine if an example is enterprise or not
+export const getIsEnterprise = ({
+  framework,
+  internalFramework,
+  entryFile,
+}: {
+  framework: string;
+  internalFramework: string;
+  entryFile: string;
+}) => {
+  const entryFileName = getEntryFileName({ framework, internalFramework });
+
+  const isEnterprise = false;
+  return entryFileName === "main.js"
+    ? entryFile?.includes("agChartsEnterprise")
+    : entryFile?.includes("ag-charts-enterprise");
+};
 
 /**
  * The "internalFramework" is the framework name we use inside the example runner depending on which options the

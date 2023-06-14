@@ -5,9 +5,11 @@ import {
   isStyleFile,
   getInternalFramework,
   getBoilerPlateFramework,
+  getEntryFileName,
+  getIsEnterprise,
 } from "../../../../utils/pages";
 import JavascriptTemplate from "../../../../components/framework-templates/JavascriptTemplate.astro";
-import ReactTemplateLegacy from "../../../../components/framework-templates/ReactTemplateLegacy";
+import ReactTemplate from "../../../../components/framework-templates/ReactTemplate.astro";
 
 const { framework, page, exampleName } = Astro.params;
 
@@ -58,10 +60,20 @@ const indexHtmlFile = `${exampleFolderPath}/index.html`;
 const indexHtmlPathUrl = new URL(indexHtmlFile, import.meta.url);
 const indexHtml = await fs.readFile(indexHtmlPathUrl, "utf-8").catch(() => {});
 
-const mainJsFile = `${exampleFolderPath}/main.js`;
-const mainJsFileUrl = new URL(mainJsFile, import.meta.url);
-const mainJs = await fs.readFile(mainJsFileUrl, "utf-8").catch(() => {});
-const isEnterprise = mainJs?.includes("agChartsEnterprise"); // TODO: Find a better way to determine if an example is enterprise or not
+const entryFileName = getEntryFileName({
+  framework,
+  internalFramework,
+});
+const entryFilePath = `${exampleFolderPath}/${entryFileName}`;
+const entryFileUrl = new URL(entryFilePath, import.meta.url);
+const entryFile = await fs.readFile(entryFileUrl, "utf-8").catch(() => {});
+const entryFileWebUrl = `${exampleFolderBaseUrl}${entryFileName}`;
+
+const isEnterprise = getIsEnterprise({
+  framework,
+  internalFramework,
+  entryFile,
+});
 
 const exampleFolderPathUrl = new URL(exampleFolderPath, import.meta.url);
 const exampleFiles = await fs.readdir(exampleFolderPathUrl);
@@ -101,22 +113,17 @@ const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boil
 
 {
   framework === "react" && (
-    <ReactTemplateLegacy
+    <ReactTemplate
       isDev={isDev}
-      library="charts"
       modifiedTimeMs={Date.now()}
       isExecuting={true}
       options={{
         enterprise: isEnterprise,
       }}
+      entryFileUrl={entryFileWebUrl}
       scriptFiles={scriptFiles}
       styleFiles={styleFiles}
-      indexFragment={indexHtml}
       appLocation={exampleFolderBaseUrl}
-      internalFramework={internalFramework}
-      boilerplatePath={boilerplatePath}
-      importType={importType}
-      type={type}
     />
   )
 }

@@ -1,0 +1,48 @@
+---
+const {
+  isDev,
+  modifiedTimeMs,
+  isExecuting,
+  options,
+  entryFileUrl,
+  styleFiles,
+  scriptFiles,
+  appLocation,
+} = Astro.props;
+
+import Scripts from "./lib/Scripts";
+import { getChartScriptPath, getChartReactScriptPath } from "../../utils/pages";
+
+const chartScriptPath = getChartScriptPath(options.enterprise);
+const chartReactScriptPath = getChartReactScriptPath();
+---
+
+<html lang="en">
+  <head>
+    <title>React Example - Babel compilation</title>
+
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    {chartScriptPath ? <script src={chartScriptPath} /> : ""}
+    {
+      chartReactScriptPath ? (
+        <script is:inline type="text/babel" src={chartReactScriptPath} />
+      ) : (
+        ""
+      )
+    }
+
+    <script is:inline type="text/babel" src={entryFileUrl}></script>
+    <Scripts files={scriptFiles} />
+  </body>
+</html>
