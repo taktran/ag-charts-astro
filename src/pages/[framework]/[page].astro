@@ -14,5 +14,7 @@ const { title, enterprise } = page.data;
 const { Content } = await page.render();
 ---
 
+<a href="/">&lt; Back</a>
+
 <h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
 <Content />

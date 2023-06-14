@@ -15,3 +15,12 @@ export function getDocPages(pages: any) {
     });
   }).flat();
 }
+
+// TODO: Make file filter more generic
+export function isScriptFile(file: string) {
+  return file.endsWith(".js");
+}
+
+export function isStyleFile(file: string) {
+  return file.endsWith(".css");
+}

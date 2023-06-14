@@ -1,0 +1,16 @@
+---
+import { SimpleExampleRunner } from "./SimpleExampleRunner";
+
+const { title, name, type, options } = Astro.props;
+---
+
+<iframe src={`./examples/${name}`}></iframe>
+
+<style>
+  iframe {
+    display: block;
+    width: 100%;
+    height: 500px;
+    border: 0;
+  }
+</style>

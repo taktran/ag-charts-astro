@@ -1,0 +1,87 @@
+---
+const {
+  isDev,
+  framework,
+  page,
+  exampleName,
+  modifiedTimeMs,
+  isExecuting,
+  options,
+  styleFiles,
+  scriptFiles,
+  indexFragment,
+  appLocation,
+} = Astro.props;
+
+import MetaData from "./components/MetaData";
+import Styles from "./components/Styles";
+import Scripts from "./components/Scripts";
+
+const getCacheBustingUrl = (url: string, timestamp: string) =>
+  `${url}?t=${timestamp}`;
+
+// TODO: Figure out how to get proper paths
+const chartScriptPath = options.enterprise
+  ? `https://build.ag-grid.com/dev/ag-charts-enterprise/dist/ag-charts-enterprise.min.js`
+  : `https://build.ag-grid.com/dev/ag-charts-enterprise/dist/ag-charts-community.min.js`;
+---
+
+<html lang="en">
+  <head>
+    <MetaData
+      isDev={isDev}
+      title="JavaScript example"
+      modifiedTimeMs={modifiedTimeMs}
+      isExecuting={isExecuting}
+      options={options}
+    />
+    <style media="only screen">
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      html {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        overflow: auto;
+      }
+
+      body {
+        padding: 1rem;
+        overflow: auto;
+      }
+    </style>
+    <Styles
+      files={isDev
+        ? styleFiles
+            .filter(
+              (file: string) =>
+                !file.includes("style.css") && !file.includes("styles.css")
+            )
+            .map((file: string) => getCacheBustingUrl(file, modifiedTimeMs))
+        : styleFiles}
+    />
+  </head>
+  <body data-app-location={appLocation}>
+    <Fragment set:html={indexFragment} />
+
+    <script is:inline>
+      var __basePath = document.body.dataset.appLocation;
+    </script>
+    {chartScriptPath ? <script src={chartScriptPath} /> : ""}
+    <Scripts files={scriptFiles} />
+    <Styles
+      files={styleFiles.filter(
+        (file: string) =>
+          file.includes("style.css") || file.includes("styles.css")
+      )}
+    />
+  </body>
+</html>

@@ -1,0 +1,64 @@
+---
+import fs from "node:fs/promises";
+import { isScriptFile, isStyleFile } from "../../../../utils/pages";
+import JavascriptTemplate from "../../../../components/framework-templates/JavascriptTemplate.astro";
+
+const { framework, page, exampleName } = Astro.params;
+
+const internalFramework = "vanilla"; // TODO: Use `getInternalFramework`
+
+const srcRoot = "../../../../../public";
+const exampleFolder = `examples/${page}/${exampleName}/packages/${internalFramework}`;
+const exampleFolderBaseUrl = `/${exampleFolder}`;
+
+const exampleFolderPath = `${srcRoot}/${exampleFolder}`;
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: {
+        framework: "javascript",
+        page: "heatmap-series",
+        exampleName: "basic-heatmap",
+      },
+    },
+  ];
+}
+
+const isDev = import.meta.env.DEV;
+
+const indexHtmlFile = `${exampleFolderPath}/index.html`;
+const indexHtmlPathUrl = new URL(indexHtmlFile, import.meta.url);
+const indexHtml = await fs.readFile(indexHtmlPathUrl, "utf-8");
+
+const mainJsFile = `${exampleFolderPath}/main.js`;
+const mainJsFileUrl = new URL(mainJsFile, import.meta.url);
+const mainJs = await fs.readFile(mainJsFileUrl, "utf-8");
+const isEnterprise = mainJs.includes("agChartsEnterprise"); // TODO: Find a better way to determine if an example is enterprise or not
+
+const exampleFolderPathUrl = new URL(exampleFolderPath, import.meta.url);
+const exampleFiles = await fs.readdir(exampleFolderPathUrl);
+
+const scriptFiles = exampleFiles.filter(isScriptFile).map((file) => {
+  return `${exampleFolderBaseUrl}/${file}`;
+});
+const styleFiles = exampleFiles.filter(isStyleFile).map((file) => {
+  return `${exampleFolderBaseUrl}/${file}`;
+});
+---
+
+<JavascriptTemplate
+  isDev={isDev}
+  framework={framework}
+  page={page}
+  exampleName={exampleName}
+  modifiedTimeMs={Date.now()}
+  isExecuting={true}
+  options={{
+    enterprise: isEnterprise,
+  }}
+  scriptFiles={scriptFiles}
+  styleFiles={styleFiles}
+  indexFragment={indexHtml}
+  appLocation={exampleFolderBaseUrl}
+/>
