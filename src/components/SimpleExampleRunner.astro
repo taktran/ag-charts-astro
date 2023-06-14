@@ -2,11 +2,20 @@
 import { SimpleExampleRunner } from "./SimpleExampleRunner";
 
 const { title, name, type, options } = Astro.props;
+
+const exampleUrl = `./examples/${name}`;
 ---
 
-<iframe src={`./examples/${name}`}></iframe>
+<div class="container">
+  <a href={exampleUrl} target="_blank">Open in New Tab</a>
+  <iframe src={exampleUrl}></iframe>
+</div>
 
 <style>
+  .container {
+    border: 1px solid gray;
+    padding: 8px;
+  }
   iframe {
     display: block;
     width: 100%;
