@@ -2,6 +2,49 @@ import { FRAMEWORK_SLUGS } from "../constants";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+interface ExamplePathArgs {
+  page: string;
+  exampleName: string;
+  importType: string;
+  internalFramework: string;
+}
+
+export const getPublicRootFileUrl = (): URL => {
+  const publicRoot = "../../public";
+  return new URL(publicRoot, import.meta.url);
+};
+
+export const getExamplePath = ({
+  page,
+  exampleName,
+  importType,
+  internalFramework,
+}: ExamplePathArgs): string => {
+  return path.join(
+    "examples",
+    page,
+    exampleName,
+    importType,
+    internalFramework
+  );
+};
+
+export const getExampleFolderPath = (args: ExamplePathArgs): string => {
+  const examplePath = getExamplePath(args);
+  return path.join(getPublicRootFileUrl().pathname, examplePath);
+};
+
+export const getExampleBaseUrl = (args: ExamplePathArgs): string => {
+  const examplePath = getExamplePath(args);
+  return path.join("/", examplePath);
+};
+
+export const getExampleFiles = (args: ExamplePathArgs) => {
+  const exampleFolderPath = getExampleFolderPath(args);
+  const exampleFolderPathUrl = new URL(exampleFolderPath, import.meta.url);
+  return fs.readdir(exampleFolderPathUrl);
+};
+
 // TODO: Figure out published packages
 export const isUsingPublishedPackages = () => false;
 export const isPreProductionBuild = () => false;
@@ -35,7 +78,7 @@ export function getDocPages(pages: any) {
 }
 
 export async function getDocExamplePages({ pages }: { pages: any }) {
-  const publicRoot = "../../public";
+  const publicRoot = getPublicRootFileUrl().pathname;
   const exampleFolderBasePathUrl = new URL(
     path.join(publicRoot, "examples"),
     import.meta.url
@@ -76,6 +119,24 @@ export function isScriptFile(file: string) {
   return file.endsWith(".js");
 }
 
+export async function getScriptFiles(args: ExamplePathArgs) {
+  const exampleFiles = await getExampleFiles(args);
+  const exampleBaseUrl = getExampleBaseUrl(args);
+
+  return exampleFiles.filter(isScriptFile).map((file) => {
+    return path.join(exampleBaseUrl, file);
+  });
+}
+
+export async function getStyleFiles(args: ExamplePathArgs) {
+  const exampleFiles = await getExampleFiles(args);
+  const exampleBaseUrl = getExampleBaseUrl(args);
+
+  return exampleFiles.filter(isStyleFile).map((file) => {
+    return path.join(exampleBaseUrl, file);
+  });
+}
+
 export function isStyleFile(file: string) {
   return file.endsWith(".css");
 }
@@ -95,6 +156,28 @@ export const getEntryFileName = ({
   };
 
   return entryFile[framework] || "main.js";
+};
+
+export const getEntryFileContents = async ({
+  page,
+  exampleName,
+  importType,
+  framework,
+  internalFramework,
+}): Promise<string | undefined> => {
+  const exampleFolderPath = getExampleFolderPath({
+    page,
+    exampleName,
+    importType,
+    internalFramework,
+  });
+  const entryFileName = getEntryFileName({
+    framework,
+    internalFramework,
+  });
+  const entryFilePath = path.join(exampleFolderPath, entryFileName);
+  const entryFileUrl = new URL(entryFilePath, import.meta.url);
+  return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
 };
 
 // TODO: Find a better way to determine if an example is enterprise or not

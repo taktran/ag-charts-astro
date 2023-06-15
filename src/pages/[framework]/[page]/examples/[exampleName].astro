@@ -3,13 +3,15 @@ import { getCollection } from "astro:content";
 import fs from "node:fs/promises";
 import path from "path";
 import {
-  isScriptFile,
-  isStyleFile,
+  getScriptFiles,
+  getStyleFiles,
   getInternalFramework,
   getBoilerPlateFramework,
-  getEntryFileName,
   getIsEnterprise,
   getDocExamplePages,
+  getExampleFolderPath,
+  getExampleBaseUrl,
+  getEntryFileContents,
 } from "../../../../utils/pages";
 import JavascriptTemplate from "../../../../components/framework-templates/JavascriptTemplate.astro";
 import ReactTemplate from "../../../../components/framework-templates/ReactTemplate.astro";
@@ -33,16 +35,18 @@ const importType = "packages";
 const library = "charts";
 const type = "generated";
 
-const publicRoot = "../../../../../public";
-const exampleFolder = path.join(
-  "examples",
+const exampleFolderPath = getExampleFolderPath({
   page,
   exampleName,
   importType,
-  internalFramework
-);
-const exampleFolderPath = path.join(publicRoot, exampleFolder);
-const exampleFolderBaseUrl = path.join("/", exampleFolder);
+  internalFramework,
+});
+const exampleBaseUrl = getExampleBaseUrl({
+  page,
+  exampleName,
+  importType,
+  internalFramework,
+});
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
@@ -58,14 +62,13 @@ const indexHtmlFile = path.join(exampleFolderPath, "index.html");
 const indexHtmlPathUrl = new URL(indexHtmlFile, import.meta.url);
 const indexHtml = await fs.readFile(indexHtmlPathUrl, "utf-8").catch(() => {});
 
-const entryFileName = getEntryFileName({
+const entryFile = await getEntryFileContents({
+  page,
+  exampleName,
+  importType,
   framework,
   internalFramework,
 });
-const entryFilePath = path.join(exampleFolderPath, entryFileName);
-const entryFileUrl = new URL(entryFilePath, import.meta.url);
-const entryFile = await fs.readFile(entryFileUrl, "utf-8").catch(() => {});
-const entryFileWebUrl = path.join("/", exampleFolder, entryFileName);
 
 const isEnterprise = getIsEnterprise({
   framework,
@@ -73,14 +76,17 @@ const isEnterprise = getIsEnterprise({
   entryFile,
 });
 
-const exampleFolderPathUrl = new URL(exampleFolderPath, import.meta.url);
-const exampleFiles = await fs.readdir(exampleFolderPathUrl);
-
-const scriptFiles = exampleFiles.filter(isScriptFile).map((file) => {
-  return path.join(exampleFolderBaseUrl, file);
+const scriptFiles = await getScriptFiles({
+  page,
+  exampleName,
+  importType,
+  internalFramework,
 });
-const styleFiles = exampleFiles.filter(isStyleFile).map((file) => {
-  return path.join(exampleFolderBaseUrl, file);
+const styleFiles = await getStyleFiles({
+  page,
+  exampleName,
+  importType,
+  internalFramework,
 });
 
 const boilerPlateFramework = getBoilerPlateFramework({
@@ -104,7 +110,7 @@ const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boil
       scriptFiles={scriptFiles}
       styleFiles={styleFiles}
       indexFragment={indexHtml}
-      appLocation={exampleFolderBaseUrl}
+      appLocation={exampleBaseUrl}
     />
   )
 }
@@ -119,7 +125,7 @@ const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boil
       }}
       scriptFiles={scriptFiles}
       styleFiles={styleFiles}
-      appLocation={exampleFolderBaseUrl}
+      appLocation={exampleBaseUrl}
       library={library}
       boilerplatePath={boilerplatePath}
       importType={importType}
