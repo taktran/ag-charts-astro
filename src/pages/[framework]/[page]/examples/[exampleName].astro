@@ -83,13 +83,13 @@ const styleFiles = exampleFiles.filter(isStyleFile).map((file) => {
   return path.join(exampleFolderBaseUrl, file);
 });
 
-// const boilerPlateFramework = getBoilerPlateFramework({
-//   framework,
-//   useFunctionalReact,
-//   useVue3,
-//   useTypescript,
-// });
-// const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boilerplate/`;
+const boilerPlateFramework = getBoilerPlateFramework({
+  framework,
+  useFunctionalReact,
+  useVue3,
+  useTypescript,
+});
+const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boilerplate/`;
 ---
 
 {
@@ -108,20 +108,23 @@ const styleFiles = exampleFiles.filter(isStyleFile).map((file) => {
     />
   )
 }
-
 {
   framework === "react" && (
-    <ReactTemplate
+    <ReactTemplateLegacy
       isDev={isDev}
       modifiedTimeMs={Date.now()}
       isExecuting={true}
       options={{
         enterprise: isEnterprise,
       }}
-      entryFileUrl={entryFileWebUrl}
       scriptFiles={scriptFiles}
       styleFiles={styleFiles}
       appLocation={exampleFolderBaseUrl}
+      library={library}
+      boilerplatePath={boilerplatePath}
+      importType={importType}
+      type={type}
+      internalFramework={internalFramework}
     />
   )
 }

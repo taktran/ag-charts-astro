@@ -12,4 +12,5 @@ export const agChartsReactVersion = "8.0.0";
 export const agChartsAngularVersion = "8.0.0";
 export const agChartsVueVersion = "8.0.0";
 
-export const localPrefix = `/`;
+// TODO: Figure out this
+export const localPrefix = `/`; // process.env.GATSBY_HOST}${process.env.GATSBY_ROOT_DIRECTORY

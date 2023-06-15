@@ -377,7 +377,7 @@ const SystemJs = ({
 
   return (
     <>
-      <script
+      {/* <script
         dangerouslySetInnerHTML={{
           __html: `
             var appLocation = '${appLocation}';
@@ -388,6 +388,22 @@ const SystemJs = ({
                 ? `var systemJsPaths = ${format(systemJsPaths)};`
                 : ""
             }
+        `,
+        }}
+      /> */}
+      {/* TODO: Fix systemjs import */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            var appLocation = '${appLocation}';
+            var boilerplatePath = '${boilerplatePath}';
+            var systemJsMap = {
+              "ag-charts-react": "https://build.ag-grid.com/dev/ag-charts-react"
+            };
+            var systemJsPaths = {
+                "ag-charts-community": "https://build.ag-grid.com/dev/ag-charts-community/dist/ag-charts-community.cjs.js",
+                "ag-charts-enterprise": "https://build.ag-grid.com/dev/ag-charts-enterprise/dist/ag-charts-enterprise.cjs.js"
+            };
         `,
         }}
       />

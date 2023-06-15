@@ -38,20 +38,15 @@ const ReactTemplateLegacy = ({
     </head>
     <body>
       <div id="root"></div>
-
       <LoadingSpinner />
-
       <Scripts files={scriptFiles} />
       <SystemJs
         library={library}
         boilerplatePath={boilerplatePath}
         appLocation={appLocation}
-        startFile={
-          appLocation +
-          (internalFramework === "reactFunctionalTs"
-            ? "index.tsx"
-            : "index.jsx")
-        }
+        startFile={`${appLocation}/${
+          internalFramework === "reactFunctionalTs" ? "index.tsx" : "index.jsx"
+        }`}
         framework={"react"}
         importType={importType}
         options={options}
