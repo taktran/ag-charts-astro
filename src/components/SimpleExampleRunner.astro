@@ -1,13 +1,29 @@
 ---
 import { SimpleExampleRunner } from "./SimpleExampleRunner";
-
+import { OpenStackblitzButton } from "./stackblitz/OpenStackblitzButton";
 const { title, name, type, options } = Astro.props;
 
 const exampleUrl = `./examples/${name}`;
+
+// TODO: Get this from framework selector
+const framework = Astro.url.pathname.split("/")[1];
 ---
 
 <div class="container">
-  <a href={exampleUrl} target="_blank">Open in New Tab</a>
+  <div class="controls">
+    <a href={exampleUrl} target="_blank">Open in New Tab</a>
+    {
+      framework === "react" && (
+        <OpenStackblitzButton
+          client:only
+          title={title}
+          name={name}
+          framework={framework}
+        />
+      )
+    }
+  </div>
+
   <iframe src={exampleUrl}></iframe>
 </div>
 
@@ -15,6 +31,10 @@ const exampleUrl = `./examples/${name}`;
   .container {
     border: 1px solid gray;
     padding: 8px;
+  }
+  .controls {
+    display: flex;
+    gap: 1rem;
   }
   iframe {
     display: block;
