@@ -1,4 +1,6 @@
 import { FRAMEWORK_SLUGS } from "../constants";
+import fs from "node:fs/promises";
+import path from "node:path";
 
 // TODO: Figure out published packages
 export const isUsingPublishedPackages = () => false;
@@ -30,6 +32,43 @@ export function getDocPages(pages: any) {
       };
     });
   }).flat();
+}
+
+export async function getDocExamplePages({ pages }: { pages: any }) {
+  const publicRoot = "../../public";
+  const exampleFolderBasePathUrl = new URL(
+    path.join(publicRoot, "examples"),
+    import.meta.url
+  );
+
+  return (
+    await Promise.all(
+      FRAMEWORK_SLUGS.map((framework) => {
+        return Promise.all(
+          pages.map(async (page: any) => {
+            const pageExampleFolderPath = path.join(
+              exampleFolderBasePathUrl.pathname,
+              page.slug
+            );
+            const exampleFiles = await fs.readdir(pageExampleFolderPath);
+            return exampleFiles.map((exampleName) => {
+              return {
+                params: {
+                  framework,
+                  page: page.slug,
+                  exampleName,
+                },
+                props: {
+                  exampleBasePath: exampleFolderBasePathUrl.pathname,
+                  basePath: pageExampleFolderPath,
+                },
+              };
+            });
+          })
+        );
+      })
+    )
+  ).flat(2);
 }
 
 // TODO: Make file filter more generic

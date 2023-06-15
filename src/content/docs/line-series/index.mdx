@@ -2,6 +2,8 @@
 title: "Line Series"
 ---
 
+import SimpleExampleRunner from "../../../components/SimpleExampleRunner.astro";
+
 The Line series is a good choice when you need to spot a trend, render large amounts of data or create a real-time chart. Line series is also the preferred choice for rendering continuous data with irregular intervals or incomplete data that has some values missing.
 
 ## Single Series
@@ -20,7 +22,11 @@ series: [
 ];
 ```
 
-<chart-example title='Single Line Series' name='basic-line' type='generated'></chart-example>
+<SimpleExampleRunner
+  title="Single Line Series"
+  name="basic-line"
+  type="generated"
+/>
 
 The chart expects the data (`chart.data` property) to be an array of objects, where each object is a table row or a database record and each key is a column.
 
@@ -41,7 +47,12 @@ series: [{
 
 The above config is used in the example below. Feel free to open it in Pluker and experiment with other [label options](#reference-line.label).
 
-<chart-example title='Line Series With Labels' name='basic-line-labels' type='generated'></chart-example>
+
+<SimpleExampleRunner
+  title="Line Series With Labels"
+  name="basic-line-labels"
+  type="generated"
+/>
 
 ## Multiple Series
 
@@ -74,7 +85,9 @@ series: [
 
 And we get a result like this:
 
-<chart-example title='Multiple Line Series' name='multi-line' type='generated'></chart-example>
+<SimpleExampleRunner
+  title='Multiple Line Series' name='multi-line' type='generated'
+/>
 
 ## Legend and Tooltip Information
 
@@ -95,7 +108,9 @@ series: [
 ];
 ```
 
-<chart-example title='Legend and Tooltip Information' name='legend-info' type='generated'></chart-example>
+<SimpleExampleRunner
+  title='Legend and Tooltip Information' name='legend-info' type='generated'
+/>
 
 The provided `yName` will also show up in tooltip titles:
 
@@ -115,7 +130,9 @@ marker: {
 
 We'll get a result like this:
 
-<chart-example title='Line and Marker Colours' name='line-marker-colors' type='generated'></chart-example>
+<SimpleExampleRunner
+  title='Line and Marker Colours' name='line-marker-colors' type='generated'
+/>
 
 There are many other customisations you can make to the markers; see the [markers section](/charts-markers/) for more information.
 
@@ -123,7 +140,9 @@ There are many other customisations you can make to the markers; see the [marker
 
 In a perfect world all data would be 100% complete. Unfortunately, in the real one, data for certain items or time periods might be missing or corrupted. But that shouldn't result in corrupted charts, and AG Charts supports the correct rendering of incomplete data:
 
-<chart-example title='Line Series with Incomplete Data' name='gap-line' type='generated'></chart-example>
+<SimpleExampleRunner
+  title='Line Series with Incomplete Data' name='gap-line' type='generated'
+/>
 
 If the `yKey` value of a data point is positive or negative `Infinity`, `null`, `undefined` or `NaN`, that data point will be rendered as a gap.
 
@@ -133,13 +152,17 @@ If the bottom axis is also continuous (for example, if it's a `'number'` axis to
 
 By default, the bottom axis is a `'category'` axis, but this can be changed if you have continuous data that you would like to plot. See the [axes section](/charts-axes/) for more information on configuring axes.
 
-<chart-example title='Continuous Data: Spiral Curve' name='two-number-axes' type='generated' options='{ "exampleHeight": 600 }'></chart-example>
+<SimpleExampleRunner
+  title='Continuous Data: Spiral Curve' name='two-number-axes' type='generated' options='{ "exampleHeight": 600 }'
+/>
 
 ## Time-Series Data
 
 The following example shows how line series can be used to render time-series data, using a `'time'` axis. In this case, we have two ambient temperature sensors that give us two independent data sets, with different numbers of readings taken at different times:
 
-<chart-example title='Time Data: Temperature Sensors' name='time-line' type='generated'></chart-example>
+<SimpleExampleRunner
+  title='Time Data: Temperature Sensors' name='time-line' type='generated'
+/>
 
 Because we have two separate data sets, we are using the `series.data` property of each series, rather than the `data` property of the chart itself:
 
@@ -182,7 +205,9 @@ The time axis automatically selects an appropriate label format depending on the
 
 The chart will update whenever new data is supplied via the chart's or series' `data` property.
 
-<chart-example title='Real-Time Chart: Core Voltage' name='real-time' type='mixed'></chart-example>
+<SimpleExampleRunner
+  title='Real-Time Chart: Core Voltage' name='real-time' type='mixed'
+/>
 
 This example uses the `'time'` axis which is configured to show a tick every 5 seconds and to use the `%H:%M:%S` label format to show colon separated hours, minutes and seconds.
 

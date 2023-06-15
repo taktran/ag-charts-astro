@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import { getDocExamplePages } from "../utils/pages";
+
+const pages = await getCollection("docs");
+const examples = await getDocExamplePages({
+  pages,
+});
+---
+
+<h1>All generated doc example pages</h1>
+<ul>
+  {
+    examples.map((example: any) => (
+      <li>
+        <div>
+          Example:
+          <pre>{JSON.stringify(example, null, 2)}</pre>
+        </div>
+      </li>
+    ))
+  }
+</ul>
