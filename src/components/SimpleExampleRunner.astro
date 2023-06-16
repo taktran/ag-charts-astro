@@ -1,12 +1,52 @@
 ---
 import { SimpleExampleRunner } from "./SimpleExampleRunner";
 import { OpenStackblitzButton } from "./stackblitz/OpenStackblitzButton";
+import { getInternalFramework } from "../utils/pages";
+import {
+  getEntryFileContents,
+  getEntryFileName,
+  getIsEnterprise,
+} from "../utils/pages";
+
 const { title, name, type, options } = Astro.props;
 
 const exampleUrl = `./examples/${name}`;
 
 // TODO: Get this from framework selector
-const framework = Astro.url.pathname.split("/")[1];
+const [_, framework, page] = Astro.url.pathname.split("/");
+
+const importType = "packages";
+
+// TODO: Create framework selector
+const useFunctionalReact = false;
+const useVue3 = false;
+const useTypescript = false;
+
+const internalFramework = getInternalFramework({
+  framework,
+  useFunctionalReact,
+  useVue3,
+  useTypescript,
+});
+
+const entryFile = await getEntryFileContents({
+  page,
+  exampleName: name,
+  importType,
+  framework,
+  internalFramework,
+});
+
+const entryFileName = getEntryFileName({
+  framework,
+  internalFramework,
+});
+
+const isEnterprise = getIsEnterprise({
+  framework,
+  internalFramework,
+  entryFile: entryFile!,
+});
 ---
 
 <div class="container">
@@ -17,8 +57,9 @@ const framework = Astro.url.pathname.split("/")[1];
         <OpenStackblitzButton
           client:only
           title={title}
-          name={name}
-          framework={framework}
+          entryFileName={entryFileName}
+          entryFile={entryFile}
+          isEnterprise={isEnterprise}
         />
       )
     }

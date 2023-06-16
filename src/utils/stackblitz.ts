@@ -1,6 +1,7 @@
 import sdk from "@stackblitz/sdk";
 
-export function openProject({ title }) {
+export function openProject({ title, entryFileName, entryFile, isEnterprise }) {
+  const entryFilePath = `src/${entryFileName}`;
   const packageJson = `{
     "name": "vite-react-typescript-starter",
     "private": true,
@@ -32,54 +33,6 @@ export function openProject({ title }) {
       "vite": "^4.3.9"
     }
   }`;
-  const indexTs = `
-  import { FunctionComponent, useState } from 'react';
-  import { createRoot } from 'react-dom/client';
-  import { AgChartsReact } from 'ag-charts-react';
-  import { AgChartOptions } from 'ag-charts-community';
-  import './style.css';
-  
-  const ChartExample: FunctionComponent = () => {
-    const [options] = useState<AgChartOptions>({
-      autoSize: true,
-      title: {
-        text: 'Average expenditure on coffee',
-      },
-      subtitle: {
-        text: 'per person per week in Krakozhia',
-      },
-      data: [
-        {
-          year: '2015',
-          spending: 35,
-        },
-        {
-          year: '2016',
-          spending: 40,
-        },
-        {
-          year: '2017',
-          spending: 43,
-        },
-        {
-          year: '2018',
-          spending: 44,
-        },
-      ],
-      series: [
-        {
-          xKey: 'year',
-          yKey: 'spending',
-        },
-      ],
-    });
-  
-    return <AgChartsReact options={options} />;
-  };
-  
-  const root = createRoot(document.getElementById('root')!);
-  root.render(<ChartExample />);  
-`;
   const styleCss = `
   :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -116,7 +69,7 @@ export function openProject({ title }) {
     </head>
     <body>
       <div id="root"></div>
-      <script type="module" src="/src/index.tsx"></script>
+      <script type="module" src="/${entryFilePath}"></script>
     </body>
   </html>`;
 
@@ -135,7 +88,7 @@ export function openProject({ title }) {
     template: "node",
     files: {
       "package.json": packageJson,
-      "src/index.tsx": indexTs,
+      [entryFilePath]: entryFile,
       "src/style.css": styleCss,
       "index.html": indexHtml,
       "vite.config.ts": viteConfig,
