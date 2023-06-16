@@ -1,4 +1,4 @@
-import { FRAMEWORK_SLUGS } from "../constants";
+import { FRAMEWORK_SLUGS, INTERNAL_FRAMEWORK_SLUGS } from "../constants";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -127,6 +127,52 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
   ).flat(2);
 }
 
+export async function getDocExampleEntryFiles({ pages }: { pages: any }) {
+  return (
+    await Promise.all(
+      INTERNAL_FRAMEWORK_SLUGS.map((internalFramework) => {
+        const framework = getFrameworkFromInternalFramework(internalFramework);
+        return Promise.all(
+          pages.map(async (page: any) => {
+            const pageExampleFolderPath = getSourceExamplesPathUrl({
+              page: page.slug,
+            });
+            const exampleFiles = await fs.readdir(pageExampleFolderPath);
+            return exampleFiles.map((exampleName) => {
+              const fileName = getEntryFileName({
+                framework,
+                internalFramework,
+              });
+
+              const url = path.join(
+                "/",
+                internalFramework,
+                page.slug,
+                "examples",
+                exampleName,
+                fileName
+              );
+
+              return {
+                params: {
+                  internalFramework,
+                  page: page.slug,
+                  exampleName,
+                  fileName,
+                },
+                props: {
+                  basePath: pageExampleFolderPath,
+                  url,
+                },
+              };
+            });
+          })
+        );
+      })
+    )
+  ).flat(2);
+}
+
 // TODO: Make file filter more generic
 export function isScriptFile(file: string) {
   return file.endsWith(".js");
@@ -193,22 +239,41 @@ export const getEntryFileContents = async ({
   return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
 };
 
-/**
- * Get entry file source
- */
-export const getEntryFileSourceContents = async ({
-  page,
-  exampleName,
-  fileName,
-}): Promise<string | undefined> => {
+export const getSourceExamplesPathUrl = ({ page }) => {
   const contentRoot = getContentRootFileUrl();
-  const exampleFolderPath = path.join("docs", page, "_examples", exampleName);
+  const examplesFolderPath = path.join("docs", page, "_examples");
+  const sourceExamplesPath = path.join(
+    contentRoot.pathname,
+    examplesFolderPath
+  );
+  return new URL(sourceExamplesPath, import.meta.url);
+};
+
+export const getEntryFileSourcePathUrl = ({ page, exampleName, fileName }) => {
+  const examplesFolderPath = getSourceExamplesPathUrl().pathname;
+  const exampleFolderPath = path.join(examplesFolderPath, exampleName);
   const entryFilePath = path.join(
     contentRoot.pathname,
     exampleFolderPath,
     fileName
   );
-  const entryFileUrl = new URL(entryFilePath, import.meta.url);
+
+  return new URL(entryFilePath, import.meta.url);
+};
+
+/**
+ * Get entry file source
+ */
+export const getEntryFileSourceContents = ({
+  page,
+  exampleName,
+  fileName,
+}): Promise<string | undefined> => {
+  const entryFileUrl = getEntryFileSourcePathUrl({
+    page,
+    exampleName,
+    fileName,
+  });
   return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
 };
 
@@ -265,6 +330,25 @@ export const getInternalFramework = ({
         : "react";
     default:
       return framework;
+  }
+};
+
+export const getFrameworkFromInternalFramework = (
+  internalFramework: string
+) => {
+  switch (internalFramework) {
+    case "typescript":
+    case "vanilla":
+      return "javascript";
+    case "react":
+    case "reactFunctionalTs":
+    case "reactFunctional":
+      return "react";
+    case "vue":
+    case "vue3":
+      return "vue";
+    default:
+      return internalFramework;
   }
 };
 

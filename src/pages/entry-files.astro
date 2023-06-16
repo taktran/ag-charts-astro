@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import { getDocExampleEntryFiles } from "../utils/pages";
+
+const pages = await getCollection("docs");
+const entryFiles = await getDocExampleEntryFiles({
+  pages,
+});
+---
+
+<a href="/">&lt; Back</a>
+<h1>All generated doc example entry file pages</h1>
+<ul>
+  {
+    entryFiles.map((entryFile: any) => (
+      <li>
+        <div>
+          entryFile:
+          <pre>{JSON.stringify(entryFile, null, 2)}</pre>
+        </div>
+      </li>
+    ))
+  }
+</ul>

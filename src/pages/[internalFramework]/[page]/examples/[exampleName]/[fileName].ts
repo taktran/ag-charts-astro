@@ -1,6 +1,6 @@
 import { getCollection, getEntry } from "astro:content";
 import {
-  getDocExamplePages,
+  getDocExampleEntryFiles,
   getContentRootFileUrl,
   getEntryFileContents,
   getEntryFileSourceContents,
@@ -8,7 +8,7 @@ import {
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
-  const examples = await getDocExamplePages({
+  const examples = await getDocExampleEntryFiles({
     pages,
   });
   return examples;
@@ -40,7 +40,6 @@ export async function get({ params, request }) {
     };
   } else {
     // For debugging
-
     const pageEntry = await getEntry("docs", page);
 
     return {
