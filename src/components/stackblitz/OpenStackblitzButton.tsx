@@ -14,8 +14,6 @@ export function OpenStackblitzButton({
   entryFile,
   isEnterprise,
 }: Props) {
-  // TODO: Pass in dynamic entry point file based on name and framework
-
   return (
     <button
       onClick={() => {
