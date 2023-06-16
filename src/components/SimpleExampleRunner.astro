@@ -9,7 +9,6 @@ import {
 } from "../utils/pages";
 
 const { title, name, type, options } = Astro.props;
-const isDev = import.meta.env.DEV;
 const exampleUrl = `./examples/${name}`;
 
 // TODO: Get this from framework selector
@@ -30,7 +29,6 @@ const internalFramework = getInternalFramework({
 });
 
 const entryFile = await getEntryFileContents({
-  isDev,
   page,
   exampleName: name,
   importType,

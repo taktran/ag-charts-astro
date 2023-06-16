@@ -1,6 +1,5 @@
 ---
 const {
-  isDev,
   modifiedTimeMs,
   isExecuting,
   options,
@@ -15,6 +14,10 @@ import ExampleStyle from "./lib/ExampleStyle";
 import Styles from "./lib/Styles";
 import Scripts from "./lib/Scripts";
 import { getChartScriptPath } from "../../utils/pages";
+
+import { getIsDev } from "../../utils/pages";
+
+const isDev = getIsDev();
 
 const getCacheBustingUrl = (url: string, timestamp: string) =>
   `${url}?t=${timestamp}`;
