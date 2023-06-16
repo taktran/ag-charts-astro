@@ -43,11 +43,16 @@ const chartScriptPath = getChartScriptPath(options.enterprise);
         : styleFiles}
     />
   </head>
-  <body data-app-location={appLocation}>
+  <body>
     <Fragment set:html={indexFragment} />
 
-    <script is:inline>
-      var __basePath = document.body.dataset.appLocation;
+    <script
+      is:inline
+      define:vars={{
+        appLocation,
+      }}
+    >
+      window.__basePath = appLocation;
     </script>
     {chartScriptPath ? <script src={chartScriptPath} /> : ""}
     <Scripts files={scriptFiles} />
