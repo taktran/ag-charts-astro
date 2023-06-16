@@ -1,4 +1,9 @@
-export const FRAMEWORK_SLUGS = ["javascript", "react", "angular", "vue"];
+export const FRAMEWORK_SLUGS = [
+  "javascript",
+  "react",
+  // "angular",
+  // "vue"
+];
 
 export const agGridVersion = "30.0.0";
 export const agGridEnterpriseVersion = "30.0.0";
