@@ -12,8 +12,19 @@ interface ExamplePathArgs {
 export const getIsDev = () => import.meta.env.DEV;
 
 export const getPublicRootFileUrl = (): URL => {
-  const publicRoot = getIsDev() ? "../../public" : "../../";
+  const publicRoot = getIsDev()
+    ? "../../public"
+    : // Relative to `./dist` folder
+      "../../";
   return new URL(publicRoot, import.meta.url);
+};
+
+export const getContentRootFileUrl = (): URL => {
+  const contentRoot = getIsDev()
+    ? "../content"
+    : // Relative to `./dist/_astro` folder
+      "../../../src/content";
+  return new URL(contentRoot, import.meta.url);
 };
 
 export const getExamplePath = ({
@@ -178,6 +189,25 @@ export const getEntryFileContents = async ({
     internalFramework,
   });
   const entryFilePath = path.join(exampleFolderPath, entryFileName);
+  const entryFileUrl = new URL(entryFilePath, import.meta.url);
+  return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
+};
+
+/**
+ * Get entry file source
+ */
+export const getEntryFileSourceContents = async ({
+  page,
+  exampleName,
+  fileName,
+}): Promise<string | undefined> => {
+  const contentRoot = getContentRootFileUrl();
+  const exampleFolderPath = path.join("docs", page, "_examples", exampleName);
+  const entryFilePath = path.join(
+    contentRoot.pathname,
+    exampleFolderPath,
+    fileName
+  );
   const entryFileUrl = new URL(entryFilePath, import.meta.url);
   return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
 };
