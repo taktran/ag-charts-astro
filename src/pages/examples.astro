@@ -2,8 +2,10 @@
 import { getCollection } from "astro:content";
 import { getDocExamplePages } from "../utils/pages";
 
+const isDev = import.meta.env.DEV;
 const pages = await getCollection("docs");
 const examples = await getDocExamplePages({
+  isDev,
   pages,
 });
 ---

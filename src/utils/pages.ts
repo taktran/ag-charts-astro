@@ -3,14 +3,15 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 interface ExamplePathArgs {
+  isDev: boolean;
   page: string;
   exampleName: string;
   importType: string;
   internalFramework: string;
 }
 
-export const getPublicRootFileUrl = (): URL => {
-  const publicRoot = "../../public";
+export const getPublicRootFileUrl = (isDev: boolean): URL => {
+  const publicRoot = isDev ? "../../public" : "../../";
   return new URL(publicRoot, import.meta.url);
 };
 
@@ -31,7 +32,7 @@ export const getExamplePath = ({
 
 export const getExampleFolderPath = (args: ExamplePathArgs): string => {
   const examplePath = getExamplePath(args);
-  return path.join(getPublicRootFileUrl().pathname, examplePath);
+  return path.join(getPublicRootFileUrl(args.isDev).pathname, examplePath);
 };
 
 export const getExampleBaseUrl = (args: ExamplePathArgs): string => {
@@ -77,8 +78,14 @@ export function getDocPages(pages: any) {
   }).flat();
 }
 
-export async function getDocExamplePages({ pages }: { pages: any }) {
-  const publicRoot = getPublicRootFileUrl().pathname;
+export async function getDocExamplePages({
+  pages,
+  isDev,
+}: {
+  pages: any;
+  isDev: boolean;
+}) {
+  const publicRoot = getPublicRootFileUrl(isDev).pathname;
   const exampleFolderBasePathUrl = new URL(
     path.join(publicRoot, "examples"),
     import.meta.url
@@ -159,6 +166,7 @@ export const getEntryFileName = ({
 };
 
 export const getEntryFileContents = async ({
+  isDev,
   page,
   exampleName,
   importType,
@@ -166,6 +174,7 @@ export const getEntryFileContents = async ({
   internalFramework,
 }): Promise<string | undefined> => {
   const exampleFolderPath = getExampleFolderPath({
+    isDev,
     page,
     exampleName,
     importType,

@@ -17,6 +17,8 @@ import JavascriptTemplate from "../../../../components/framework-templates/Javas
 import ReactTemplate from "../../../../components/framework-templates/ReactTemplate.astro";
 import ReactTemplateLegacy from "../../../../components/framework-templates/ReactTemplateLegacy";
 
+const isDev = import.meta.env.DEV;
+
 const { framework, page, exampleName } = Astro.params;
 
 // TODO: Create framework selector
@@ -34,14 +36,16 @@ const internalFramework = getInternalFramework({
 const importType = "packages";
 const library = "charts";
 const type = "generated";
-
+10;
 const exampleFolderPath = getExampleFolderPath({
+  isDev,
   page,
   exampleName,
   importType,
   internalFramework,
 });
 const exampleBaseUrl = getExampleBaseUrl({
+  isDev,
   page,
   exampleName,
   importType,
@@ -49,20 +53,21 @@ const exampleBaseUrl = getExampleBaseUrl({
 });
 
 export async function getStaticPaths() {
+  const isDev = import.meta.env.DEV;
   const pages = await getCollection("docs");
   const examples = await getDocExamplePages({
+    isDev,
     pages,
   });
   return examples;
 }
-
-const isDev = import.meta.env.DEV;
 
 const indexHtmlFile = path.join(exampleFolderPath, "index.html");
 const indexHtmlPathUrl = new URL(indexHtmlFile, import.meta.url);
 const indexHtml = await fs.readFile(indexHtmlPathUrl, "utf-8").catch(() => {});
 
 const entryFile = await getEntryFileContents({
+  isDev,
   page,
   exampleName,
   importType,
@@ -77,12 +82,14 @@ const isEnterprise = getIsEnterprise({
 });
 
 const scriptFiles = await getScriptFiles({
+  isDev,
   page,
   exampleName,
   importType,
   internalFramework,
 });
 const styleFiles = await getStyleFiles({
+  isDev,
   page,
   exampleName,
   importType,
