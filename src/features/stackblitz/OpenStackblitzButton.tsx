@@ -1,8 +1,10 @@
-import { openProject } from "../../utils/stackblitz";
+import { openProject } from "./stackblitz";
 import "./OpenStackblitzButton.module.scss";
 
 interface Props {
   title: string;
+  framework: string;
+  internalFramework: string;
   entryFileName: string;
   entryFile: string;
   isEnterprise: boolean;
@@ -10,6 +12,8 @@ interface Props {
 
 export function OpenStackblitzButton({
   title,
+  framework,
+  internalFramework,
   entryFileName,
   entryFile,
   isEnterprise,
@@ -17,7 +21,14 @@ export function OpenStackblitzButton({
   return (
     <button
       onClick={() => {
-        openProject({ title, entryFileName, entryFile, isEnterprise });
+        openProject({
+          title,
+          framework,
+          internalFramework,
+          entryFileName,
+          entryFile,
+          isEnterprise,
+        });
       }}
     >
       Open in Stackblitz

@@ -1,6 +1,6 @@
 ---
 import { SimpleExampleRunner } from "./SimpleExampleRunner";
-import { OpenStackblitzButton } from "./stackblitz/OpenStackblitzButton";
+import { OpenStackblitzButton } from "../features/stackblitz/OpenStackblitzButton";
 import { getInternalFramework } from "../utils/pages";
 import {
   getEntryFileContents,
@@ -9,7 +9,7 @@ import {
 } from "../utils/pages";
 
 const { title, name, type, options } = Astro.props;
-
+const isDev = import.meta.env.DEV;
 const exampleUrl = `./examples/${name}`;
 
 // TODO: Get this from framework selector
@@ -30,6 +30,7 @@ const internalFramework = getInternalFramework({
 });
 
 const entryFile = await getEntryFileContents({
+  isDev,
   page,
   exampleName: name,
   importType,
@@ -52,17 +53,16 @@ const isEnterprise = getIsEnterprise({
 <div class="container">
   <div class="controls">
     <a href={exampleUrl} target="_blank">Open in New Tab</a>
-    {
-      framework === "react" && (
-        <OpenStackblitzButton
-          client:only
-          title={title}
-          entryFileName={entryFileName}
-          entryFile={entryFile}
-          isEnterprise={isEnterprise}
-        />
-      )
-    }
+
+    <OpenStackblitzButton
+      client:only
+      title={title}
+      framework={framework}
+      internalFramework={internalFramework}
+      entryFileName={entryFileName}
+      entryFile={entryFile}
+      isEnterprise={isEnterprise}
+    />
   </div>
 
   <iframe src={exampleUrl}></iframe>
