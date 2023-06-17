@@ -3,7 +3,6 @@ import {
   getIsDev,
   getDocExampleEntryFiles,
   getContentRootFileUrl,
-  getEntryFileContents,
   getEntryFileSourceContents,
 } from "../../../../../utils/pages";
 
@@ -16,12 +15,12 @@ export async function getStaticPaths() {
 }
 
 export async function get({ params, request }) {
-  const { framework, page, exampleName } = params;
+  const { internalFramework, page, exampleName } = params;
 
   const importType = "packages"; // TODO
 
   const contentRoot = getContentRootFileUrl();
-  if (framework === "javascript") {
+  if (internalFramework === "vanilla") {
     const entryFile = await getEntryFileSourceContents({
       page,
       exampleName,
@@ -30,14 +29,18 @@ export async function get({ params, request }) {
     return {
       body: entryFile ? entryFile : contentRoot.pathname,
     };
-  } else if (framework === "react") {
+  } else if (internalFramework === "react") {
     const entryFile = await getEntryFileSourceContents({
       page,
       exampleName,
       fileName: "main.ts",
     });
     return {
-      body: entryFile ? entryFile : contentRoot.pathname,
+      body: entryFile
+        ? entryFile
+        : getIsDev()
+        ? `File not found within: ${contentRoot.pathname}`
+        : "Not found",
     };
   } else {
     const pageEntry = await getEntry("docs", page);

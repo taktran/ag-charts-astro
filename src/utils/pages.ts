@@ -250,13 +250,11 @@ export const getSourceExamplesPathUrl = ({ page }) => {
 };
 
 export const getEntryFileSourcePathUrl = ({ page, exampleName, fileName }) => {
-  const examplesFolderPath = getSourceExamplesPathUrl().pathname;
+  const examplesFolderPath = getSourceExamplesPathUrl({
+    page,
+  }).pathname;
   const exampleFolderPath = path.join(examplesFolderPath, exampleName);
-  const entryFilePath = path.join(
-    contentRoot.pathname,
-    exampleFolderPath,
-    fileName
-  );
+  const entryFilePath = path.join(exampleFolderPath, fileName);
 
   return new URL(entryFilePath, import.meta.url);
 };
