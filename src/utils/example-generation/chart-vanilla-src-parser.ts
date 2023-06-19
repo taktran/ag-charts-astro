@@ -1,5 +1,5 @@
-import * as $ from "jquery";
-import { SignatureDeclaration } from "typescript";
+import * as cheerio from "cheerio";
+import type { SignatureDeclaration } from "typescript";
 import {
   extractEventHandlers,
   extractImportStatements,
@@ -38,7 +38,7 @@ function tsGenerateWithOptionReferences(node, srcFile) {
   );
 }
 
-export function parser(examplePath, fileName, srcFile, html, exampleSettings) {
+export function parser({ srcFile, html, exampleSettings }) {
   const bindings = internalParser(
     readAsJsFile(srcFile, { includeImports: true }),
     html,
@@ -49,9 +49,8 @@ export function parser(examplePath, fileName, srcFile, html, exampleSettings) {
 }
 
 export function internalParser(js, html, exampleSettings) {
-  const domTree = $(`<div>${html}</div>`);
-
-  domTree.find("style").remove();
+  const domTree = cheerio.load(`<div>${html}</div>`);
+  domTree("style").remove();
 
   const domEventHandlers = extractEventHandlers(domTree, recognizedDomEvents);
   const tsTree = parseFile(js);
@@ -217,7 +216,7 @@ export function internalParser(js, html, exampleSettings) {
     tsCollectors
   );
 
-  domTree.find("#myChart").replaceWith(templatePlaceholder);
+  domTree("#myChart").replaceWith(templatePlaceholder);
   tsBindings.template = domTree.html();
   tsBindings.imports = extractImportStatements(tsTree);
   tsBindings.optionsTypeInfo = extractTypeInfoForVariable(tsTree, "options");

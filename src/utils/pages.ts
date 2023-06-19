@@ -1,6 +1,8 @@
 import { FRAMEWORK_SLUGS, INTERNAL_FRAMEWORK_SLUGS } from "../constants";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { parser as chartVanillaSrcParser } from "../utils/example-generation/chart-vanilla-src-parser";
+import { vanillaToReact } from "../utils/example-generation/chart-vanilla-to-react";
 
 interface ExamplePathArgs {
   page: string;
@@ -274,6 +276,72 @@ export const getEntryFileSourceContents = ({
   });
   return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
 };
+
+/**
+ * Dynamic path where example files are
+ */
+export const getExampleLocation = ({
+  internalFramework,
+  page,
+  exampleName,
+}: {
+  internalFramework: string;
+  page: string;
+  exampleName: string;
+}) => {
+  return path.join("/", internalFramework, page, "examples", exampleName);
+};
+
+/**
+ * Get entry file generated file
+ */
+export const getEntryFileGeneratedContents = async ({
+  internalFramework,
+  importType,
+  page,
+  exampleName,
+  fileName,
+}): Promise<string | undefined> => {
+  const entryFile = await getEntryFileSourceContents({
+    page,
+    exampleName,
+    fileName: "main.ts",
+  });
+  const indexHtml = await getEntryFileSourceContents({
+    page,
+    exampleName,
+    fileName: "index.html",
+  });
+
+  if (!entryFile) {
+    return;
+  }
+
+  const { bindings, typedBindings } = chartVanillaSrcParser({
+    srcFile: entryFile,
+    html: indexHtml,
+    exampleSettings: {},
+  });
+
+  let result;
+  if (internalFramework === "react") {
+    const getSource = vanillaToReact(
+      deepCloneObject(bindings),
+      [] // TODO: extractComponentFileNames(reactScripts, "_react"),
+    );
+    // TODO:
+    // importTypes.forEach((importType) =>
+    //   reactConfigs.set(importType, { "index.jsx": getSource(importType) })
+    // );
+    result = getSource();
+  }
+
+  return result;
+};
+
+function deepCloneObject(object: object) {
+  return JSON.parse(JSON.stringify(object));
+}
 
 // TODO: Find a better way to determine if an example is enterprise or not
 export const getIsEnterprise = ({

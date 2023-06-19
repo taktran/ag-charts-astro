@@ -1,5 +1,5 @@
-import ts = require("typescript");
-const sucrase = require("sucrase");
+import ts from "typescript";
+import sucrase from "sucrase";
 
 export type ImportType = "packages" | "modules";
 
@@ -10,7 +10,7 @@ export interface BindingImport {
   imports: string[];
 }
 
-const moduleMapping = require("../../documentation/doc-pages/modules/modules.json");
+// const moduleMapping = require("../../documentation/doc-pages/modules/modules.json");
 
 export function readAsJsFile(
   srcFile,
@@ -61,15 +61,16 @@ export function modulesProcessor(modules: string[]) {
   const requiredModules = [];
   modules.forEach((module) => {
     let found = false;
-    moduleMapping.forEach((moduleConfig) => {
-      if (moduleConfig.shortname && moduleConfig.shortname == module) {
-        requiredModules.push(moduleConfig);
-        found = true;
-      }
-    });
-    if (!found) {
-      console.error(`Could not find module ${module} in modules.json`);
-    }
+    console.warn(`TODO: module mapping for ${module}`);
+    // moduleMapping.forEach((moduleConfig) => {
+    //   if (moduleConfig.shortname && moduleConfig.shortname == module) {
+    //     requiredModules.push(moduleConfig);
+    //     found = true;
+    //   }
+    // });
+    // if (!found) {
+    //   console.error(`Could not find module ${module} in modules.json`);
+    // }
   });
 
   requiredModules.forEach((requiredModule) => {
@@ -190,7 +191,7 @@ export function tsNodeIsTopLevelVariable(
 export function tsNodeIsFunctionWithName(node: ts.Node, name: string): boolean {
   // eg: function someFunction() { }
   if (ts.isFunctionDeclaration(node)) {
-    const isMatch = node.name.getText() === name;
+    const isMatch = node?.name?.getText() === name;
     return isMatch;
   }
   return false;
@@ -274,13 +275,15 @@ const extractEventHandlerBody = (code: string) => code.match(/^(\w+)\((.*)\)/);
  * for each of the recognised events (click, change etc) extract the corresponding event handler, with (optional) params
  * eg: onclick="refreshEvenRowsCurrencyData()"
  */
-export function extractEventHandlers(tree: any, eventNames: string[]) {
+export function extractEventHandlers(domTree: any, eventNames: string[]) {
   const getHandlerAttributes = (event: string) => {
     const handlerName = `on${event}`;
 
-    return Array.prototype.map.call(tree.find(`[${handlerName}]`), (el) =>
-      el.getAttribute(handlerName)
-    );
+    // TODO: Fix `getAttribute`
+    // return Array.prototype.map.call(domTree(`[${handlerName}]`), (el) => {
+    //   return el.getAttribute(handlerName);
+    // });
+    return [];
   };
 
   return flatMap(eventNames, (event: string) =>

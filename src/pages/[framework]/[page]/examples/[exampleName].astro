@@ -12,6 +12,7 @@ import {
   getExampleFolderPath,
   getExampleBaseUrl,
   getEntryFileContents,
+  getExampleLocation,
 } from "../../../../utils/pages";
 import JavascriptTemplate from "../../../../components/framework-templates/JavascriptTemplate.astro";
 import ReactTemplateLegacy from "../../../../components/framework-templates/ReactTemplateLegacy";
@@ -93,6 +94,12 @@ const boilerPlateFramework = getBoilerPlateFramework({
   useTypescript,
 });
 const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boilerplate/`;
+
+const appLocation = getExampleLocation({
+  internalFramework,
+  page,
+  exampleName,
+});
 ---
 
 {
@@ -120,7 +127,7 @@ const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boil
       }}
       scriptFiles={scriptFiles}
       styleFiles={styleFiles}
-      appLocation={exampleBaseUrl}
+      appLocation={appLocation}
       library={library}
       boilerplatePath={boilerplatePath}
       importType={importType}
