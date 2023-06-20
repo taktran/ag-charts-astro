@@ -97,7 +97,7 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
 
   return (
     await Promise.all(
-      FRAMEWORK_SLUGS.map((framework) => {
+      INTERNAL_FRAMEWORK_SLUGS.map((internalFramework) => {
         return Promise.all(
           pages.map(async (page: any) => {
             const pageExampleFolderPath = path.join(
@@ -108,7 +108,7 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
             return exampleFiles.map((exampleName) => {
               return {
                 params: {
-                  framework,
+                  internalFramework,
                   page: page.slug,
                   exampleName,
                 },

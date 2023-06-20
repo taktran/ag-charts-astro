@@ -4,15 +4,12 @@ import { OpenStackblitzButton } from "../features/stackblitz/OpenStackblitzButto
 import { getInternalFramework } from "../utils/pages";
 import { getIsEnterprise } from "../utils/pages";
 import { getGeneratedContents } from "../features/examples-generator/examples-generator";
+import path from "node:path";
 
 const { title, name, type, options } = Astro.props;
-const exampleUrl = `./examples/${name}`;
 
 // TODO: Get this from framework selector
 const [_, framework, page] = Astro.url.pathname.split("/");
-
-const importType = "packages";
-
 // TODO: Create framework selector
 const useFunctionalReact = false;
 const useVue3 = false;
@@ -24,6 +21,10 @@ const internalFramework = getInternalFramework({
   useVue3,
   useTypescript,
 });
+
+const exampleUrl = path.join("/", internalFramework, page, "examples", name);
+
+const importType = "packages";
 
 const { files, entryFileName } = await getGeneratedContents({
   internalFramework,

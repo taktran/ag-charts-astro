@@ -12,20 +12,17 @@ import {
 import JavascriptTemplate from "../../../../components/framework-templates/JavascriptTemplate.astro";
 import ReactTemplateLegacy from "../../../../components/framework-templates/ReactTemplateLegacy";
 import { getGeneratedContents } from "../../../../features/examples-generator/examples-generator";
+import { getFrameworkFromInternalFramework } from "../../../../features/examples-generator/file-utils";
 
-const { framework, page, exampleName } = Astro.params;
+const internalFramework = Astro.params.internalFramework!;
+const page = Astro.params.page!;
+const exampleName = Astro.params.exampleName!;
 
 // TODO: Create framework selector
-const useFunctionalReact = false;
 const useVue3 = false;
 const useTypescript = false;
 
-const internalFramework = getInternalFramework({
-  framework,
-  useFunctionalReact,
-  useVue3,
-  useTypescript,
-});
+const framework = getFrameworkFromInternalFramework(internalFramework);
 
 const importType = "packages";
 const library = "charts";
@@ -69,7 +66,7 @@ const styleFiles = await getStyleFiles({
 
 const boilerPlateFramework = getBoilerPlateFramework({
   framework,
-  useFunctionalReact,
+  internalFramework,
   useVue3,
   useTypescript,
 });
