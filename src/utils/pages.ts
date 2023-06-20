@@ -11,6 +11,11 @@ interface ExamplePathArgs {
   internalFramework: string;
 }
 
+interface GeneratedContents {
+  files: Record<string, string>;
+  entryFileName: string;
+}
+
 export const getIsDev = () => import.meta.env.DEV;
 
 export const getPublicRootFileUrl = (): URL => {
@@ -293,25 +298,26 @@ export const getExampleLocation = ({
 };
 
 /**
- * Get entry file generated file
+ * Get generated contents for an example
  */
-export const getEntryFileGeneratedContents = async ({
+export const getGeneratedContents = async ({
   internalFramework,
   importType,
   page,
   exampleName,
-  fileName,
-}): Promise<string | undefined> => {
+}): Promise<GeneratedContents | undefined> => {
+  const framework = getFrameworkFromInternalFramework(internalFramework);
+  const entryFileName = getEntryFileName({ framework, internalFramework });
   const entryFile = await getEntryFileSourceContents({
     page,
     exampleName,
     fileName: "main.ts",
   });
-  const indexHtml = await getEntryFileSourceContents({
+  const indexHtml = (await getEntryFileSourceContents({
     page,
     exampleName,
     fileName: "index.html",
-  });
+  })) as string;
 
   if (!entryFile) {
     return;
@@ -323,7 +329,7 @@ export const getEntryFileGeneratedContents = async ({
     exampleSettings: {},
   });
 
-  let result;
+  let contents: GeneratedContents = {} as GeneratedContents;
   if (internalFramework === "react") {
     const getSource = vanillaToReact(
       deepCloneObject(bindings),
@@ -333,10 +339,14 @@ export const getEntryFileGeneratedContents = async ({
     // importTypes.forEach((importType) =>
     //   reactConfigs.set(importType, { "index.jsx": getSource(importType) })
     // );
-    result = getSource();
+    contents.files = {
+      [entryFileName]: getSource(),
+      "index.html": indexHtml,
+    };
+    contents.entryFileName = entryFileName;
   }
 
-  return result;
+  return contents;
 };
 
 function deepCloneObject(object: object) {

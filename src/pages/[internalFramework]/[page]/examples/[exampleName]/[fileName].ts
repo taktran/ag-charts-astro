@@ -4,7 +4,7 @@ import {
   getDocExampleEntryFiles,
   getContentRootFileUrl,
   getEntryFileSourceContents,
-  getEntryFileGeneratedContents,
+  getGeneratedContents,
 } from "../../../../../utils/pages";
 
 export async function getStaticPaths() {
@@ -19,11 +19,11 @@ export async function get({ params, request }) {
   const { internalFramework, page, exampleName } = params;
 
   const importType = "packages"; // TODO: Only valid for charts
-  const entryFileName = "main.ts";
 
   const contentRoot = getContentRootFileUrl();
   if (internalFramework === "vanilla") {
     // TODO: Get generated file
+    const entryFileName = "main.ts";
     const entryFile = await getEntryFileSourceContents({
       page,
       exampleName,
@@ -33,13 +33,14 @@ export async function get({ params, request }) {
       body: entryFile ? entryFile : contentRoot.pathname,
     };
   } else if (internalFramework === "react") {
-    const entryFile = await getEntryFileGeneratedContents({
+    const { files, entryFileName } = await getGeneratedContents({
       internalFramework,
       importType,
       page,
       exampleName,
-      fileName: entryFileName,
     });
+
+    const entryFile = files[entryFileName];
     return {
       body: entryFile
         ? entryFile
