@@ -1,30 +1,30 @@
 import { getCollection, getEntry } from "astro:content";
-import { getIsDev, getDocExampleEntryFiles } from "../../../../../utils/pages";
+import { getIsDev, getDocExampleFiles } from "../../../../../utils/pages";
 import { getContentRootFileUrl } from "../../../../../features/examples-generator/file-utils";
 import { getGeneratedContents } from "../../../../../features/examples-generator/examples-generator";
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
-  const examples = await getDocExampleEntryFiles({
+  const examples = await getDocExampleFiles({
     pages,
   });
   return examples;
 }
 
 export async function get({ params, request }) {
-  const { internalFramework, page, exampleName } = params;
+  const { internalFramework, page, exampleName, fileName } = params;
 
   const importType = "packages"; // TODO: Only valid for charts
 
   const contentRoot = getContentRootFileUrl();
   if (internalFramework === "vanilla") {
-    const { files, entryFileName } = await getGeneratedContents({
+    const { files } = await getGeneratedContents({
       internalFramework,
       importType,
       page,
       exampleName,
     });
-    const entryFile = files[entryFileName];
+    const entryFile = files[fileName];
     return {
       body: entryFile
         ? entryFile
@@ -33,14 +33,14 @@ export async function get({ params, request }) {
         : "Not found",
     };
   } else if (internalFramework === "react") {
-    const { files, entryFileName } = await getGeneratedContents({
+    const { files } = await getGeneratedContents({
       internalFramework,
       importType,
       page,
       exampleName,
     });
 
-    const entryFile = files[entryFileName];
+    const entryFile = files[fileName];
     return {
       body: entryFile
         ? entryFile

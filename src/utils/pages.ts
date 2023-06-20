@@ -6,6 +6,7 @@ import {
   getFrameworkFromInternalFramework,
   getSourceExamplesPathUrl,
 } from "../features/examples-generator/file-utils";
+import { getGeneratedContentsFileList } from "../features/examples-generator/examples-generator";
 
 interface ExamplePathArgs {
   page: string;
@@ -124,7 +125,7 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
   ).flat(2);
 }
 
-export async function getDocExampleEntryFiles({ pages }: { pages: any }) {
+export async function getDocExampleFiles({ pages }: { pages: any }) {
   return (
     await Promise.all(
       INTERNAL_FRAMEWORK_SLUGS.map((internalFramework) => {
@@ -134,40 +135,42 @@ export async function getDocExampleEntryFiles({ pages }: { pages: any }) {
             const pageExampleFolderPath = getSourceExamplesPathUrl({
               page: page.slug,
             });
-            const exampleFiles = await fs.readdir(pageExampleFolderPath);
-            return exampleFiles.map((exampleName) => {
-              const fileName = getEntryFileName({
-                framework,
+            const examples = await fs.readdir(pageExampleFolderPath);
+            return examples.map((exampleName) => {
+              // Get all example files for the example
+              const exampleFileList = getGeneratedContentsFileList({
                 internalFramework,
               });
 
-              const url = path.join(
-                "/",
-                internalFramework,
-                page.slug,
-                "examples",
-                exampleName,
-                fileName
-              );
-
-              return {
-                params: {
+              return exampleFileList.map((fileName) => {
+                const url = path.join(
+                  "/",
                   internalFramework,
-                  page: page.slug,
+                  page.slug,
+                  "examples",
                   exampleName,
-                  fileName,
-                },
-                props: {
-                  basePath: pageExampleFolderPath,
-                  url,
-                },
-              };
+                  fileName
+                );
+
+                return {
+                  params: {
+                    internalFramework,
+                    page: page.slug,
+                    exampleName,
+                    fileName,
+                  },
+                  props: {
+                    basePath: pageExampleFolderPath,
+                    url,
+                  },
+                };
+              });
             });
           })
         );
       })
     )
-  ).flat(2);
+  ).flat(3);
 }
 
 // TODO: Make file filter more generic

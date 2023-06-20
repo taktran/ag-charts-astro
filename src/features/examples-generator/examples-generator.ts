@@ -17,6 +17,27 @@ function deepCloneObject(object: object) {
 }
 
 /**
+ * Get the file list of the generated contents
+ * (without generating the contents)
+ */
+export const getGeneratedContentsFileList = ({
+  internalFramework,
+
+  // TODO: file list can be different if there are extra files
+  // importType,
+  // page,
+  // exampleName,
+}): string[] => {
+  if (internalFramework === "vanilla") {
+    return ["main.js", "index.html"];
+  } else if (internalFramework === "react") {
+    return ["index.jsx"];
+  }
+
+  return [];
+};
+
+/**
  * Get generated contents for an example
  */
 export const getGeneratedContents = async ({
