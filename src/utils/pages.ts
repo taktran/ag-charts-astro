@@ -2,10 +2,9 @@ import { FRAMEWORK_SLUGS, INTERNAL_FRAMEWORK_SLUGS } from "../constants";
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
-  getFrameworkFromInternalFramework,
   getSourceExamplesPathUrl,
   getSourceFolderUrl,
-} from "../features/examples-generator/file-utils";
+} from "../features/examples-generator/utils/file-utils";
 import { getGeneratedContentsFileList } from "../features/examples-generator/examples-generator";
 
 export const getIsDev = () => import.meta.env.DEV;
@@ -84,43 +83,46 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
   return (
     await Promise.all(
       INTERNAL_FRAMEWORK_SLUGS.map((internalFramework) => {
-        const framework = getFrameworkFromInternalFramework(internalFramework);
         return Promise.all(
           pages.map(async (page: any) => {
             const pageExampleFolderPath = getSourceExamplesPathUrl({
               page: page.slug,
             });
             const examples = await fs.readdir(pageExampleFolderPath);
-            return examples.map((exampleName) => {
-              // Get all example files for the example
-              const exampleFileList = getGeneratedContentsFileList({
-                internalFramework,
-              });
-
-              return exampleFileList.map((fileName) => {
-                const url = path.join(
-                  "/",
+            return Promise.all(
+              examples.map(async (exampleName) => {
+                // Get all example files for the example
+                const exampleFileList = await getGeneratedContentsFileList({
                   internalFramework,
-                  page.slug,
-                  "examples",
+                  page: page.slug,
                   exampleName,
-                  fileName
-                );
+                });
 
-                return {
-                  params: {
+                return exampleFileList.map((fileName) => {
+                  const url = path.join(
+                    "/",
                     internalFramework,
-                    page: page.slug,
+                    page.slug,
+                    "examples",
                     exampleName,
-                    fileName,
-                  },
-                  props: {
-                    basePath: pageExampleFolderPath,
-                    url,
-                  },
-                };
-              });
-            });
+                    fileName
+                  );
+
+                  return {
+                    params: {
+                      internalFramework,
+                      page: page.slug,
+                      exampleName,
+                      fileName,
+                    },
+                    props: {
+                      basePath: pageExampleFolderPath,
+                      url,
+                    },
+                  };
+                });
+              })
+            );
           })
         );
       })

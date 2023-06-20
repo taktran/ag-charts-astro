@@ -1,10 +1,11 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import { getIsDev } from "../../utils/pages";
+import { getIsDev } from "../../../utils/pages";
 
 export const getContentRootFileUrl = (): URL => {
   const contentRoot = getIsDev()
-    ? "../../content"
+    ? // Relative to the folder of this file
+      "../../../content"
     : // Relative to `./dist/_astro` folder
       "../../../src/content";
   return new URL(contentRoot, import.meta.url);
@@ -99,8 +100,33 @@ export const getIsEnterprise = ({
 }) => {
   const entryFileName = getEntryFileName({ framework, internalFramework });
 
-  const isEnterprise = false;
   return entryFileName === "main.js"
     ? entryFile?.includes("agChartsEnterprise")
     : entryFile?.includes("ag-charts-enterprise");
+};
+
+export const getContentsOfFileList = async ({
+  page,
+  exampleName,
+  fileList,
+}: {
+  page: string;
+  exampleName: string;
+  fileList: string[];
+}) => {
+  const contentFiles = {} as Record<string, string>;
+  await Promise.all(
+    fileList.map(async (fileName) => {
+      const file = (await getSourceFileContents({
+        page,
+        exampleName,
+        fileName,
+      })) as string;
+      if (file) {
+        contentFiles[fileName] = file;
+      }
+    })
+  );
+
+  return contentFiles;
 };

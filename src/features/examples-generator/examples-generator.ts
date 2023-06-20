@@ -3,17 +3,23 @@ import {
   getSourceFileContents,
   getFrameworkFromInternalFramework,
   getIsEnterprise,
-} from "./file-utils";
+  getSourceFolderUrl,
+} from "./utils/file-utils";
 import chartVanillaSrcParser from "./transformation-scripts/chart-vanilla-src-parser";
 import { vanillaToReact } from "./transformation-scripts/chart-vanilla-to-react";
 import { readAsJsFile } from "./transformation-scripts/parser-utils";
-
+import fs from "node:fs/promises";
+import {
+  getOtherScriptFiles,
+  type FileContents,
+} from "./utils/getOtherScriptFiles";
 interface GeneratedContents {
-  files: Record<string, string>;
+  files: FileContents;
   entryFileName: string;
   scriptFiles: string[];
   styleFiles: string[];
   isEnterprise: boolean;
+  sourceFileList: string[];
 }
 
 function deepCloneObject(object: object) {
@@ -24,21 +30,36 @@ function deepCloneObject(object: object) {
  * Get the file list of the generated contents
  * (without generating the contents)
  */
-export const getGeneratedContentsFileList = ({
+export const getGeneratedContentsFileList = async ({
   internalFramework,
 
   // TODO: file list can be different if there are extra files
   // importType,
-  // page,
-  // exampleName,
+  page,
+  exampleName,
 }): string[] => {
+  const framework = getFrameworkFromInternalFramework(internalFramework);
+  const entryFileName = getEntryFileName({ framework, internalFramework });
+  const sourceFolderUrl = getSourceFolderUrl({
+    page,
+    exampleName,
+  });
+  const sourceFileList = await fs.readdir(sourceFolderUrl);
+  const scriptFiles = await getOtherScriptFiles({
+    sourceEntryFileName: entryFileName,
+    sourceFileList,
+    page,
+    exampleName,
+  });
+
+  let generatedFileList = scriptFiles.fileNames;
   if (internalFramework === "vanilla") {
-    return ["main.js", "index.html"];
+    generatedFileList = generatedFileList.concat(["main.js", "index.html"]);
   } else if (internalFramework === "react") {
-    return ["index.jsx"];
+    generatedFileList = generatedFileList.concat("index.jsx");
   }
 
-  return [];
+  return generatedFileList;
 };
 
 /**
@@ -51,11 +72,18 @@ export const getGeneratedContents = async ({
   exampleName,
 }): Promise<GeneratedContents | undefined> => {
   const framework = getFrameworkFromInternalFramework(internalFramework);
+  const sourceFolderUrl = getSourceFolderUrl({
+    page,
+    exampleName,
+  });
+  const sourceFileList = await fs.readdir(sourceFolderUrl);
+
   const entryFileName = getEntryFileName({ framework, internalFramework });
+  const sourceEntryFileName = "main.ts";
   const entryFile = await getSourceFileContents({
     page,
     exampleName,
-    fileName: "main.ts",
+    fileName: sourceEntryFileName,
   });
   const indexHtml = (await getSourceFileContents({
     page,
@@ -66,8 +94,6 @@ export const getGeneratedContents = async ({
   if (!entryFile) {
     return;
   }
-
-  // Get other script files
 
   const { bindings, typedBindings } = chartVanillaSrcParser({
     srcFile: entryFile,
@@ -81,10 +107,19 @@ export const getGeneratedContents = async ({
     entryFile,
   });
 
-  let contents: GeneratedContents = {
+  const otherScriptFiles = await getOtherScriptFiles({
+    sourceEntryFileName,
+    sourceFileList,
+    page,
+    exampleName,
+  });
+
+  const contents: GeneratedContents = {
     isEnterprise,
-    scriptFiles: [] as string[], // TODO: Figure out script files
+    scriptFiles: otherScriptFiles.fileNames,
     styleFiles: [] as string[], // TODO: Figure out style files
+    sourceFileList,
+    files: otherScriptFiles.contents,
   } as GeneratedContents;
   if (internalFramework === "vanilla") {
     let mainJs = readAsJsFile(entryFile);
@@ -106,11 +141,10 @@ export const getGeneratedContents = async ({
       });
     }
 
-    contents.files = {
-      "main.js": mainJs,
-      "index.html": indexHtml,
-    };
-    contents.scriptFiles = ["main.js"];
+    contents.files["main.js"] = mainJs;
+    contents.files["index.html"] = indexHtml;
+
+    contents.scriptFiles.push("main.js");
     contents.entryFileName = "main.js";
   } else if (internalFramework === "react") {
     const getSource = vanillaToReact(
@@ -121,9 +155,9 @@ export const getGeneratedContents = async ({
     // importTypes.forEach((importType) =>
     //   reactConfigs.set(importType, { "index.jsx": getSource(importType) })
     // );
-    contents.files = {
-      [entryFileName]: getSource(),
-    };
+
+    contents.files[entryFileName] = getSource();
+
     contents.entryFileName = entryFileName;
   }
 
