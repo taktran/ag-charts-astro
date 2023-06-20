@@ -56,11 +56,17 @@ export const getEntryFileName = ({
   return entryFile[framework] || "main.js";
 };
 
-export const getSourceFileUrl = ({ page, exampleName, fileName }) => {
+export const getSourceFolderUrl = ({ page, exampleName }) => {
   const examplesFolderPath = getSourceExamplesPathUrl({
     page,
   }).pathname;
   const exampleFolderPath = path.join(examplesFolderPath, exampleName);
+
+  return new URL(exampleFolderPath, import.meta.url);
+};
+
+export const getSourceFileUrl = ({ page, exampleName, fileName }) => {
+  const exampleFolderPath = getSourceFolderUrl({ page, exampleName }).pathname;
   const entryFilePath = path.join(exampleFolderPath, fileName);
 
   return new URL(entryFilePath, import.meta.url);
