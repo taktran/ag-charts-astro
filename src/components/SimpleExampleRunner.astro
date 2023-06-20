@@ -2,8 +2,8 @@
 import { SimpleExampleRunner } from "./SimpleExampleRunner";
 import { OpenStackblitzButton } from "../features/stackblitz/OpenStackblitzButton";
 import { getInternalFramework } from "../utils/pages";
-import { getEntryFileContents, getIsEnterprise } from "../utils/pages";
-import { getEntryFileName } from "../features/examples-generator/file-utils";
+import { getIsEnterprise } from "../utils/pages";
+import { getGeneratedContents } from "../features/examples-generator/examples-generator";
 
 const { title, name, type, options } = Astro.props;
 const exampleUrl = `./examples/${name}`;
@@ -25,18 +25,13 @@ const internalFramework = getInternalFramework({
   useTypescript,
 });
 
-const entryFile = await getEntryFileContents({
+const { files, entryFileName } = await getGeneratedContents({
+  internalFramework,
+  importType,
   page,
   exampleName: name,
-  importType,
-  framework,
-  internalFramework,
 });
-
-const entryFileName = getEntryFileName({
-  framework,
-  internalFramework,
-});
+const entryFile = files[entryFileName];
 
 const isEnterprise = getIsEnterprise({
   framework,

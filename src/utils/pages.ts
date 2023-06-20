@@ -197,30 +197,6 @@ export function isStyleFile(file: string) {
   return file.endsWith(".css");
 }
 
-export const getEntryFileContents = async ({
-  page,
-  exampleName,
-  importType,
-  framework,
-  internalFramework,
-}): Promise<string | undefined> => {
-  const exampleFolderPath = getExampleFolderPath({
-    page,
-    exampleName,
-    importType,
-    internalFramework,
-  });
-  const entryFileName = getEntryFileName({
-    framework,
-    internalFramework,
-  });
-  const entryFilePath = path.join(exampleFolderPath, entryFileName);
-  const entryFileUrl = new URL(entryFilePath, import.meta.url);
-  return fs.readFile(entryFileUrl, "utf-8").catch(() => {
-    return undefined;
-  });
-};
-
 /**
  * Dynamic path where example files are
  */

@@ -1,7 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import fs from "node:fs/promises";
-import path from "path";
 import {
   getScriptFiles,
   getStyleFiles,
@@ -9,13 +7,11 @@ import {
   getBoilerPlateFramework,
   getIsEnterprise,
   getDocExamplePages,
-  getExampleFolderPath,
-  getExampleBaseUrl,
-  getEntryFileContents,
   getExampleLocation,
 } from "../../../../utils/pages";
 import JavascriptTemplate from "../../../../components/framework-templates/JavascriptTemplate.astro";
 import ReactTemplateLegacy from "../../../../components/framework-templates/ReactTemplateLegacy";
+import { getGeneratedContents } from "../../../../features/examples-generator/examples-generator";
 
 const { framework, page, exampleName } = Astro.params;
 
@@ -34,19 +30,6 @@ const internalFramework = getInternalFramework({
 const importType = "packages";
 const library = "charts";
 const type = "generated";
-10;
-const exampleFolderPath = getExampleFolderPath({
-  page,
-  exampleName,
-  importType,
-  internalFramework,
-});
-const exampleBaseUrl = getExampleBaseUrl({
-  page,
-  exampleName,
-  importType,
-  internalFramework,
-});
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
@@ -56,17 +39,14 @@ export async function getStaticPaths() {
   return examples;
 }
 
-const indexHtmlFile = path.join(exampleFolderPath, "index.html");
-const indexHtmlPathUrl = new URL(indexHtmlFile, import.meta.url);
-const indexHtml = await fs.readFile(indexHtmlPathUrl, "utf-8").catch(() => {});
-
-const entryFile = await getEntryFileContents({
+const { files, entryFileName } = await getGeneratedContents({
+  internalFramework,
+  importType,
   page,
   exampleName,
-  importType,
-  framework,
-  internalFramework,
 });
+const entryFile = files[entryFileName];
+const indexHtml = files["index.html"];
 
 const isEnterprise = getIsEnterprise({
   framework,
@@ -113,7 +93,7 @@ const appLocation = getExampleLocation({
       scriptFiles={scriptFiles}
       styleFiles={styleFiles}
       indexFragment={indexHtml}
-      appLocation={exampleBaseUrl}
+      appLocation={appLocation}
     />
   )
 }
