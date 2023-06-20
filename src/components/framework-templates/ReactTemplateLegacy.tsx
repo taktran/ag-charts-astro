@@ -33,7 +33,7 @@ const ReactTemplateLegacy = ({
       />
       <ExampleStyle rootId="root" />
       {(type !== "generated" || library !== "grid") && (
-        <Styles files={styleFiles} />
+        <Styles baseUrl={appLocation} files={styleFiles} />
       )}
     </head>
     <body>

@@ -13,6 +13,7 @@ import {
   getOtherScriptFiles,
   type FileContents,
 } from "./utils/getOtherScriptFiles";
+import { getStyleFiles } from "./utils/getStyleFiles";
 interface GeneratedContents {
   files: FileContents;
   entryFileName: string;
@@ -51,8 +52,15 @@ export const getGeneratedContentsFileList = async ({
     page,
     exampleName,
   });
+  const styleFiles = await getStyleFiles({
+    sourceFileList,
+    page,
+    exampleName,
+  });
 
-  let generatedFileList = scriptFiles.fileNames;
+  let generatedFileList = Object.keys(scriptFiles).concat(
+    Object.keys(styleFiles)
+  );
   if (internalFramework === "vanilla") {
     generatedFileList = generatedFileList.concat(["main.js", "index.html"]);
   } else if (internalFramework === "react") {
@@ -113,13 +121,18 @@ export const getGeneratedContents = async ({
     page,
     exampleName,
   });
+  const styleFiles = await getStyleFiles({
+    sourceFileList,
+    page,
+    exampleName,
+  });
 
   const contents: GeneratedContents = {
     isEnterprise,
-    scriptFiles: otherScriptFiles.fileNames,
-    styleFiles: [] as string[], // TODO: Figure out style files
+    scriptFiles: Object.keys(otherScriptFiles),
+    styleFiles: Object.keys(styleFiles),
     sourceFileList,
-    files: otherScriptFiles.contents,
+    files: Object.assign(otherScriptFiles, styleFiles),
   } as GeneratedContents;
   if (internalFramework === "vanilla") {
     let mainJs = readAsJsFile(entryFile);

@@ -86,8 +86,5 @@ export const getOtherScriptFiles = async ({
     otherJsFileContents
   ) as FileContents;
 
-  return {
-    fileNames,
-    contents,
-  };
+  return contents;
 };

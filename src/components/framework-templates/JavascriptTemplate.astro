@@ -36,6 +36,7 @@ const chartScriptPath = getChartScriptPath(options.enterprise);
     />
     <ExampleStyle />
     <Styles
+      baseUrl={appLocation}
       files={isDev
         ? styleFiles
             .filter(
@@ -60,6 +61,7 @@ const chartScriptPath = getChartScriptPath(options.enterprise);
     {chartScriptPath ? <script src={chartScriptPath} /> : ""}
     <Scripts baseUrl={appLocation} files={scriptFiles} />
     <Styles
+      baseUrl={appLocation}
       files={styleFiles.filter(
         (file: string) =>
           file.includes("style.css") || file.includes("styles.css")
