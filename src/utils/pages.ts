@@ -59,8 +59,8 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
               page: page.slug,
             });
 
-            const exampleFiles = await fs.readdir(sourceExamplesPathUrl);
-            return exampleFiles.map((exampleName) => {
+            const examples = await fs.readdir(sourceExamplesPathUrl);
+            return examples.map((exampleName) => {
               return {
                 params: {
                   internalFramework,
