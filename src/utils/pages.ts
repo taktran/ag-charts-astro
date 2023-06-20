@@ -89,22 +89,16 @@ export function getDocPages(pages: any) {
 }
 
 export async function getDocExamplePages({ pages }: { pages: any }) {
-  const publicRoot = getPublicRootFileUrl().pathname;
-  const exampleFolderBasePathUrl = new URL(
-    path.join(publicRoot, "examples"),
-    import.meta.url
-  );
-
   return (
     await Promise.all(
       INTERNAL_FRAMEWORK_SLUGS.map((internalFramework) => {
         return Promise.all(
           pages.map(async (page: any) => {
-            const pageExampleFolderPath = path.join(
-              exampleFolderBasePathUrl.pathname,
-              page.slug
-            );
-            const exampleFiles = await fs.readdir(pageExampleFolderPath);
+            const sourceExamplesPathUrl = getSourceExamplesPathUrl({
+              page: page.slug,
+            });
+
+            const exampleFiles = await fs.readdir(sourceExamplesPathUrl);
             return exampleFiles.map((exampleName) => {
               return {
                 params: {
@@ -113,8 +107,7 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
                   exampleName,
                 },
                 props: {
-                  exampleBasePath: exampleFolderBasePathUrl.pathname,
-                  basePath: pageExampleFolderPath,
+                  sourceExamplesPath: sourceExamplesPathUrl.pathname,
                 },
               };
             });
