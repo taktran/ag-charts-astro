@@ -1,6 +1,6 @@
 import {
   getEntryFileName,
-  getEntryFileSourceContents,
+  getSourceFileContents,
   getFrameworkFromInternalFramework,
   getIsEnterprise,
 } from "./file-utils";
@@ -52,12 +52,12 @@ export const getGeneratedContents = async ({
 }): Promise<GeneratedContents | undefined> => {
   const framework = getFrameworkFromInternalFramework(internalFramework);
   const entryFileName = getEntryFileName({ framework, internalFramework });
-  const entryFile = await getEntryFileSourceContents({
+  const entryFile = await getSourceFileContents({
     page,
     exampleName,
     fileName: "main.ts",
   });
-  const indexHtml = (await getEntryFileSourceContents({
+  const indexHtml = (await getSourceFileContents({
     page,
     exampleName,
     fileName: "index.html",
@@ -66,6 +66,8 @@ export const getGeneratedContents = async ({
   if (!entryFile) {
     return;
   }
+
+  // Get other script files
 
   const { bindings, typedBindings } = chartVanillaSrcParser({
     srcFile: entryFile,

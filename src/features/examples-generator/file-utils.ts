@@ -56,7 +56,7 @@ export const getEntryFileName = ({
   return entryFile[framework] || "main.js";
 };
 
-export const getEntryFileSourcePathUrl = ({ page, exampleName, fileName }) => {
+export const getSourceFileUrl = ({ page, exampleName, fileName }) => {
   const examplesFolderPath = getSourceExamplesPathUrl({
     page,
   }).pathname;
@@ -66,15 +66,12 @@ export const getEntryFileSourcePathUrl = ({ page, exampleName, fileName }) => {
   return new URL(entryFilePath, import.meta.url);
 };
 
-/**
- * Get entry file source
- */
-export const getEntryFileSourceContents = ({
+export const getSourceFileContents = ({
   page,
   exampleName,
   fileName,
 }): Promise<string | undefined> => {
-  const entryFileUrl = getEntryFileSourcePathUrl({
+  const entryFileUrl = getSourceFileUrl({
     page,
     exampleName,
     fileName,
