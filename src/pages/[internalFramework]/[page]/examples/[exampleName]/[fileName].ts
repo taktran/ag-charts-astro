@@ -3,7 +3,6 @@ import {
   getIsDev,
   getDocExampleEntryFiles,
   getContentRootFileUrl,
-  getEntryFileSourceContents,
   getGeneratedContents,
 } from "../../../../../utils/pages";
 
@@ -22,15 +21,19 @@ export async function get({ params, request }) {
 
   const contentRoot = getContentRootFileUrl();
   if (internalFramework === "vanilla") {
-    // TODO: Get generated file
-    const entryFileName = "main.ts";
-    const entryFile = await getEntryFileSourceContents({
+    const { files, entryFileName } = await getGeneratedContents({
+      internalFramework,
+      importType,
       page,
       exampleName,
-      fileName: entryFileName,
     });
+    const entryFile = files[entryFileName];
     return {
-      body: entryFile ? entryFile : contentRoot.pathname,
+      body: entryFile
+        ? entryFile
+        : getIsDev()
+        ? `File not found within: ${contentRoot.pathname}`
+        : "Not found",
     };
   } else if (internalFramework === "react") {
     const { files, entryFileName } = await getGeneratedContents({

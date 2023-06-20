@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { parser as chartVanillaSrcParser } from "../utils/example-generation/chart-vanilla-src-parser";
 import { vanillaToReact } from "../utils/example-generation/chart-vanilla-to-react";
+import { readAsJsFile } from "./example-generation/parser-utils";
 
 interface ExamplePathArgs {
   page: string;
@@ -330,7 +331,13 @@ export const getGeneratedContents = async ({
   });
 
   let contents: GeneratedContents = {} as GeneratedContents;
-  if (internalFramework === "react") {
+  if (internalFramework === "vanilla") {
+    contents.files = {
+      "main.js": readAsJsFile(entryFile),
+      "index.html": indexHtml,
+    };
+    contents.entryFileName = "main.js";
+  } else if (internalFramework === "react") {
     const getSource = vanillaToReact(
       deepCloneObject(bindings),
       [] // TODO: extractComponentFileNames(reactScripts, "_react"),
@@ -341,7 +348,6 @@ export const getGeneratedContents = async ({
     // );
     contents.files = {
       [entryFileName]: getSource(),
-      "index.html": indexHtml,
     };
     contents.entryFileName = entryFileName;
   }
