@@ -2,18 +2,11 @@ import { FRAMEWORK_SLUGS, INTERNAL_FRAMEWORK_SLUGS } from "../constants";
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
-  getEntryFileName,
   getFrameworkFromInternalFramework,
   getSourceExamplesPathUrl,
+  getSourceFolderUrl,
 } from "../features/examples-generator/file-utils";
 import { getGeneratedContentsFileList } from "../features/examples-generator/examples-generator";
-
-interface ExamplePathArgs {
-  page: string;
-  exampleName: string;
-  importType: string;
-  internalFramework: string;
-}
 
 export const getIsDev = () => import.meta.env.DEV;
 
@@ -60,18 +53,26 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
             });
 
             const examples = await fs.readdir(sourceExamplesPathUrl);
-            return examples.map((exampleName) => {
-              return {
-                params: {
-                  internalFramework,
+            return Promise.all(
+              examples.map(async (exampleName) => {
+                const sourceFolderUrl = getSourceFolderUrl({
                   page: page.slug,
                   exampleName,
-                },
-                props: {
-                  sourceExamplesPath: sourceExamplesPathUrl.pathname,
-                },
-              };
-            });
+                });
+                const sourceFiles = await fs.readdir(sourceFolderUrl);
+                return {
+                  params: {
+                    internalFramework,
+                    page: page.slug,
+                    exampleName,
+                  },
+                  props: {
+                    sourceExamplesPath: sourceExamplesPathUrl.pathname,
+                    sourceFiles,
+                  },
+                };
+              })
+            );
           })
         );
       })
