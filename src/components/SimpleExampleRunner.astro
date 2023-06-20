@@ -2,11 +2,8 @@
 import { SimpleExampleRunner } from "./SimpleExampleRunner";
 import { OpenStackblitzButton } from "../features/stackblitz/OpenStackblitzButton";
 import { getInternalFramework } from "../utils/pages";
-import {
-  getEntryFileContents,
-  getEntryFileName,
-  getIsEnterprise,
-} from "../utils/pages";
+import { getEntryFileContents, getIsEnterprise } from "../utils/pages";
+import { getEntryFileName } from "../features/examples-generator/file-utils";
 
 const { title, name, type, options } = Astro.props;
 const exampleUrl = `./examples/${name}`;

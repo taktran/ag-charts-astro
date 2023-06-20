@@ -1,20 +1,17 @@
 import { FRAMEWORK_SLUGS, INTERNAL_FRAMEWORK_SLUGS } from "../constants";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { parser as chartVanillaSrcParser } from "../utils/example-generation/chart-vanilla-src-parser";
-import { vanillaToReact } from "../utils/example-generation/chart-vanilla-to-react";
-import { readAsJsFile } from "./example-generation/parser-utils";
+import {
+  getEntryFileName,
+  getFrameworkFromInternalFramework,
+  getSourceExamplesPathUrl,
+} from "../features/examples-generator/file-utils";
 
 interface ExamplePathArgs {
   page: string;
   exampleName: string;
   importType: string;
   internalFramework: string;
-}
-
-interface GeneratedContents {
-  files: Record<string, string>;
-  entryFileName: string;
 }
 
 export const getIsDev = () => import.meta.env.DEV;
@@ -25,14 +22,6 @@ export const getPublicRootFileUrl = (): URL => {
     : // Relative to `./dist` folder
       "../../";
   return new URL(publicRoot, import.meta.url);
-};
-
-export const getContentRootFileUrl = (): URL => {
-  const contentRoot = getIsDev()
-    ? "../content"
-    : // Relative to `./dist/_astro` folder
-      "../../../src/content";
-  return new URL(contentRoot, import.meta.url);
 };
 
 export const getExamplePath = ({
@@ -208,23 +197,6 @@ export function isStyleFile(file: string) {
   return file.endsWith(".css");
 }
 
-export const getEntryFileName = ({
-  framework,
-  internalFramework,
-}: {
-  framework: string;
-  internalFramework: string;
-}) => {
-  const entryFile = {
-    react:
-      internalFramework === "reactFunctionalTs" ? "index.tsx" : "index.jsx",
-    angular: "app/app.component.ts",
-    javascript: internalFramework === "typescript" ? "main.ts" : "main.js",
-  };
-
-  return entryFile[framework] || "main.js";
-};
-
 export const getEntryFileContents = async ({
   page,
   exampleName,
@@ -244,43 +216,9 @@ export const getEntryFileContents = async ({
   });
   const entryFilePath = path.join(exampleFolderPath, entryFileName);
   const entryFileUrl = new URL(entryFilePath, import.meta.url);
-  return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
-};
-
-export const getSourceExamplesPathUrl = ({ page }) => {
-  const contentRoot = getContentRootFileUrl();
-  const examplesFolderPath = path.join("docs", page, "_examples");
-  const sourceExamplesPath = path.join(
-    contentRoot.pathname,
-    examplesFolderPath
-  );
-  return new URL(sourceExamplesPath, import.meta.url);
-};
-
-export const getEntryFileSourcePathUrl = ({ page, exampleName, fileName }) => {
-  const examplesFolderPath = getSourceExamplesPathUrl({
-    page,
-  }).pathname;
-  const exampleFolderPath = path.join(examplesFolderPath, exampleName);
-  const entryFilePath = path.join(exampleFolderPath, fileName);
-
-  return new URL(entryFilePath, import.meta.url);
-};
-
-/**
- * Get entry file source
- */
-export const getEntryFileSourceContents = ({
-  page,
-  exampleName,
-  fileName,
-}): Promise<string | undefined> => {
-  const entryFileUrl = getEntryFileSourcePathUrl({
-    page,
-    exampleName,
-    fileName,
+  return fs.readFile(entryFileUrl, "utf-8").catch(() => {
+    return undefined;
   });
-  return fs.readFile(entryFileUrl, "utf-8").catch(() => {});
 };
 
 /**
@@ -297,67 +235,6 @@ export const getExampleLocation = ({
 }) => {
   return path.join("/", internalFramework, page, "examples", exampleName);
 };
-
-/**
- * Get generated contents for an example
- */
-export const getGeneratedContents = async ({
-  internalFramework,
-  importType,
-  page,
-  exampleName,
-}): Promise<GeneratedContents | undefined> => {
-  const framework = getFrameworkFromInternalFramework(internalFramework);
-  const entryFileName = getEntryFileName({ framework, internalFramework });
-  const entryFile = await getEntryFileSourceContents({
-    page,
-    exampleName,
-    fileName: "main.ts",
-  });
-  const indexHtml = (await getEntryFileSourceContents({
-    page,
-    exampleName,
-    fileName: "index.html",
-  })) as string;
-
-  if (!entryFile) {
-    return;
-  }
-
-  const { bindings, typedBindings } = chartVanillaSrcParser({
-    srcFile: entryFile,
-    html: indexHtml,
-    exampleSettings: {},
-  });
-
-  let contents: GeneratedContents = {} as GeneratedContents;
-  if (internalFramework === "vanilla") {
-    contents.files = {
-      "main.js": readAsJsFile(entryFile),
-      "index.html": indexHtml,
-    };
-    contents.entryFileName = "main.js";
-  } else if (internalFramework === "react") {
-    const getSource = vanillaToReact(
-      deepCloneObject(bindings),
-      [] // TODO: extractComponentFileNames(reactScripts, "_react"),
-    );
-    // TODO:
-    // importTypes.forEach((importType) =>
-    //   reactConfigs.set(importType, { "index.jsx": getSource(importType) })
-    // );
-    contents.files = {
-      [entryFileName]: getSource(),
-    };
-    contents.entryFileName = entryFileName;
-  }
-
-  return contents;
-};
-
-function deepCloneObject(object: object) {
-  return JSON.parse(JSON.stringify(object));
-}
 
 // TODO: Find a better way to determine if an example is enterprise or not
 export const getIsEnterprise = ({
@@ -412,25 +289,6 @@ export const getInternalFramework = ({
         : "react";
     default:
       return framework;
-  }
-};
-
-export const getFrameworkFromInternalFramework = (
-  internalFramework: string
-) => {
-  switch (internalFramework) {
-    case "typescript":
-    case "vanilla":
-      return "javascript";
-    case "react":
-    case "reactFunctionalTs":
-    case "reactFunctional":
-      return "react";
-    case "vue":
-    case "vue3":
-      return "vue";
-    default:
-      return internalFramework;
   }
 };
 

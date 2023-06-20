@@ -1,10 +1,7 @@
 import { getCollection, getEntry } from "astro:content";
-import {
-  getIsDev,
-  getDocExampleEntryFiles,
-  getContentRootFileUrl,
-  getGeneratedContents,
-} from "../../../../../utils/pages";
+import { getIsDev, getDocExampleEntryFiles } from "../../../../../utils/pages";
+import { getContentRootFileUrl } from "../../../../../features/examples-generator/file-utils";
+import { getGeneratedContents } from "../../../../../features/examples-generator/examples-generator";
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
