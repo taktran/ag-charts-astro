@@ -17,45 +17,6 @@ interface ExamplePathArgs {
 
 export const getIsDev = () => import.meta.env.DEV;
 
-export const getPublicRootFileUrl = (): URL => {
-  const publicRoot = getIsDev()
-    ? "../../public"
-    : // Relative to `./dist` folder
-      "../../";
-  return new URL(publicRoot, import.meta.url);
-};
-
-export const getExamplePath = ({
-  page,
-  exampleName,
-  importType,
-  internalFramework,
-}: ExamplePathArgs): string => {
-  return path.join(
-    "examples",
-    page,
-    exampleName,
-    importType,
-    internalFramework
-  );
-};
-
-export const getExampleFolderPath = (args: ExamplePathArgs): string => {
-  const examplePath = getExamplePath(args);
-  return path.join(getPublicRootFileUrl().pathname, examplePath);
-};
-
-export const getExampleBaseUrl = (args: ExamplePathArgs): string => {
-  const examplePath = getExamplePath(args);
-  return path.join("/", examplePath);
-};
-
-export const getExampleFiles = (args: ExamplePathArgs) => {
-  const exampleFolderPath = getExampleFolderPath(args);
-  const exampleFolderPathUrl = new URL(exampleFolderPath, import.meta.url);
-  return fs.readdir(exampleFolderPathUrl);
-};
-
 // TODO: Figure out published packages
 export const isUsingPublishedPackages = () => false;
 export const isPreProductionBuild = () => false;
@@ -166,33 +127,6 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
   ).flat(3);
 }
 
-// TODO: Make file filter more generic
-export function isScriptFile(file: string) {
-  return file.endsWith(".js");
-}
-
-export async function getScriptFiles(args: ExamplePathArgs) {
-  const exampleFiles = await getExampleFiles(args);
-  const exampleBaseUrl = getExampleBaseUrl(args);
-
-  return exampleFiles.filter(isScriptFile).map((file) => {
-    return path.join(exampleBaseUrl, file);
-  });
-}
-
-export async function getStyleFiles(args: ExamplePathArgs) {
-  const exampleFiles = await getExampleFiles(args);
-  const exampleBaseUrl = getExampleBaseUrl(args);
-
-  return exampleFiles.filter(isStyleFile).map((file) => {
-    return path.join(exampleBaseUrl, file);
-  });
-}
-
-export function isStyleFile(file: string) {
-  return file.endsWith(".css");
-}
-
 /**
  * Dynamic path where example files are
  */
@@ -206,24 +140,6 @@ export const getExampleLocation = ({
   exampleName: string;
 }) => {
   return path.join("/", internalFramework, page, "examples", exampleName);
-};
-
-// TODO: Find a better way to determine if an example is enterprise or not
-export const getIsEnterprise = ({
-  framework,
-  internalFramework,
-  entryFile,
-}: {
-  framework: string;
-  internalFramework: string;
-  entryFile: string;
-}) => {
-  const entryFileName = getEntryFileName({ framework, internalFramework });
-
-  const isEnterprise = false;
-  return entryFileName === "main.js"
-    ? entryFile?.includes("agChartsEnterprise")
-    : entryFile?.includes("ag-charts-enterprise");
 };
 
 /**

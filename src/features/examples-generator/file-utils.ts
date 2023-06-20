@@ -83,3 +83,21 @@ export const getEntryFileSourceContents = ({
     return undefined;
   });
 };
+
+// TODO: Find a better way to determine if an example is enterprise or not
+export const getIsEnterprise = ({
+  framework,
+  internalFramework,
+  entryFile,
+}: {
+  framework: string;
+  internalFramework: string;
+  entryFile: string;
+}) => {
+  const entryFileName = getEntryFileName({ framework, internalFramework });
+
+  const isEnterprise = false;
+  return entryFileName === "main.js"
+    ? entryFile?.includes("agChartsEnterprise")
+    : entryFile?.includes("ag-charts-enterprise");
+};

@@ -1,5 +1,10 @@
-import React from 'react';
+import React from "react";
+import path from "node:path";
 
-const Scripts = ({ files }) => files.map(file => <script key={file} src={file} />);
+const Scripts = ({ baseUrl, files }) =>
+  files.map((file) => {
+    const srcFile = path.join(baseUrl, file);
+    return <script key={file} src={srcFile} />;
+  });
 
 export default Scripts;

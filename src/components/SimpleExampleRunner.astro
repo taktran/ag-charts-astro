@@ -2,7 +2,6 @@
 import { SimpleExampleRunner } from "./SimpleExampleRunner";
 import { OpenStackblitzButton } from "../features/stackblitz/OpenStackblitzButton";
 import { getInternalFramework } from "../utils/pages";
-import { getIsEnterprise } from "../utils/pages";
 import { getGeneratedContents } from "../features/examples-generator/examples-generator";
 import path from "node:path";
 
@@ -26,19 +25,13 @@ const exampleUrl = path.join("/", internalFramework, page, "examples", name);
 
 const importType = "packages";
 
-const { files, entryFileName } = await getGeneratedContents({
+const { files, entryFileName, isEnterprise } = await getGeneratedContents({
   internalFramework,
   importType,
   page,
   exampleName: name,
 });
 const entryFile = files[entryFileName];
-
-const isEnterprise = getIsEnterprise({
-  framework,
-  internalFramework,
-  entryFile: entryFile!,
-});
 ---
 
 <div class="container">

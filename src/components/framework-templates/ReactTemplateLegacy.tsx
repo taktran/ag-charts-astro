@@ -39,7 +39,7 @@ const ReactTemplateLegacy = ({
     <body>
       <div id="root"></div>
       <LoadingSpinner />
-      <Scripts files={scriptFiles} />
+      <Scripts baseUrl={appLocation} files={scriptFiles} />
       <SystemJs
         library={library}
         boilerplatePath={boilerplatePath}

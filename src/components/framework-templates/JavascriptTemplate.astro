@@ -58,7 +58,7 @@ const chartScriptPath = getChartScriptPath(options.enterprise);
       window.__basePath = appLocation;
     </script>
     {chartScriptPath ? <script src={chartScriptPath} /> : ""}
-    <Scripts files={scriptFiles} />
+    <Scripts baseUrl={appLocation} files={scriptFiles} />
     <Styles
       files={styleFiles.filter(
         (file: string) =>

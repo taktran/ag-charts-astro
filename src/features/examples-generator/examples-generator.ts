@@ -2,6 +2,7 @@ import {
   getEntryFileName,
   getEntryFileSourceContents,
   getFrameworkFromInternalFramework,
+  getIsEnterprise,
 } from "./file-utils";
 import chartVanillaSrcParser from "./transformation-scripts/chart-vanilla-src-parser";
 import { vanillaToReact } from "./transformation-scripts/chart-vanilla-to-react";
@@ -10,6 +11,9 @@ import { readAsJsFile } from "./transformation-scripts/parser-utils";
 interface GeneratedContents {
   files: Record<string, string>;
   entryFileName: string;
+  scriptFiles: string[];
+  styleFiles: string[];
+  isEnterprise: boolean;
 }
 
 function deepCloneObject(object: object) {
@@ -69,12 +73,42 @@ export const getGeneratedContents = async ({
     exampleSettings: {},
   });
 
-  let contents: GeneratedContents = {} as GeneratedContents;
+  const isEnterprise = getIsEnterprise({
+    framework,
+    internalFramework,
+    entryFile,
+  });
+
+  let contents: GeneratedContents = {
+    isEnterprise,
+    scriptFiles: [] as string[], // TODO: Figure out script files
+    styleFiles: [] as string[], // TODO: Figure out style files
+  } as GeneratedContents;
   if (internalFramework === "vanilla") {
+    let mainJs = readAsJsFile(entryFile);
+
+    // Chart classes that need scoping
+    const chartImports = typedBindings.imports.find(
+      (i) =>
+        i.module.includes("ag-charts-community") ||
+        i.module.includes("ag-charts-enterprise")
+    );
+    if (chartImports) {
+      chartImports.imports.forEach((i) => {
+        const toReplace = `(?<!\\.)${i}([\\s\/.])`;
+        const reg = new RegExp(toReplace, "g");
+        mainJs = mainJs.replace(
+          reg,
+          `${isEnterprise ? "agChartsEnterprise" : "agCharts"}.${i}$1`
+        );
+      });
+    }
+
     contents.files = {
-      "main.js": readAsJsFile(entryFile),
+      "main.js": mainJs,
       "index.html": indexHtml,
     };
+    contents.scriptFiles = ["main.js"];
     contents.entryFileName = "main.js";
   } else if (internalFramework === "react") {
     const getSource = vanillaToReact(

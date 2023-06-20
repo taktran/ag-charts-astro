@@ -1,11 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import {
-  getScriptFiles,
-  getStyleFiles,
-  getInternalFramework,
   getBoilerPlateFramework,
-  getIsEnterprise,
   getDocExamplePages,
   getExampleLocation,
 } from "../../../../utils/pages";
@@ -36,33 +32,14 @@ export async function getStaticPaths() {
   return examples;
 }
 
-const { files, entryFileName } = await getGeneratedContents({
-  internalFramework,
-  importType,
-  page,
-  exampleName,
-});
-const entryFile = files[entryFileName];
+const { files, scriptFiles, styleFiles, isEnterprise } =
+  await getGeneratedContents({
+    internalFramework,
+    importType,
+    page,
+    exampleName,
+  });
 const indexHtml = files["index.html"];
-
-const isEnterprise = getIsEnterprise({
-  framework,
-  internalFramework,
-  entryFile,
-});
-
-const scriptFiles = await getScriptFiles({
-  page,
-  exampleName,
-  importType,
-  internalFramework,
-});
-const styleFiles = await getStyleFiles({
-  page,
-  exampleName,
-  importType,
-  internalFramework,
-});
 
 const boilerPlateFramework = getBoilerPlateFramework({
   framework,
