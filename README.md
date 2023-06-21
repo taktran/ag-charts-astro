@@ -1,4 +1,4 @@
-# AG Charts Astro Spike
+# AG Grid Astro Spike
 
 ## 🧞 Commands
 
