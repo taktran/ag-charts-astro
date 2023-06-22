@@ -30,6 +30,7 @@ const ReactTemplateLegacy = ({
         modifiedTimeMs={modifiedTimeMs}
         isExecuting={isExecuting}
         options={options}
+        isDev={isDev}
       />
       <ExampleStyle rootId="root" />
       {(type !== "generated" || library !== "grid") && (
