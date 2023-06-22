@@ -8,7 +8,7 @@ import path from "node:path";
 const { title, name, type, options } = Astro.props;
 
 // TODO: Get this from framework selector
-const [_, framework, page] = Astro.url.pathname.split("/");
+const [_, framework, pageName] = Astro.url.pathname.split("/");
 // TODO: Create framework selector
 const useFunctionalReact = false;
 const useVue3 = false;
@@ -21,14 +21,20 @@ const internalFramework = getInternalFramework({
   useTypescript,
 });
 
-const exampleUrl = path.join("/", internalFramework, page, "examples", name);
+const exampleUrl = path.join(
+  "/",
+  internalFramework,
+  pageName,
+  "examples",
+  name
+);
 
 const importType = "packages";
 
 const { files, entryFileName, isEnterprise } = await getGeneratedContents({
   internalFramework,
   importType,
-  page,
+  pageName,
   exampleName: name,
 });
 const entryFile = files[entryFileName];

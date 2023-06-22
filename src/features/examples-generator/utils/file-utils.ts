@@ -11,9 +11,13 @@ export const getContentRootFileUrl = (): URL => {
   return new URL(contentRoot, import.meta.url);
 };
 
-export const getSourceExamplesPathUrl = ({ page }) => {
+export const getSourceExamplesPathUrl = ({
+  pageName,
+}: {
+  pageName: string;
+}) => {
   const contentRoot = getContentRootFileUrl();
-  const examplesFolderPath = path.join("docs", page, "_examples");
+  const examplesFolderPath = path.join("docs", pageName, "_examples");
   const sourceExamplesPath = path.join(
     contentRoot.pathname,
     examplesFolderPath
@@ -57,29 +61,50 @@ export const getEntryFileName = ({
   return entryFile[framework] || "main.js";
 };
 
-export const getSourceFolderUrl = ({ page, exampleName }) => {
+export const getSourceFolderUrl = ({
+  pageName,
+  exampleName,
+}: {
+  pageName: string;
+  exampleName: string;
+}) => {
   const examplesFolderPath = getSourceExamplesPathUrl({
-    page,
+    pageName,
   }).pathname;
   const exampleFolderPath = path.join(examplesFolderPath, exampleName);
 
   return new URL(exampleFolderPath, import.meta.url);
 };
 
-export const getSourceFileUrl = ({ page, exampleName, fileName }) => {
-  const exampleFolderPath = getSourceFolderUrl({ page, exampleName }).pathname;
+export const getSourceFileUrl = ({
+  pageName,
+  exampleName,
+  fileName,
+}: {
+  pageName: string;
+  exampleName: string;
+  fileName: string;
+}) => {
+  const exampleFolderPath = getSourceFolderUrl({
+    pageName,
+    exampleName,
+  }).pathname;
   const entryFilePath = path.join(exampleFolderPath, fileName);
 
   return new URL(entryFilePath, import.meta.url);
 };
 
 export const getSourceFileContents = ({
-  page,
+  pageName,
   exampleName,
   fileName,
+}: {
+  pageName: string;
+  exampleName: string;
+  fileName: string;
 }): Promise<string | undefined> => {
   const entryFileUrl = getSourceFileUrl({
-    page,
+    pageName,
     exampleName,
     fileName,
   });
@@ -106,11 +131,11 @@ export const getIsEnterprise = ({
 };
 
 export const getContentsOfFileList = async ({
-  page,
+  pageName,
   exampleName,
   fileList,
 }: {
-  page: string;
+  pageName: string;
   exampleName: string;
   fileList: string[];
 }) => {
@@ -118,7 +143,7 @@ export const getContentsOfFileList = async ({
   await Promise.all(
     fileList.map(async (fileName) => {
       const file = (await getSourceFileContents({
-        page,
+        pageName,
         exampleName,
         fileName,
       })) as string;

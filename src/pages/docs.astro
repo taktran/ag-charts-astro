@@ -12,12 +12,8 @@ const docPages = getDocPages(docs);
   {
     docPages.map((docPage: any) => (
       <li>
-        <p>params.framework: {docPage.params.framework}</p>
-        <p>params.page: {docPage.params.page}</p>
-        <div>
-          props.page:
-          <pre>{JSON.stringify(docPage.props.page, null, 2)}</pre>
-        </div>
+        Doc page:
+        <pre>{JSON.stringify(docPage, null, 2)}</pre>
       </li>
     ))
   }

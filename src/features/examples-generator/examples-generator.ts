@@ -36,25 +36,25 @@ export const getGeneratedContentsFileList = async ({
 
   // TODO: file list can be different if there are extra files
   // importType,
-  page,
+  pageName,
   exampleName,
 }): string[] => {
   const framework = getFrameworkFromInternalFramework(internalFramework);
   const entryFileName = getEntryFileName({ framework, internalFramework });
   const sourceFolderUrl = getSourceFolderUrl({
-    page,
+    pageName,
     exampleName,
   });
   const sourceFileList = await fs.readdir(sourceFolderUrl);
   const scriptFiles = await getOtherScriptFiles({
     sourceEntryFileName: entryFileName,
     sourceFileList,
-    page,
+    pageName,
     exampleName,
   });
   const styleFiles = await getStyleFiles({
     sourceFileList,
-    page,
+    pageName,
     exampleName,
   });
 
@@ -76,12 +76,12 @@ export const getGeneratedContentsFileList = async ({
 export const getGeneratedContents = async ({
   internalFramework,
   importType,
-  page,
+  pageName,
   exampleName,
 }): Promise<GeneratedContents | undefined> => {
   const framework = getFrameworkFromInternalFramework(internalFramework);
   const sourceFolderUrl = getSourceFolderUrl({
-    page,
+    pageName,
     exampleName,
   });
   const sourceFileList = await fs.readdir(sourceFolderUrl);
@@ -89,12 +89,12 @@ export const getGeneratedContents = async ({
   const entryFileName = getEntryFileName({ framework, internalFramework });
   const sourceEntryFileName = "main.ts";
   const entryFile = await getSourceFileContents({
-    page,
+    pageName,
     exampleName,
     fileName: sourceEntryFileName,
   });
   const indexHtml = (await getSourceFileContents({
-    page,
+    pageName,
     exampleName,
     fileName: "index.html",
   })) as string;
@@ -118,12 +118,12 @@ export const getGeneratedContents = async ({
   const otherScriptFiles = await getOtherScriptFiles({
     sourceEntryFileName,
     sourceFileList,
-    page,
+    pageName,
     exampleName,
   });
   const styleFiles = await getStyleFiles({
     sourceFileList,
-    page,
+    pageName,
     exampleName,
   });
 
@@ -139,12 +139,12 @@ export const getGeneratedContents = async ({
 
     // Chart classes that need scoping
     const chartImports = typedBindings.imports.find(
-      (i) =>
+      (i: any) =>
         i.module.includes("ag-charts-community") ||
         i.module.includes("ag-charts-enterprise")
     );
     if (chartImports) {
-      chartImports.imports.forEach((i) => {
+      chartImports.imports.forEach((i: any) => {
         const toReplace = `(?<!\\.)${i}([\\s\/.])`;
         const reg = new RegExp(toReplace, "g");
         mainJs = mainJs.replace(

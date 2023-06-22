@@ -6,12 +6,12 @@ export type FileContents = Record<string, string>;
 const getOtherTsGeneratedFiles = async ({
   sourceEntryFileName,
   sourceFileList,
-  page,
+  pageName,
   exampleName,
 }: {
   sourceEntryFileName: string;
   sourceFileList: string[];
-  page: string;
+  pageName: string;
   exampleName: string;
 }) => {
   const otherTsFiles = sourceFileList
@@ -19,7 +19,7 @@ const getOtherTsGeneratedFiles = async ({
     // Exclude entry file
     .filter((fileName) => fileName !== sourceEntryFileName);
   const tsFileContents = await getContentsOfFileList({
-    page,
+    pageName,
     exampleName,
     fileList: otherTsFiles,
   });
@@ -36,18 +36,18 @@ const getOtherTsGeneratedFiles = async ({
 
 const getOtherJsFiles = ({
   sourceFileList,
-  page,
+  pageName,
   exampleName,
 }: {
   sourceFileList: string[];
-  page: string;
+  pageName: string;
   exampleName: string;
 }): Promise<FileContents> => {
   const otherJsFiles = sourceFileList.filter((fileName) =>
     fileName.endsWith(".js")
   );
   return getContentsOfFileList({
-    page,
+    pageName,
     exampleName,
     fileList: otherJsFiles,
   });
@@ -56,29 +56,25 @@ const getOtherJsFiles = ({
 export const getOtherScriptFiles = async ({
   sourceEntryFileName,
   sourceFileList,
-  page,
+  pageName,
   exampleName,
 }: {
   sourceEntryFileName: string;
   sourceFileList: string[];
-  page: string;
+  pageName: string;
   exampleName: string;
 }) => {
   const otherTsGeneratedFileContents = await getOtherTsGeneratedFiles({
     sourceEntryFileName,
     sourceFileList,
-    page,
+    pageName,
     exampleName,
   });
   const otherJsFileContents = await getOtherJsFiles({
-    page,
+    pageName,
     exampleName,
     sourceFileList,
   });
-
-  const fileNames = Object.keys(otherJsFileContents).concat(
-    Object.keys(otherTsGeneratedFileContents)
-  );
 
   const contents = Object.assign(
     {},

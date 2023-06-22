@@ -11,7 +11,7 @@ import { getGeneratedContents } from "../../../../features/examples-generator/ex
 import { getFrameworkFromInternalFramework } from "../../../../features/examples-generator/utils/file-utils";
 
 const internalFramework = Astro.params.internalFramework!;
-const page = Astro.params.page!;
+const pageName = Astro.params.pageName!;
 const exampleName = Astro.params.exampleName!;
 
 // TODO: Create framework selector
@@ -36,7 +36,7 @@ const { files, scriptFiles, styleFiles, isEnterprise } =
   await getGeneratedContents({
     internalFramework,
     importType,
-    page,
+    pageName,
     exampleName,
   });
 const indexHtml = files["index.html"];
@@ -51,7 +51,7 @@ const boilerplatePath = `/example-runner/${library}-${boilerPlateFramework}-boil
 
 const appLocation = getExampleLocation({
   internalFramework,
-  page,
+  pageName,
   exampleName,
 });
 ---

@@ -2,11 +2,11 @@ import { getContentsOfFileList } from "./file-utils";
 
 export const getStyleFiles = async ({
   sourceFileList,
-  page,
+  pageName,
   exampleName,
 }: {
   sourceFileList: string[];
-  page: string;
+  pageName: string;
   exampleName: string;
 }) => {
   const styleFiles = sourceFileList.filter((fileName) =>
@@ -14,7 +14,7 @@ export const getStyleFiles = async ({
   );
 
   const styleContents = await getContentsOfFileList({
-    page,
+    pageName,
     exampleName,
     fileList: styleFiles,
   });

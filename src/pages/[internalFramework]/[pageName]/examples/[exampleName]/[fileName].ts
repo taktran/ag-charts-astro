@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 export async function get({ params, request }) {
-  const { internalFramework, page, exampleName, fileName } = params;
+  const { internalFramework, pageName, exampleName, fileName } = params;
 
   const importType = "packages"; // TODO: Only valid for charts
 
@@ -21,7 +21,7 @@ export async function get({ params, request }) {
     const { files } = await getGeneratedContents({
       internalFramework,
       importType,
-      page,
+      pageName,
       exampleName,
     });
     const entryFile = files[fileName];
@@ -36,7 +36,7 @@ export async function get({ params, request }) {
     const { files } = await getGeneratedContents({
       internalFramework,
       importType,
-      page,
+      pageName,
       exampleName,
     });
 
@@ -49,12 +49,12 @@ export async function get({ params, request }) {
         : "Not found",
     };
   } else {
-    const pageEntry = await getEntry("docs", page);
+    const pageEntry = await getEntry("docs", pageName);
     const debugOutput = JSON.stringify(
       {
         contentRoot: contentRoot.pathname,
         internalFramework,
-        page,
+        pageName,
         exampleName,
         pageEntry,
       },

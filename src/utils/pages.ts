@@ -31,7 +31,7 @@ export function getDocPages(pages: any) {
       return {
         params: {
           framework,
-          page: page.slug,
+          pageName: page.slug,
         },
         props: {
           page,
@@ -48,21 +48,21 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
         return Promise.all(
           pages.map(async (page: any) => {
             const sourceExamplesPathUrl = getSourceExamplesPathUrl({
-              page: page.slug,
+              pageName: page.slug,
             });
 
             const examples = await fs.readdir(sourceExamplesPathUrl);
             return Promise.all(
               examples.map(async (exampleName) => {
                 const sourceFolderUrl = getSourceFolderUrl({
-                  page: page.slug,
+                  pageName: page.slug,
                   exampleName,
                 });
                 const sourceFiles = await fs.readdir(sourceFolderUrl);
                 return {
                   params: {
                     internalFramework,
-                    page: page.slug,
+                    pageName: page.slug,
                     exampleName,
                   },
                   props: {
@@ -86,7 +86,7 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
         return Promise.all(
           pages.map(async (page: any) => {
             const pageExampleFolderPath = getSourceExamplesPathUrl({
-              page: page.slug,
+              pageName: page.slug,
             });
             const examples = await fs.readdir(pageExampleFolderPath);
             return Promise.all(
@@ -94,7 +94,7 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
                 // Get all example files for the example
                 const exampleFileList = await getGeneratedContentsFileList({
                   internalFramework,
-                  page: page.slug,
+                  pageName: page.slug,
                   exampleName,
                 });
 
@@ -111,7 +111,7 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
                   return {
                     params: {
                       internalFramework,
-                      page: page.slug,
+                      pageName: page.slug,
                       exampleName,
                       fileName,
                     },
@@ -135,14 +135,14 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
  */
 export const getExampleLocation = ({
   internalFramework,
-  page,
+  pageName,
   exampleName,
 }: {
   internalFramework: string;
-  page: string;
+  pageName: string;
   exampleName: string;
 }) => {
-  return path.join("/", internalFramework, page, "examples", exampleName);
+  return path.join("/", internalFramework, pageName, "examples", exampleName);
 };
 
 /**
