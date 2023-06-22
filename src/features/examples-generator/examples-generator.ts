@@ -62,7 +62,7 @@ export const getGeneratedContentsFileList = async ({
     Object.keys(styleFiles)
   );
   if (internalFramework === "vanilla") {
-    generatedFileList = generatedFileList.concat(["main.js", "index.html"]);
+    generatedFileList = generatedFileList.concat(["index.html"]);
   } else if (internalFramework === "react") {
     generatedFileList = generatedFileList.concat("index.jsx");
   }
