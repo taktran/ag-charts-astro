@@ -1,4 +1,4 @@
-import { getContentsOfFileList } from "./file-utils";
+import { getContentsOfFileList } from "./fileUtils";
 
 export const getStyleFiles = async ({
   sourceFileList,

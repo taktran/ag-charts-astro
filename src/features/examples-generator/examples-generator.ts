@@ -4,7 +4,7 @@ import {
   getFrameworkFromInternalFramework,
   getIsEnterprise,
   getSourceFolderUrl,
-} from "./utils/file-utils";
+} from "./utils/fileUtils";
 import chartVanillaSrcParser from "./transformation-scripts/chart-vanilla-src-parser";
 import { vanillaToReact } from "./transformation-scripts/chart-vanilla-to-react";
 import { readAsJsFile } from "./transformation-scripts/parser-utils";

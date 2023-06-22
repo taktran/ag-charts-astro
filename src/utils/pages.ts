@@ -4,7 +4,7 @@ import path from "node:path";
 import {
   getSourceExamplesPathUrl,
   getSourceFolderUrl,
-} from "../features/examples-generator/utils/file-utils";
+} from "../features/examples-generator/utils/fileUtils";
 import { getGeneratedContentsFileList } from "../features/examples-generator/examples-generator";
 
 export const getIsDev = () => import.meta.env.DEV;

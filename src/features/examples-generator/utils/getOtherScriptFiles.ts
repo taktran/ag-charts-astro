@@ -1,5 +1,5 @@
 import { readAsJsFile } from "../transformation-scripts/parser-utils";
-import { getContentsOfFileList } from "./file-utils";
+import { getContentsOfFileList } from "./fileUtils";
 
 export type FileContents = Record<string, string>;
 
