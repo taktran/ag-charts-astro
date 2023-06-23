@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { getDocPages } from "../../utils/pages";
+import SimpleExampleRunner from "../../components/SimpleExampleRunner.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
@@ -11,10 +12,15 @@ const { page } = Astro.props;
 const { framework } = Astro.params;
 const { title, enterprise } = page.data;
 
-const { Content } = await page.render();
+const { Content, components } = await page.render();
 ---
 
 <a href="/">&lt; Back</a>
 
 <h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
-<Content />
+<Content
+  components={{
+    ...components,
+    SimpleExampleRunner,
+  }}
+/>
