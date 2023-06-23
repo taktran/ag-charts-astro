@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { getDocPages } from "../../utils/pages";
 import SimpleExampleRunner from "../../components/SimpleExampleRunner.astro";
+import { MenuSidebar } from "../../components/MenuSidebar";
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
@@ -13,14 +14,50 @@ const { framework } = Astro.params;
 const { title, enterprise } = page.data;
 
 const { Content, components } = await page.render();
+const pages = await getCollection("docs");
 ---
 
-<a href="/">&lt; Back</a>
+<main>
+  <section class="header"><a href="/">Home</a></section>
+  <section class="sidebar">
+    <MenuSidebar client:load pages={pages} framework={framework} />
+  </section>
+  <section class="content">
+    <h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
+    <Content
+      components={{
+        ...components,
+        SimpleExampleRunner,
+      }}
+    />
+  </section>
+</main>
 
-<h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
-<Content
-  components={{
-    ...components,
-    SimpleExampleRunner,
-  }}
-/>
+<style>
+  main {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-areas:
+      "header header"
+      "sidebar content";
+    gap: 8px;
+  }
+
+  .header {
+    grid-area: header;
+    background: #eaeaea;
+    padding: 8px;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+  }
+
+  .content {
+    grid-area: content;
+  }
+
+  .content h1 {
+    margin-top: 0;
+  }
+</style>
