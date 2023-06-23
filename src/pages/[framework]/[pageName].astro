@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { getDocPages } from "../../utils/pages";
 import SimpleExampleRunner from "../../components/SimpleExampleRunner.astro";
 import { MenuSidebar } from "../../components/MenuSidebar";
+import { FrameworkSelector } from "../../components/FrameworkSelector";
 
 export async function getStaticPaths() {
   const pages = await getCollection("docs");
@@ -10,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { framework } = Astro.params;
+const { framework, pageName } = Astro.params;
 const { title, enterprise } = page.data;
 
 const { Content, components } = await page.render();
@@ -18,7 +19,14 @@ const pages = await getCollection("docs");
 ---
 
 <main>
-  <section class="header"><a href="/">Home</a></section>
+  <section class="header">
+    <a href="/">Home</a>
+    <FrameworkSelector
+      client:load
+      initialFramework={framework}
+      currentPage={pageName}
+    />
+  </section>
   <section class="sidebar">
     <MenuSidebar client:load pages={pages} framework={framework} />
   </section>
@@ -45,6 +53,8 @@ const pages = await getCollection("docs");
 
   .header {
     grid-area: header;
+    display: flex;
+    justify-content: space-between;
     background: #eaeaea;
     padding: 8px;
   }
