@@ -20,7 +20,7 @@ series: [
 ];
 ```
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title="Single Line Series"
   name="basic-line"
   type="generated"
@@ -46,7 +46,7 @@ series: [{
 The above config is used in the example below. Feel free to open it in Pluker and experiment with other [label options](#reference-line.label).
 
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title="Line Series With Labels"
   name="basic-line-labels"
   type="generated"
@@ -83,7 +83,7 @@ series: [
 
 And we get a result like this:
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title='Multiple Line Series' name='multi-line' type='generated'
 />
 
@@ -106,7 +106,7 @@ series: [
 ];
 ```
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title='Legend and Tooltip Information' name='legend-info' type='generated'
 />
 
@@ -128,7 +128,7 @@ marker: {
 
 We'll get a result like this:
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title='Line and Marker Colours' name='line-marker-colors' type='generated'
 />
 
@@ -138,7 +138,7 @@ There are many other customisations you can make to the markers; see the [marker
 
 In a perfect world all data would be 100% complete. Unfortunately, in the real one, data for certain items or time periods might be missing or corrupted. But that shouldn't result in corrupted charts, and AG Charts supports the correct rendering of incomplete data:
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title='Line Series with Incomplete Data' name='gap-line' type='generated'
 />
 
@@ -150,7 +150,7 @@ If the bottom axis is also continuous (for example, if it's a `'number'` axis to
 
 By default, the bottom axis is a `'category'` axis, but this can be changed if you have continuous data that you would like to plot. See the [axes section](/charts-axes/) for more information on configuring axes.
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title='Continuous Data: Spiral Curve' name='two-number-axes' type='generated' options='{ "exampleHeight": 600 }'
 />
 
@@ -158,7 +158,7 @@ By default, the bottom axis is a `'category'` axis, but this can be changed if y
 
 The following example shows how line series can be used to render time-series data, using a `'time'` axis. In this case, we have two ambient temperature sensors that give us two independent data sets, with different numbers of readings taken at different times:
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title='Time Data: Temperature Sensors' name='time-line' type='generated'
 />
 
@@ -203,7 +203,7 @@ The time axis automatically selects an appropriate label format depending on the
 
 The chart will update whenever new data is supplied via the chart's or series' `data` property.
 
-<SimpleExampleRunner
+<ChartExampleRunner
   title='Real-Time Chart: Core Voltage' name='real-time' type='mixed'
 />
 

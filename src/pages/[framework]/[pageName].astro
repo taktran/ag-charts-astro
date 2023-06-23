@@ -35,7 +35,8 @@ const pages = await getCollection("docs");
     <Content
       components={{
         ...components,
-        SimpleExampleRunner,
+        ChartExampleRunner: SimpleExampleRunner,
+        GridExampleRunner: SimpleExampleRunner,
       }}
     />
   </section>
