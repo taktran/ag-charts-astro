@@ -17,6 +17,12 @@ export async function get({ params, request }) {
   const importType = "packages"; // TODO: Only valid for charts
 
   const contentRoot = getContentRootFileUrl();
+  const createDevErrorMessage = ({ availableFiles }) =>
+    JSON.stringify({
+      error: `File not found`,
+      contentPath: contentRoot.pathname,
+      availableFiles: Object.keys(availableFiles),
+    });
   if (internalFramework === "vanilla") {
     const { files } = await getGeneratedContents({
       internalFramework,
@@ -29,7 +35,7 @@ export async function get({ params, request }) {
       body: entryFile
         ? entryFile
         : getIsDev()
-        ? `File not found within: ${contentRoot.pathname}`
+        ? createDevErrorMessage({ availableFiles: files })
         : "Not found",
     };
   } else if (internalFramework === "react") {
@@ -45,26 +51,44 @@ export async function get({ params, request }) {
       body: entryFile
         ? entryFile
         : getIsDev()
-        ? `File not found within: ${contentRoot.pathname}`
+        ? createDevErrorMessage({ availableFiles: files })
         : "Not found",
     };
   } else {
-    const pageEntry = await getEntry("docs", pageName);
-    const debugOutput = JSON.stringify(
-      {
-        contentRoot: contentRoot.pathname,
-        internalFramework,
-        pageName,
-        exampleName,
-        pageEntry,
-      },
-      null,
-      2
-    );
+    // HACK: Use react for the rest of the frameworks
+    const { files } = await getGeneratedContents({
+      internalFramework,
+      importType,
+      pageName,
+      exampleName,
+    });
 
-    const body = getIsDev() ? `Not found: ${debugOutput}` : "Not found";
+    const entryFile = files[fileName];
     return {
-      body,
+      body: entryFile
+        ? entryFile
+        : getIsDev()
+        ? createDevErrorMessage({ availableFiles: files })
+        : "Not found",
     };
+
+    // Debugging
+    // const pageEntry = await getEntry("docs", pageName);
+    // const debugOutput = JSON.stringify(
+    //   {
+    //     contentRoot: contentRoot.pathname,
+    //     internalFramework,
+    //     pageName,
+    //     exampleName,
+    //     pageEntry,
+    //   },
+    //   null,
+    //   2
+    // );
+
+    // const body = getIsDev() ? `Not found: ${debugOutput}` : "Not found";
+    // return {
+    //   body,
+    // };
   }
 }

@@ -65,6 +65,9 @@ export const getGeneratedContentsFileList = async ({
     generatedFileList = generatedFileList.concat(["index.html"]);
   } else if (internalFramework === "react") {
     generatedFileList = generatedFileList.concat("index.jsx");
+  } else {
+    // HACK: Use react for the rest of the other frameworks for now
+    generatedFileList = generatedFileList.concat("index.jsx");
   }
 
   return generatedFileList;
@@ -160,6 +163,20 @@ export const getGeneratedContents = async ({
     contents.scriptFiles.push("main.js");
     contents.entryFileName = "main.js";
   } else if (internalFramework === "react") {
+    const getSource = vanillaToReact(
+      deepCloneObject(bindings),
+      [] // TODO: extractComponentFileNames(reactScripts, "_react"),
+    );
+    // TODO:
+    // importTypes.forEach((importType) =>
+    //   reactConfigs.set(importType, { "index.jsx": getSource(importType) })
+    // );
+
+    contents.files[entryFileName] = getSource();
+
+    contents.entryFileName = entryFileName;
+  } else {
+    // HACK: Use react for the rest of the frameworks
     const getSource = vanillaToReact(
       deepCloneObject(bindings),
       [] // TODO: extractComponentFileNames(reactScripts, "_react"),

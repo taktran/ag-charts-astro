@@ -54,7 +54,11 @@ export const getEntryFileName = ({
   const entryFile = {
     react:
       internalFramework === "reactFunctionalTs" ? "index.tsx" : "index.jsx",
-    angular: "app/app.component.ts",
+    // HACK: Using react template for now
+    // angular: "app/app.component.ts",
+    angular: "index.jsx",
+    vue: "index.jsx",
+
     javascript: internalFramework === "typescript" ? "main.ts" : "main.js",
   };
 

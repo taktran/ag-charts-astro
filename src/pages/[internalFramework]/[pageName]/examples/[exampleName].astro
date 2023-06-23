@@ -90,3 +90,24 @@ const appLocation = getExampleLocation({
     />
   )
 }
+
+<!-- HACK: Use react for rest of the frameworks -->
+{
+  framework !== "react" && framework !== "javascript" && (
+    <ReactTemplateLegacy
+      modifiedTimeMs={Date.now()}
+      isExecuting={true}
+      options={{
+        enterprise: isEnterprise,
+      }}
+      scriptFiles={scriptFiles}
+      styleFiles={styleFiles}
+      appLocation={appLocation}
+      library={library}
+      boilerplatePath={boilerplatePath}
+      importType={importType}
+      type={type}
+      internalFramework={internalFramework}
+    />
+  )
+}

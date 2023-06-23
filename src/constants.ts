@@ -1,19 +1,14 @@
-export const FRAMEWORK_SLUGS = [
-  "javascript",
-  "react",
-  // "angular",
-  // "vue"
-];
+export const FRAMEWORK_SLUGS = ["javascript", "react", "angular", "vue"];
 
 export const INTERNAL_FRAMEWORK_SLUGS = [
   "vanilla",
-  // "typescript",
+  "typescript",
   "react",
-  // "reactFunctional",
-  // "reactFunctionalTs",
-  // "angular",
-  // "vue",
-  // "vue3",
+  "reactFunctional",
+  "reactFunctionalTs",
+  "angular",
+  "vue",
+  "vue3",
 ];
 
 export const agGridVersion = "30.0.0";

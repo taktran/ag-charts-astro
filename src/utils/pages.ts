@@ -196,9 +196,9 @@ export function getBoilerPlateFramework({
 }) {
   let boilerPlateFramework;
   switch (framework) {
-    case "vue":
-      boilerPlateFramework = useVue3 ? "vue3" : "vue";
-      break;
+    // case "vue":
+    //   boilerPlateFramework = useVue3 ? "vue3" : "vue";
+    //   break;
     case "javascript":
       boilerPlateFramework = useTypescript ? "typescript" : "javascript";
       break;
@@ -208,8 +208,12 @@ export function getBoilerPlateFramework({
           ? "react-ts"
           : "react";
       break;
+    // HACK: Use react by default
+    // default:
+    //   boilerPlateFramework = framework;
     default:
-      boilerPlateFramework = framework;
+      boilerPlateFramework = "react";
+      break;
   }
 
   return boilerPlateFramework;
