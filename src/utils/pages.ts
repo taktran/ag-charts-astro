@@ -1,4 +1,5 @@
 import { FRAMEWORK_SLUGS, INTERNAL_FRAMEWORK_SLUGS } from "../constants";
+import fsOriginal from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
@@ -51,6 +52,10 @@ export async function getDocExamplePages({ pages }: { pages: any }) {
               pageName: page.slug,
             });
 
+            if (!fsOriginal.existsSync(sourceExamplesPathUrl)) {
+              return [];
+            }
+
             const examples = await fs.readdir(sourceExamplesPathUrl);
             return Promise.all(
               examples.map(async (exampleName) => {
@@ -88,6 +93,11 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
             const pageExampleFolderPath = getSourceExamplesPathUrl({
               pageName: page.slug,
             });
+
+            if (!fsOriginal.existsSync(pageExampleFolderPath)) {
+              return [];
+            }
+
             const examples = await fs.readdir(pageExampleFolderPath);
             return Promise.all(
               examples.map(async (exampleName) => {
