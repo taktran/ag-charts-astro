@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "test:watch": "jest --watch",
-    "copyExamples": "ts-node --esm ./src/scripts/copyExamples.ts"
+    "copyExamples": "ts-node ./src/scripts/copyExamples.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",

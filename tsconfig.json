@@ -1,5 +1,11 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react"

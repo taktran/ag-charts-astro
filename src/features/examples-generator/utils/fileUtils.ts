@@ -159,3 +159,51 @@ export const getContentsOfFileList = async ({
 
   return contentFiles;
 };
+
+export async function getFilesRecursively(
+  dir: string,
+  allFiles: string[] = []
+) {
+  allFiles = allFiles || [];
+  const files = await fs.readdir(dir);
+
+  await Promise.all(
+    files.map(async (file) => {
+      const name = path.join(dir, file);
+
+      const isDirectory = (await fs.stat(name)).isDirectory();
+
+      if (isDirectory) {
+        await getFilesRecursively(name, allFiles);
+      } else {
+        allFiles.push(name);
+      }
+    })
+  );
+
+  return allFiles;
+}
+
+export async function getFoldersRecursively({
+  dir,
+  allFolders = [],
+}: {
+  dir: string;
+  allFolders?: string[];
+}) {
+  const files = await fs.readdir(dir);
+
+  await Promise.all(
+    files.map(async (file) => {
+      const name = path.join(dir, file);
+      const isDirectory = (await fs.stat(name)).isDirectory();
+
+      if (isDirectory) {
+        allFolders.push(name);
+        await getFoldersRecursively({ dir: name, allFolders });
+      }
+    })
+  );
+
+  return allFolders;
+}

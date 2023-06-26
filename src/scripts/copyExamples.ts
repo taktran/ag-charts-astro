@@ -3,6 +3,10 @@ import fsOriginal from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import dashdash from "dashdash";
+import {
+  getFilesRecursively,
+  getFoldersRecursively,
+} from "../features/examples-generator/utils/fileUtils";
 
 // Specify the options. Minimally `name` (or `names`) and `type`
 // must be given for each.
@@ -23,51 +27,6 @@ const DOC_PAGES_FOLDER = "grid-packages/ag-grid-docs/documentation/doc-pages";
 const ROOT_FOLDER = path.join(DIR_NAME, "../../");
 const CONTENTS_PATH = "src/content/docs";
 const CONTENTS_FOLDER = path.join(ROOT_FOLDER, CONTENTS_PATH);
-
-async function getFilesRecursively(dir: string, allFiles: string[] = []) {
-  allFiles = allFiles || [];
-  const files = await fs.readdir(dir);
-
-  await Promise.all(
-    files.map(async (file) => {
-      const name = path.join(dir, file);
-
-      const isDirectory = (await fs.stat(name)).isDirectory();
-
-      if (isDirectory) {
-        await getFilesRecursively(name, allFiles);
-      } else {
-        allFiles.push(name);
-      }
-    })
-  );
-
-  return allFiles;
-}
-
-async function getFoldersRecursively({
-  dir,
-  allFolders = [],
-}: {
-  dir: string;
-  allFolders?: string[];
-}) {
-  const files = await fs.readdir(dir);
-
-  await Promise.all(
-    files.map(async (file) => {
-      const name = path.join(dir, file);
-      const isDirectory = (await fs.stat(name)).isDirectory();
-
-      if (isDirectory) {
-        allFolders.push(name);
-        await getFoldersRecursively({ dir: name, allFolders });
-      }
-    })
-  );
-
-  return allFolders;
-}
 
 async function copyDocPages({
   srcFolder,
