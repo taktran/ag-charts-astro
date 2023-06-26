@@ -62,7 +62,7 @@ export const getEntryFileName = ({
     javascript: internalFramework === "typescript" ? "main.ts" : "main.js",
   };
 
-  return entryFile[framework] || "main.js";
+  return entryFile[framework as keyof typeof entryFile] || "main.js";
 };
 
 export const getSourceFolderUrl = ({
@@ -206,4 +206,28 @@ export async function getFoldersRecursively({
   );
 
   return allFolders;
+}
+
+export async function getFilePathsRecursively(
+  dir: string,
+  allFiles: string[] = []
+) {
+  allFiles = allFiles || [];
+  const files = await fs.readdir(dir);
+
+  await Promise.all(
+    files.map(async (file) => {
+      const name = path.join(dir, file);
+
+      const isDirectory = (await fs.stat(name)).isDirectory();
+
+      allFiles.push(name);
+
+      if (isDirectory) {
+        await getFilePathsRecursively(name, allFiles);
+      }
+    })
+  );
+
+  return allFiles;
 }

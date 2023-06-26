@@ -3,6 +3,8 @@ import fsOriginal from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
+  getContentRootFileUrl,
+  getFilePathsRecursively,
   getSourceExamplesPathUrl,
   getSourceFolderUrl,
 } from "../features/examples-generator/utils/fileUtils";
@@ -99,6 +101,96 @@ export async function getDocExampleFiles({ pages }: { pages: any }) {
             }
 
             const examples = await fs.readdir(pageExampleFolderPath);
+            return Promise.all(
+              examples.map(async (exampleName) => {
+                // Get all example files for the example
+                const exampleFileList = await getGeneratedContentsFileList({
+                  internalFramework,
+                  pageName: page.slug,
+                  exampleName,
+                });
+
+                return exampleFileList.map((fileName) => {
+                  const url = path.join(
+                    "/",
+                    internalFramework,
+                    page.slug,
+                    "examples",
+                    exampleName,
+                    fileName
+                  );
+
+                  return {
+                    params: {
+                      internalFramework,
+                      pageName: page.slug,
+                      exampleName,
+                      fileName,
+                    },
+                    props: {
+                      basePath: pageExampleFolderPath,
+                      url,
+                    },
+                  };
+                });
+              })
+            );
+          })
+        );
+      })
+    )
+  ).flat(3);
+}
+
+export async function getDocExampleFilesFromFilePaths({
+  pages,
+}: {
+  pages: any;
+}) {
+  const contentRoot = getContentRootFileUrl();
+  const docsFolder = path.join(contentRoot.pathname, "docs");
+  // NOTE: Get all file paths, so that we don't call too many filesystem functions at the same time
+  const allFilePaths = await getFilePathsRecursively(docsFolder);
+
+  return (
+    await Promise.all(
+      INTERNAL_FRAMEWORK_SLUGS.map((internalFramework) => {
+        return Promise.all(
+          pages.map(async (page: any) => {
+            const pageExampleFolderPath = getSourceExamplesPathUrl({
+              pageName: page.slug,
+            });
+
+            if (!fsOriginal.existsSync(pageExampleFolderPath)) {
+              return [];
+            }
+
+            const numDocsFolders = docsFolder.split("/").length;
+            const examples = allFilePaths
+              .filter((filePath) => {
+                const folders = filePath.split("/");
+
+                // docs/[pageName]/_examples/[exampleName]
+                //  0  /    1     /     2   /    3
+                const numFoldersForExamples = numDocsFolders + 3;
+
+                const matchingFolder = path.join(
+                  "content",
+                  "docs",
+                  page.slug,
+                  "_examples"
+                );
+
+                return (
+                  folders.length === numFoldersForExamples &&
+                  filePath.includes(matchingFolder)
+                );
+              })
+              .map((filePath) => {
+                const folders = filePath.split("/");
+                return folders[folders.length - 1];
+              });
+
             return Promise.all(
               examples.map(async (exampleName) => {
                 // Get all example files for the example
