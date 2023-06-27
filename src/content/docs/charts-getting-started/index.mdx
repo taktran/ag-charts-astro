@@ -2,17 +2,6 @@
 title: "Get Started with AG Charts"
 ---
 
-<style>
-    .gatsby-resp-image-wrapper {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        margin-bottom: 1rem;
-    }
-    .gatsby-resp-image-image {
-        box-shadow: none !important;
-    }
-</style>
-
 AG Charts is a powerful standalone component with no dependencies. The charts factory API can be used to seamlessly create and update data visualizations independently of the grid.
 
 ### Quick Look Code Example
@@ -21,7 +10,10 @@ AG Charts is a powerful standalone component with no dependencies. The charts fa
 <tabs>
 
 <div tabs-links="true">
-<open-in-cta type="plunker" href="https://plnkr.co/edit/4RA1NMI4unVHfRaV?preview" />
+  <open-in-cta
+    type="plunker"
+    href="https://plnkr.co/edit/4RA1NMI4unVHfRaV?preview"
+  />
 </div>
 
 <div tab-label="main.js">
@@ -84,20 +76,12 @@ AG Charts is a powerful standalone component with no dependencies. The charts fa
 </div>
 
 <div tab-label="index.html">
-```
-| &lt;!DOCTYPE html>
-| &lt;html lang="en">
-|     &lt;head>
-|         &lt;title>AG Charts Basic Example&lt;/title>
-|         &lt;script src="https://cdn.jsdelivr.net/npm/ag-charts-community/dist/ag-charts-community.min.js">
-|         &lt;/script>
-|     &lt;/head>
-|     &lt;body>
-|         &lt;div id="myChart" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;">&lt;/div>
-|         &lt;script src="main.js">&lt;/script>
-|     &lt;/body>
-| &lt;/html>
-```
+  ``` | &lt;!DOCTYPE html> | &lt;html lang="en"> | &lt;head> | &lt;title>AG
+  Charts Basic Example&lt;/title> | &lt;script
+  src="https://cdn.jsdelivr.net/npm/ag-charts-community/dist/ag-charts-community.min.js">
+  | &lt;/script> | &lt;/head> | &lt;body> | &lt;div id="myChart"
+  style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;">&lt;/div> |
+  &lt;script src="main.js">&lt;/script> | &lt;/body> | &lt;/html> ```
 </div>
 
 </tabs>
@@ -107,7 +91,10 @@ AG Charts is a powerful standalone component with no dependencies. The charts fa
 <tabs>
 
 <div tabs-links="true">
-<open-in-cta type="stackblitz" href="https://stackblitz.com/edit/ag-charts-react-hello-world-yduhy" />
+  <open-in-cta
+    type="stackblitz"
+    href="https://stackblitz.com/edit/ag-charts-react-hello-world-yduhy"
+  />
 </div>
 
 <div tab-label="index.js">
@@ -173,11 +160,7 @@ AG Charts is a powerful standalone component with no dependencies. The charts fa
 ```
 </div>
 
-<div tab-label="index.html">
-```
-| &lt;div id="root">&lt;/div>
-```
-</div>
+<div tab-label="index.html">``` | &lt;div id="root">&lt;/div> ```</div>
 
 </tabs>
 </framework-specific-section>
@@ -186,7 +169,10 @@ AG Charts is a powerful standalone component with no dependencies. The charts fa
 <tabs>
 
 <div tabs-links="true">
-<open-in-cta type="stackblitz" href="https://stackblitz.com/edit/ag-charts-angular-hello-world-gjjfpt" />
+  <open-in-cta
+    type="stackblitz"
+    href="https://stackblitz.com/edit/ag-charts-angular-hello-world-gjjfpt"
+  />
 </div>
 
 <div tab-label="app.component.ts">
@@ -269,12 +255,8 @@ AG Charts is a powerful standalone component with no dependencies. The charts fa
 </div>
 
 <div tab-label="app.component.html">
-```
-| &lt;ag-charts-angular
-|     style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;"
-|     [options]="options">
-| &lt;/ag-charts-angular>
-```
+  ``` | &lt;ag-charts-angular | style="position: absolute; top: 0; right: 0;
+  bottom: 0; left: 0;" | [options]="options"> | &lt;/ag-charts-angular> ```
 </div>
 
 </tabs>
@@ -374,12 +356,8 @@ AG Charts is a powerful standalone component with no dependencies. The charts fa
 </div>
 
 <div tab-label="main.js">
-```
-| import { createApp } from 'vue'
-| import App from './App.vue'
-|
-| createApp(App).mount('#app')
-```
+  ``` | import {createApp} from 'vue' | import App from './App.vue' | |
+  createApp(App).mount('#app') ```
 </div>
 
 </tabs>
@@ -535,6 +513,7 @@ Finally, let's add the component definition to our template. Edit `app/app.compo
 |     [options]="options">
 | &lt;/ag-charts-angular>
 ```
+
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -705,6 +684,7 @@ Next, let's declare the basic charts configuration. Edit `src/App.vue`:
 |   };
 | &lt;/script>
 ```
+
 &nbsp;
 Here we'll provide the `options` we want to use for our chart, including the `series` to use to plot the data.
 &nbsp;
@@ -815,7 +795,11 @@ The chart legend uses the `yKey` for the series, which in this case is `'spendin
 ```
 </framework-specific-section>
 
-<ChartExampleRunner title='Line Chart' name='line-chart-legend' type='generated'></ChartExampleRunner>
+<ChartExampleRunner
+  title="Line Chart"
+  name="line-chart-legend"
+  type="generated"
+></ChartExampleRunner>
 
 ## Basic Column Chart
 
@@ -864,10 +848,12 @@ that:
 |     ],
 | });
 ```
+
 </framework-specific-section>
 
 <framework-specific-section frameworks="frameworks">
-This time, let's choose another series type to plot the data: stacked columns. Here's the chart configuration we can use to do that:
+  This time, let's choose another series type to plot the data: stacked columns.
+  Here's the chart configuration we can use to do that:
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -948,7 +934,11 @@ This time, let's choose another series type to plot the data: stacked columns. H
 
 Chart tooltips are enabled by default so you can hover over a block to see its value.
 
-<ChartExampleRunner title='Column Chart' name='beverage-expenses-no-labels' type='generated'></ChartExampleRunner>
+<ChartExampleRunner
+  title="Column Chart"
+  name="beverage-expenses-no-labels"
+  type="generated"
+></ChartExampleRunner>
 
 ## Labels and Titles
 
@@ -992,6 +982,7 @@ We can enhance our chart by providing a label for each block segment. We can set
 |     ],
 | });
 ```
+
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -1142,7 +1133,11 @@ We can enhance our chart by providing a label for each block segment. We can set
 ```
 </framework-specific-section>
 
-<ChartExampleRunner title='Column Chart With Labels' name='beverage-expenses-labels' type='generated'></ChartExampleRunner>
+<ChartExampleRunner
+  title="Column Chart With Labels"
+  name="beverage-expenses-labels"
+  type="generated"
+></ChartExampleRunner>
 
 If we then want to add a title and subtitle to the chart, we can simply add this to our chart config:
 
@@ -1369,7 +1364,11 @@ If we then want to add a title and subtitle to the chart, we can simply add this
 ```
 </framework-specific-section>
 
-<ChartExampleRunner title='Column Chart With Captions' name='beverage-expenses-captions' type='generated'></ChartExampleRunner>
+<ChartExampleRunner
+  title="Column Chart With Captions"
+  name="beverage-expenses-captions"
+  type="generated"
+></ChartExampleRunner>
 
 <framework-specific-section frameworks="javascript">
 
@@ -1392,6 +1391,7 @@ Creating charts is done using the `agCharts.AgChart` factory as shown in the exa
 ```
 | agCharts.AgChart.create(options);
 ```
+
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -1400,7 +1400,9 @@ Creating charts is done using the `agCharts.AgChart` factory as shown in the exa
 The table below gives the ranges of compatible versions of AG Charts with Angular versions.
 
 <note>
-AG Charts Legacy is only required for apps on Angular v8-11 that wish to use AG Charts v6-7. See [AG Grid Legacy](/angular-compatibility/#ag-grid-legacy) for more details about our legacy packages.
+  AG Charts Legacy is only required for apps on Angular v8-11 that wish to use
+  AG Charts v6-7. See [AG Grid Legacy](/angular-compatibility/#ag-grid-legacy)
+  for more details about our legacy packages.
 </note>
 
 | Angular | AG Charts | AG Charts Package        |
