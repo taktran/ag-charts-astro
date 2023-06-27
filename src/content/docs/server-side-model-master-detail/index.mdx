@@ -25,7 +25,7 @@ To enable Master / Detail, you should set the following grid options:
 These grid options are illustrated below:
 
 
-<snippet spaceBetweenProperties="true">
+```
 | const gridOptions = {
 |     // master grid columns
 |     columnDefs: [],
@@ -47,7 +47,7 @@ These grid options are illustrated below:
 |         }
 |     },
 | }
-</snippet>
+```
 
 <note>
 Note that the nested detail grid can be configured to use any Row Model.
@@ -69,7 +69,7 @@ It is possible to combine [Server-Side Grouping](/server-side-model-grouping/) w
 
 The following snippet shows row grouping on the 'country' column by setting `rowGroup = true`:
 
-<snippet suppressFrameworkContext="true">
+```
 | const gridOptions = {
 |     columnDefs: [
 |         { field: 'country', rowGroup: true },
@@ -77,7 +77,7 @@ The following snippet shows row grouping on the 'country' column by setting `row
 |         // more column definitions
 |     ]
 | }
-</snippet>
+```
 
 ## Example: Row Grouping with Master Detail
 
@@ -100,7 +100,7 @@ Rather than use the `autoGroupColumnDef` for the master rows as shown in the exa
 
 This is shown in the code snippet below:
 
-<snippet suppressFrameworkContext="true">
+```
 | const gridOptions = {
 |     columnDefs: [
 |         { field: 'country', rowGroup: true },
@@ -109,7 +109,7 @@ This is shown in the code snippet below:
 |         // more column definitions
 |     ]
 | }
-</snippet>
+```
 
 ## Detail Row Height
 
@@ -122,14 +122,14 @@ The height of detail rows can be configured in one of the following ways:
 The following snippets compares these approaches:
 
 Option 1 - fixed detail row height, sets height for all details rows
-<snippet>
+```
 const gridOptions = {
     detailRowHeight: 500,
 }
-</snippet>
+```
 
 Option 2 - dynamic detail row height, dynamically sets height for all rows
-<snippet>
+```
 | const gridOptions = {
 |     getRowHeight: params => {
 |         const isDetailRow = params.node.detail;
@@ -143,16 +143,16 @@ Option 2 - dynamic detail row height, dynamically sets height for all rows
 |         return 25;
 |     }
 | }
-</snippet>
+```
 
 Option 3 - use autoHeight
-<snippet>
+```
 | const gridOptions = {
 |     detailCellRendererParams: {
 |         autoHeight: true,
 |     }
 | }
-</snippet>
+```
 
 <note>
 Purging the cache and dynamic row heights do not work together for the Server-Side Row Model.

@@ -8,7 +8,7 @@ Grouping columns is done by providing the columns in a tree hierarchy to the gri
 
 Here is a code snippet of providing two groups of columns.
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -31,7 +31,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 Below shows an example of column group configuration.
 
@@ -80,14 +80,14 @@ If you grab the group resize bar, it resizes each child in the group evenly dist
 The grid doesn't colour the groups for you. However you can use the column definition `headerClass` for this purpose. The `headerClass` attribute is available on both columns and column groups.
 
 
-<snippet suppressFrameworkContext="true">
+```
 const gridOptions = {
     columnDefs: [
         // the CSS class name supplied to 'headerClass' will get applied to the header group
         { headerName: 'Athlete Details', headerClass: 'my-css-class', children: []}
     ]
 }
-</snippet>
+```
 
 ## Align the Header Group Label To The Right
 
@@ -163,7 +163,7 @@ Note the following:
 
 Using the **Column Property** `suppressSpanHeaderHeight` the Grid will balance the column headers with different number of levels with an empty column group header cell, as shown in the example below.
 
-<snippet>
+```
 const gridOptions = {
   columnDefs: [
     {
@@ -180,7 +180,7 @@ const gridOptions = {
     }
   ]
 }
-</snippet>
+```
 
 Note the following:
 

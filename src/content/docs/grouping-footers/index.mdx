@@ -10,14 +10,14 @@ This section shows how to add group footers to show group level totals.
 If you want to include a footer with each group, set the property `groupIncludeFooter` to true. It is also possible to 
 include a 'grand' total footer for all groups using the property `groupIncludeTotalFooter`.
 
-<snippet>
+```
 const gridOptions = {
     // adds subtotals
     groupIncludeFooter: true,
     // includes grand total
     groupIncludeTotalFooter: true,
 }
-</snippet>
+```
 
 Note that these properties can be used together to produce totals across all group levels.
 
@@ -34,7 +34,7 @@ The following example demonstrates these properties. Note the following:
 By default, the footer will display the word 'Total' followed by the group key. However, this can be changed using the
 `footerValueGetter` supplied to the [Group Cell Renderer](/group-cell-renderer/) params as shown below: 
  
-<snippet>
+```
 const gridOptions = {
     autoGroupColumnDef: { 
         cellRendererParams: {
@@ -48,7 +48,7 @@ const gridOptions = {
         }
     },
 }
-</snippet>
+```
 
 Note in the snippet above that the `footerValueGetter` contains special handling to display Subtotals and Grand Totals
 differently. This is demonstrated in the example below.

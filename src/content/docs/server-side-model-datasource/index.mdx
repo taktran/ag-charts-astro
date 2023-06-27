@@ -20,11 +20,11 @@ such as sorting or grouping, more data will be requested via the datasource.
 
 The [Client-Side Row Model](/client-side-model/) is the default Row Model. To use the SSRM instead, set the `rowModelType` as follows:
 
-<snippet>
+```
 const gridOptions = {
     rowModelType: 'serverSide',
 }
-</snippet>
+```
 
 ## Implementing the Server-Side Datasource
 
@@ -69,17 +69,17 @@ The datasource is registered with the grid via either a) the grid property `serv
 
 Registering the datasource via grid options is done as follows:
 
-<snippet>
+```
 const gridOptions = {
     serverSideDatasource: myDatasource
 }
-</snippet>
+```
 
 Alternatively, the datasource can be registered via the grid API:
 
-<snippet>
+```
 gridOptions.api.setServerSideDatasource(myDatasource);
-</snippet>
+```
 
 The example below demonstrates loading rows using a simple SSRM Datasource. Note the following:
 

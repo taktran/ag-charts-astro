@@ -61,7 +61,7 @@ and `getServerSideGroupKey(dataItem)`.
 The following code snippet shows the relevant `gridOptions` entries for configuring tree data with the
 server-side row model:
 
-<snippet spaceBetweenProperties="true">
+```
 | const gridOptions = {
 |     // choose Server-Side Row Model
 |     rowModelType: 'serverSide',
@@ -76,7 +76,7 @@ server-side row model:
 |         return dataItem.employeeId;
 |     },
 | }
-</snippet>
+```
 
 <note>
 Be careful not to get mixed up with the [Client-Side Tree Data](../tree-data/) configurations by mistake.

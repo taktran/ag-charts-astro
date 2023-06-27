@@ -12,7 +12,7 @@ to provide insights into data trends at a glance. These sparklines can be fully 
 
 To enable sparklines on a particular column, add the `agSparklineCellRenderer` as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -22,7 +22,7 @@ const gridOptions = {
         // other column definitions ...
     ],
 }
-</snippet>
+```
 
 Note in the snippet above that specifying an `agSparklineCellRenderer` will display the data using the default `line` sparkline.
 
@@ -42,7 +42,7 @@ customised by overriding the default sparkline options.
 Sparklines are customised by supplying `sparklineOptions` to the `cellRendererParams` on the Sparkline Cell Renderer
 as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -56,7 +56,7 @@ const gridOptions = {
         // other column definitions ...
     ],
 }
-</snippet>
+```
 
 Each Sparkline type contains specific `sparklineOptions` that can be overridden and are covered in the following sections:
 

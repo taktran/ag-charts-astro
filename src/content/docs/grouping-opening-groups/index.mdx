@@ -9,7 +9,7 @@ This section covers different ways to control how row groups are expanded and co
 
 To open all groups down to a given group level use the `groupDefaultExpanded` grid option as shown below: 
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         { field: 'country', hide: true, rowGroup: true },
@@ -20,7 +20,7 @@ const gridOptions = {
     // all 'country' row groups will be open by default
     groupDefaultExpanded: 1
 }
-</snippet>
+```
 
 In the snippet above, all `country` row groups will be expanded by default as `groupDefaultExpanded = 1`.
 
@@ -40,7 +40,7 @@ The example below demonstrates the `groupDefaultExpanded` behaviour. Note the fo
 To have groups open by default, implement the grid callback `isGroupOpenByDefault`. This callback is invoked
 each time a group is created.
 
-<snippet>
+```
 const gridOptions = {
     // expand when year is '2004' or when country is 'United States'
     isGroupOpenByDefault: params => {
@@ -48,7 +48,7 @@ const gridOptions = {
             (params.field == 'country' && params.key == 'United States');
     }
 }
-</snippet>
+```
 
 The params passed to the callback have the `IsGroupOpenByDefaultParams` interface:
 
@@ -71,13 +71,13 @@ When more custom behaviour is required, obtain a reference to the rowNode and th
 
 For example, to expand a group with the name 'United States' would be done as follows:
 
-<snippet>
+```
 | gridOptions.api.forEachNode(node => {
 |     if (node.key === 'United States') {
 |         gridOptions.api.setRowNodeExpanded(node, true);
 |     }
 | });
-</snippet>
+```
 
 The following example demonstrates different ways to expand / collapse row groups via the grid API.
 

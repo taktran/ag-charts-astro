@@ -171,7 +171,7 @@ After the grid has created an instance of a cell renderer for a cell it is possi
 
 An example of getting the cell renderer for exactly one cell is as follows:
 
-<snippet transform={false}>
+```
 |// example - get cell renderer for first row and column 'gold'
 |const firstRowNode = gridOptions.api.getDisplayedRowAtIndex(0);
 |const params = { columns: ['gold'], rowNodes: [firstRowNode] };
@@ -181,7 +181,7 @@ An example of getting the cell renderer for exactly one cell is as follows:
 |    // got it, user must be scrolled so that it exists
 |    const instance = instances[0];
 |}
-</snippet>
+```
 
 Note that this method will only return instances of the cell renderer that exists. Due to row and column virtualisation, renderers will only exist for cells that the user can actually see due to horizontal and vertical scrolling.
 

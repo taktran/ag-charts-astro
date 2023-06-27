@@ -30,13 +30,13 @@ This section details how such state items can be manipulated without having to u
 There are two API methods provided for getting and setting Column State. `columnApi.getColumnState()` gets the current
 column state and `columnApi.applyColumnState(params)` sets the column state.
 
-<snippet>
+```
 | // save the column's state
 | const savedState = gridOptions.columnApi.getColumnState();
 |
 | // restore the column state
 | gridOptions.columnApi.applyColumnState({ state: savedState });
-</snippet>
+```
 
 The example below demonstrates saving and restoring column state. Try the following:
 
@@ -74,7 +74,7 @@ that Column but other attributes, such as Sort, are left intact.
 Combining these rules together leaves for flexible fine grained state control. Take the following code snippets as
 examples:
 
-<snippet>
+```
 | // Sort Athlete column ascending
 | gridOptions.columnApi.applyColumnState({
 |     state: [
@@ -124,7 +124,7 @@ examples:
 |     ],
 |     applyOrder: true
 | });
-</snippet>
+```
 
 The example below shows some fine grained access to Column State.
 

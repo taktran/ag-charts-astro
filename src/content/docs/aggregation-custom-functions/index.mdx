@@ -9,7 +9,7 @@ This section covers how custom aggregation functions can be supplied and used in
 
 Custom aggregation functions can be supplied directly to `colDef.aggFunc` as shown below: 
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -22,7 +22,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 As shown above, a custom agg function is supplied directly to the `aggFunc` property. The custom function uses the 
 provided `values` to perform the custom aggregation. See [Aggregation API Reference](/aggregation/#api-reference) to 
@@ -52,7 +52,7 @@ and is done using the `aggFuncs` grid option:
 
 The following snippet shows how to register custom functions using the `aggFuncs` grid option:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         { field: 'sales', aggFunc: 'mySum' },
@@ -65,7 +65,7 @@ const gridOptions = {
         }
     },
 }
-</snippet>
+```
 
 As shown above, a custom function is registered with in the grid with the name 'mySum' and is referenced by name in 
 the column definition using the `aggFunc` property.
@@ -131,7 +131,7 @@ should be passed around instead of a simple value. This value object should also
 also be resolved by the grid to a single value. This is shown in the code snippet below:
 
 
-<snippet spaceBetweenProperties="true">
+```
 | const gridOptions = {
 |     columnDefs: [
 |         { field: 'gold', aggFunc: 'sum' },
@@ -171,7 +171,7 @@ also be resolved by the grid to a single value. This is shown in the code snippe
 |         }
 |     ]
 | }
-</snippet>
+```
 
 The following example demonstrates this approach in action:
 
@@ -189,7 +189,7 @@ will not work when pivoting.
 
 For groups, when aggregating, the grid stores the results in the colId of the column. For example, if you have a group defined as follows:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -199,7 +199,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 Then the result of the aggregation will be stored in `data.aaa` and not in 'abby'. Most of the time this will not matter for you as the colId, if not provided, will default to the field. In order for the grid to display the aggregation result, it must be stored in the correct field name.
 

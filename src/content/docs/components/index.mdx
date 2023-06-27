@@ -54,7 +54,7 @@ Each Custom Component gets a set of parameters from the grid. For example, for C
 
 To provide additional parameters, use the property `[prop-name]Params`, e.g. `cellRendererParams`.
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     columnDefs: [
         { 
@@ -66,7 +66,7 @@ const gridOptions = {
         },
     ],
 }
-</snippet>
+```
 
 md-include:js-fw-angular.md
 md-include:js-fw-react.md
@@ -279,7 +279,7 @@ It is also possible to override components. Where the grid uses a default value,
 To override the default component, register the custom component in the GridOptions `components` property under the above name.
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 |const gridOptions = {
 |    // Here is where we specify the components to be used instead of the default
 |    components: {
@@ -287,11 +287,11 @@ To override the default component, register the custom component in the GridOpti
 |        agColumnHeader: CustomHeaderComponent
 |    }
 |};
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="ts">
+```
 |@Component({
 |    selector: 'my-app',
 |    template: `
@@ -308,20 +308,20 @@ To override the default component, register the custom component in the GridOpti
 |        agDateInput: CustomDateComponent,
 |        agColumnHeader: CustomHeaderComponent
 |    };
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |&lt;AgGridReact
 |    components={{ agDateInput: CustomDateComponent, agColumnHeader: CustomHeaderComponent }}
 |    ...other properties...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="ts">
+```
 |const MyApp = {
 |    // Here is where we specify the components to be used instead of the default
 |    components: {
@@ -329,7 +329,7 @@ To override the default component, register the custom component in the GridOpti
 |        agDateInput: CustomDateComponent,
 |        agColumnHeader: CustomHeaderComponent
 |    },
-</snippet>
+```
 </framework-specific-section>
 
 

@@ -26,14 +26,14 @@ and drop the columns to the pivot drop zone from the Tool Panel.
 
 To pivot rows by a particular column, mark the column you want to group with `pivot=true`. There is no limit on the number of columns that the grid can pivot by. For example, the following will pivot the rows in the grid by country and then sport:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         { field: "country", pivot: true },
         { field: "sport", pivot: true }
     ]
 }
-</snippet>
+```
 
 ## Example: Simple Pivot
 
@@ -83,7 +83,7 @@ As mentioned above, the Pivot Result Columns in the grid are created by the grid
 
 <api-documentation source='column-api/api.json' section='Pivoting' names='["getPivotResultColumn"]'></api-documentation>
 
-<snippet>
+```
 | // look up the Column that pivots on country Ireland and aggregates Gold
 | const irelandGoldColumn = gridOptions.columnApi.getPivotResultColumn(['Ireland'],'gold');
 | 
@@ -94,7 +94,7 @@ As mentioned above, the Pivot Result Columns in the grid are created by the grid
 | const sausageKingdomColumn = gridOptions.columnApi.getPivotResultColumn(['SausageKingdom','2002'],'silver');
 | 
 | console.log('found column with id ' + sausageKingdomColumn.getId());
-</snippet>
+```
 
 ## Pivot Result Column Definitions
 
@@ -104,7 +104,7 @@ It is possible to manipulate the [Column Definition](/column-definitions/) of th
 The `field` and `colId` properties of the Pivot Result Column definitions should not be overwritten.
 </note>
 
-<snippet>
+```
 const gridOptions = {
     processPivotResultColDef: (colDef) => {
         if (colDef.pivotValueColumn.getId() === 'gold') {
@@ -118,7 +118,7 @@ const gridOptions = {
         colGroupDef.headerName = 'Year ' + colGroupDef.headerName
     },
 }
-</snippet>
+```
 
 In the example below, notice how applying these functions can be used to manipulate the headers
 - The Group Headers have had `Year` prefixed onto each value
@@ -144,7 +144,7 @@ When pivoting is active, it is not possible to filter on regular columns using [
 These filters are applied to the data before it is pivoted, as such a change in these filters can effect not only the resulting
 values and rows, but also the columns generated from the pivot.
 
-<snippet>
+```
 | const gridOptions = {
 |    columnDefs: [
 |        { field: 'country', rowGroup: true, filter: true },
@@ -157,7 +157,7 @@ values and rows, but also the columns generated from the pivot.
 |    pivotMode: true,
 |    sideBar: 'filters',
 | }
-</snippet>
+```
 
 The snippet above has been used to construct the example below, demonstrating the effects of applying filters to the columns in the grid options while pivot mode is enabled.
 
@@ -182,7 +182,7 @@ Filtering on any other column:
 
 When pivot mode is enabled, you may also [Filter](/filtering-overview/) on the generated pivot result columns using the column menu, or [Floating Filters](/floating-filters/). As pivot values are all aggregates, filtering pivot result columns shares the same behaviour as [Filtering Group Aggregations](/aggregation-filtering/#filtering-group-aggregations). This means that when filtering pivoting result columns, the aggregated values on any level will not change because of child rows being filtered out.
 
-<snippet>
+```
 | const gridOptions = {
 |    columnDefs: [
 |        { field: 'country', rowGroup: true },
@@ -194,7 +194,7 @@ When pivot mode is enabled, you may also [Filter](/filtering-overview/) on the g
 |    ],
 |    pivotMode: true,
 | }
-</snippet>
+```
 
 As shown in the snippet above, filters are enabled on pivot result columns by inheriting properties from the underlying value column. The below example demonstrates this behaviour.
 
@@ -217,7 +217,7 @@ Filtering on a pivot result column:
 
 When pivot mode is enabled, you may also [Filter](/filtering-overview/) on both the pivot result columns, and the regular columns using the [Filter API](/filter-api/).
 
-<snippet>
+```
 | const filterNotBlank2000Silvers = () => {
 |   const targetCol = gridOptions.columnApi.getPivotResultColumn(['2000'], 'silver');
 |   if (targetCol) {
@@ -229,7 +229,7 @@ When pivot mode is enabled, you may also [Filter](/filtering-overview/) on both 
 |     })
 |   }
 | }
-</snippet>
+```
 
 As shown in the snippet above, you can also set filters on pivot result columns using the API.
 

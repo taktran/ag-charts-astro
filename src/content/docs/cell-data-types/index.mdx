@@ -14,7 +14,7 @@ These are enabled by default, with the data type being inferred from the row dat
 
 Specific cell data types can also be defined by setting the `cellDataType` property on the column definition.
 
-<snippet spaceBetweenProperties="true">
+```
 |const gridOptions = {
 |    columnDefs: [
 |        {
@@ -24,7 +24,7 @@ Specific cell data types can also be defined by setting the `cellDataType` prope
 |        }
 |    ]
 |}
-</snippet>
+```
 
 The following example demonstrates the six pre-defined cell data types (inferred from the row data):
 - The **Athlete** column has a `'text'` data type.
@@ -147,7 +147,7 @@ Custom cell data types can be added by setting the grid option `dataTypeDefiniti
 
 <api-documentation source='grid-options/properties.json' section='columns' names='["dataTypeDefinitions"]' ></api-documentation>
 
-<snippet spaceBetweenProperties="true">
+```
 |const gridOptions = {
 |    dataTypeDefinitions: {
 |        percentage: {
@@ -159,7 +159,7 @@ Custom cell data types can be added by setting the grid option `dataTypeDefiniti
 |        }
 |    }
 |}
-</snippet>
+```
 
 Each custom data type definition must have a `baseDataType` of one of the six [Pre-Defined Cell Data Types](#pre-defined-cell-data-types), which represents the data type of the underlying cell values.
 
@@ -184,7 +184,7 @@ For example, this is required if a different date format is desired.
 
 This works in the same way as when [Providing Custom Cell Data Types](#providing-custom-cell-data-types).
 
-<snippet spaceBetweenProperties="true">
+```
 |const gridOptions = {
 |    dataTypeDefinitions: {
 |        // override `date` to handle custom date format `dd/mm/yyyy`
@@ -212,7 +212,7 @@ This works in the same way as when [Providing Custom Cell Data Types](#providing
 |        }
 |    }
 |}
-</snippet>
+```
 
 The following example demonstrates overriding pre-defined cell data types:
 - The **Date** column is of type `'dateString'` which has been overridden to use a different date format (`dd/mm/yyyy`).

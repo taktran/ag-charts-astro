@@ -10,7 +10,7 @@ This section covers Row Grouping in the Server-Side Row Model (SSRM).
 Row Grouping is enabled in the grid via the `rowGroup` column definition attribute.
 The example below shows how to group rows by 'country':
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         { field: 'country', rowGroup: true },
@@ -18,7 +18,7 @@ const gridOptions = {
         { field: 'year' },
     ]
 }
-</snippet>
+```
 
 For more configuration details see the section on [Row Grouping](/grouping/).
 
@@ -106,13 +106,13 @@ Row group footers can also be used with `groupDisplayType='multipleColumns`, as 
 
 It is possible to expand and collapse all group rows using the `expandAll()` and `collapseAll()` grid API's.
 
-<snippet>
+```
 | // Expand all group rows
 | gridOptions.api.expandAll();
 |
 | // Collapse all group rows
 | gridOptions.api.collapseAll();
-</snippet>
+```
 
 Calling `expandAll()` and `collapseAll()` will impact **all loaded group nodes**, including those not visible due to their containing group been closed. This means there could potentially be a huge number of groups expanded, so this method should be used very wisely to not create massive amount of server requests and loading a large amount of data.
 
@@ -120,14 +120,14 @@ Calling `expandAll()` and `collapseAll()` will have no impact on rows yet to be 
 
 To open only specific groups, e.g. only groups at the top level, then use the `forEachNode()` callback and open / close the row using `setExpanded()` as follows:
 
-<snippet>
+```
 | // Expand all top level row nodes
 | gridOptions.api.forEachNode(node => {
 |     if (node.group && node.level == 0) {
 |         node.setExpanded(true);
 |     }
 | });
-</snippet>
+```
 
 The example below demonstrates these techniques. Note the following:
 
@@ -144,14 +144,14 @@ By default, the grid will not show row counts beside the group names. If you do 
 
 <api-documentation source='grid-options/properties.json' section='serverSideRowModel' names='["getChildCount"]' ></api-documentation>
 
-<snippet>
+```
 const gridOptions = {
     getChildCount: data => {
         // here child count is stored in the 'childCount' property
         return data.childCount;
     }
 }
-</snippet>
+```
 
 <GridExampleRunner title='Child Counts' name='child-counts' type='generated' options='{ "enterprise": true, "exampleHeight": 590, "extras": ["alasql"], "modules": ["serverside"] }'></GridExampleRunner>
 

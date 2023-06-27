@@ -29,7 +29,7 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} lineNumbers="true">
+```
 |const columnDefs = [
 |  { field: "make" },
 |  { field: "model" },
@@ -54,7 +54,7 @@ title: "Get Started with AG Grid"
 |  const gridDiv = document.querySelector('#myGrid');
 |  new agGrid.Grid(gridDiv, gridOptions);
 |});
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -65,7 +65,7 @@ title: "Get Started with AG Grid"
 
 
 <framework-specific-section frameworks="javascript">
-<snippet language="html" transform={false} lineNumbers="true">
+```
 |&lt;!DOCTYPE html>
 |&lt;html lang="en">
 |&lt;head>
@@ -77,7 +77,7 @@ title: "Get Started with AG Grid"
 |    &lt;div id="myGrid" style="height: 200px; width:500px;" class="ag-theme-alpine">&lt;/div>
 |&lt;/body>
 |&lt;/html>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -126,7 +126,7 @@ title: "Get Started with AG Grid"
 
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} language="html">
+```
 |&lt;!DOCTYPE html>
 |&lt;html lang="en">
 |  &lt;head>
@@ -195,7 +195,7 @@ title: "Get Started with AG Grid"
 |    &lt;/script>
 |  &lt;/body>
 |&lt;/html>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -219,7 +219,7 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} language="html">
+```
 |    &lt;!-- Include the JS for AG Grid -->
 |    &lt;script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js">&lt;/script>
 |    &lt;!-- Include the core CSS, this is needed by the grid -->
@@ -228,7 +228,7 @@ title: "Get Started with AG Grid"
 |    &lt;!-- Include the theme CSS, only need to import the theme you are going to use -->
 |    &lt;link rel="stylesheet"
 |      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css"/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -236,11 +236,11 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} language="html">
+```
 |    &lt;!-- Include the JS and CSS (all themes) for AG Grid. Larger download than needed -->
 |    &lt;!-- as will includes themes you don't use -->
 |    &lt;script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js">&lt;/script>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -250,9 +250,9 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} language="html">
+```
 |&lt;div id="myGrid" class="ag-theme-alpine" style="height: 500px">&lt;/div>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -263,7 +263,7 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | // Grid Options are properties passed to the grid
 | const gridOptions = {
 |
@@ -285,7 +285,7 @@ title: "Get Started with AG Grid"
 |     console.log('cell was clicked', params)
 |   }
 | };
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -297,12 +297,12 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | // get div to host the grid
 | const eGridDiv = document.getElementById("myGrid");
 | // new grid instance, passing in the hosting DIV and Grid Options
 | new agGrid.Grid(eGridDiv, gridOptions);
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -313,7 +313,7 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | // Fetch data from server
 | fetch("https://www.ag-grid.com/example-assets/row-data.json")
 |   .then(response => response.json())
@@ -321,7 +321,7 @@ title: "Get Started with AG Grid"
 |      // load fetched data into grid
 |      gridOptions.api.setRowData(data);
 |   });
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -333,12 +333,12 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | // Function to demonstrate calling grid's API
 | function deselect(){
 |     gridOptions.api.deselectAll()
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -349,13 +349,13 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | const gridOptions = {
 |   onCellClicked: params => { // example event handler
 |     console.log('cell was clicked', params)
 |   }
 |   ....
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -373,10 +373,10 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} language="diff">
+```
 |- &lt;script src="https://cdn.jsdelivr.net/npm/ag-grid-community@@AG_GRID_VERSION@/dist/ag-grid-community.min.js">&lt;/script>
 |+ &lt;script src="https://cdn.jsdelivr.net/npm/ag-grid-enterprise@@AG_GRID_VERSION@/dist/ag-grid-enterprise.min.js">&lt;/script>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -388,7 +388,7 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | const gridOptions = {
 |   columnDefs: [
 |     { field: "make", rowGroup: true },
@@ -396,7 +396,7 @@ title: "Get Started with AG Grid"
 |     { field: "price" },
 |   ],
 |   ...
-</snippet>
+```
 </framework-specific-section>
 
 
@@ -416,7 +416,7 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="ts" lineNumbers="true">
+```
 |import { Component } from '@angular/core';
 |import { ColDef } from 'ag-grid-community';
 |
@@ -440,7 +440,7 @@ title: "Get Started with AG Grid"
 |    ];
 |
 |}
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -449,14 +449,14 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="html" lineNumbers="true">
+```
 |&lt;ag-grid-angular
 |    style="width: 500px; height: 350px;"
 |    class="ag-theme-alpine"
 |    [rowData]="rowData"
 |    [columnDefs]="columnDefs">
 |&lt;/ag-grid-angular>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -465,10 +465,10 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="scss" lineNumbers="true">
+```
 |@import 'ag-grid-community/styles/ag-grid.css';
 |@import 'ag-grid-community/styles/ag-theme-alpine.css';
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -514,13 +514,13 @@ title: "Get Started with AG Grid"
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="bash">
+```
 |ng new my-app --style scss --routing false
 |cd my-app
 |npm install --save ag-grid-community
 |npm install --save ag-grid-angular
 |npm run start
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -534,12 +534,12 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "ag-grid-community": "@AG_GRID_VERSION@",
 |    "ag-grid-angular": "@AG_GRID_VERSION@",
 |    ...
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -554,7 +554,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 |import { NgModule } from '@angular/core';
 |import { BrowserModule } from '@angular/platform-browser';
 |import { HttpClientModule } from '@angular/common/http'
@@ -575,7 +575,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |})
 |export class AppModule { }
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -585,7 +585,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform="{false}">
+```
 |import { HttpClient } from '@angular/common/http';
 |import { Component, ViewChild } from '@angular/core';
 |import { AgGridAngular } from 'ag-grid-angular';
@@ -637,7 +637,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |  }
 |}
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -647,7 +647,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform="{false}">
+```
 |&lt;!-- Button to clear selection -->
 |&lt;button (click)="clearSelection()">Clear Selection&lt;/button>
 |&lt;!-- AG Grid Angular Component -->
@@ -662,7 +662,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |    (gridReady)="onGridReady($event)"
 |    (cellClicked)="onCellClicked($event)"
 |  >&lt;/ag-grid-angular>
-</snippet> 
+``` 
 </framework-specific-section>
 
 
@@ -671,7 +671,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="css">
+```
 |@import 'ag-grid-community/styles/ag-grid.css';
 |@import 'ag-grid-community/styles/ag-theme-alpine.css';
 |
@@ -682,7 +682,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |    box-sizing: border-box;
 |    -webkit-overflow-scrolling: touch;
 |}
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -704,7 +704,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="css">
+```
 | import { AgGridModule } from 'ag-grid-angular';
 |
 | ...
@@ -715,7 +715,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |    AgGridModule
 |  ],
 |
-</snippet>
+```
 </framework-specific-section>
 
 
@@ -729,10 +729,10 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform="{false}" language="css">
+```
 |@import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 |@import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -747,11 +747,11 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="html">
+```
 |&lt;ag-grid-angular
 |    style="width: 100%; height: 100%"
 |    class="ag-theme-alpine"/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -762,7 +762,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform="{false}">
+```
 | // Data that gets displayed in the grid
 | public rowData$!: Observable&lt;any[]>;
 | ...
@@ -778,7 +778,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |&lt;ag-grid-angular
 |    [rowData]="rowData$ | async"
 |    ...
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -790,7 +790,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 | // Each Column Definition results in one Column.
 | public columnDefs: ColDef[] = [
 |   { field: 'make'},
@@ -811,7 +811,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |    [defaultColDef]="defaultColDef"
 |    ...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -819,7 +819,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform="{false}">
+```
 | // For accessing the Grid's API
 | @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
 | ...
@@ -827,7 +827,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 | clearSelection(): void {
 |   this.agGrid.api.deselectAll();
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -839,12 +839,12 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="html">
+```
 |&lt;ag-grid-angular
 |    (cellClicked)="onCellClicked($event)"
 |    ...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -856,13 +856,13 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform="{false}">
+```
 |&lt;ag-grid-angular
 |    [rowSelection]="'multiple'"
 |    [animateRows]="true"
 |    ...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -881,9 +881,9 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="bash">
+```
 | npm install --save ag-grid-enterprise
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -891,13 +891,13 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "ag-grid-community": "@AG_GRID_VERSION@",
 |    "ag-grid-enterprise": "@AG_GRID_VERSION@",
 |    "ag-grid-angular": "@AG_GRID_VERSION@",
 |    ...
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -909,9 +909,9 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 | Import AG Grid Enterprise intro your application as follows:
 </framework-specific-section>
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 |import 'ag-grid-enterprise';
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -923,14 +923,14 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 | // Each Column Definition results in one Column.
 | public columnDefs: ColDef[] = [
 |   { field: 'make', rowGroup: true},
 |   { field: 'model'},
 |   { field: 'price' }
 | ];
-</snippet>
+```
 </framework-specific-section>
 
 [//]: # (React Section)
@@ -949,7 +949,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx" lineNumbers="true">
+```
 |import React, { useState } from 'react';
 |import { createRoot } from 'react-dom/client';
 |import { AgGridReact } from 'ag-grid-react';
@@ -982,7 +982,7 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 |
 |const root = createRoot(document.getElementById('root'));
 |root.render(&lt;GridExample />);
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -991,9 +991,9 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="html" lineNumbers="true">
+```
 |&lt;div id="root">&lt;/div>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1042,13 +1042,13 @@ pointing to <a href="http://localhost:4200">localhost:4200</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="bash">
+```
 | npx create-react-app hello
 | cd hello
 | npm install --save ag-grid-community
 | npm install --save ag-grid-react
 | npm start
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1063,12 +1063,12 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |"dependencies": {
 |    "ag-grid-community": "@AG_GRID_VERSION@",
 |    "ag-grid-react": "@AG_GRID_VERSION@",
 |    ...
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1082,7 +1082,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |import React, { useState, useRef, useEffect, useMemo, useCallback} from 'react';
 |import { createRoot } from 'react-dom/client';
 |import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
@@ -1152,7 +1152,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 |};
 |
 |export default App;
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1172,10 +1172,10 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false}>
+```
 |import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 |import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1185,9 +1185,9 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |&lt;div className="ag-theme-alpine" style={{width: 500, height: 500}}>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1202,7 +1202,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |const [rowData, setRowData] = useState(); // Set rowData to Array of Objects, one Object per Row
 |
 |...
@@ -1220,7 +1220,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 |    rowData={rowData} // Row Data for Rows
 |    ...
 |    />
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1232,7 +1232,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |// Each Column Definition results in one Column.
 |const [columnDefs, setColumnDefs] = useState([
 |    {field: 'make', filter: true},
@@ -1252,7 +1252,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 |    defaultColDef={defaultColDef} // Default Column Properties
 |    ...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1260,7 +1260,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |const gridRef = useRef(); // Optional - for accessing Grid's API
 |// Example using Grid's API
 |const buttonListener = useCallback( e => {
@@ -1270,7 +1270,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 |&lt;AgGridReact
 |    ref={gridRef} // Ref for accessing Grid's API
 |    />
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1281,12 +1281,12 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |&lt;AgGridReact
 |    onCellClicked={cellClickedListener} // Optional - registering for Grid Event
 |    ...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1298,13 +1298,13 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |&lt;AgGridReact
 |    animateRows={true} // Optional - set to 'true' to have rows animate when sorted
 |    rowSelection='multiple' // Options - allows click selection of rows
 |    ...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1324,9 +1324,9 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="bash">
+```
 | npm install --save ag-grid-enterprise
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1334,13 +1334,13 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "ag-grid-community": "@AG_GRID_VERSION@",
 |    "ag-grid-enterprise": "@AG_GRID_VERSION@",
 |    "ag-grid-react": "@AG_GRID_VERSION@",
 |    ...
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1353,9 +1353,9 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |import 'ag-grid-enterprise';
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -1368,14 +1368,14 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |// Each Column Definition results in one Column.
 |const [columnDefs, setColumnDefs] = useState([
 |    {field: 'make', rowGroup: true},
 |    {field: 'model'},
 |    {field: 'price'}
 |]);
-</snippet>
+```
 </framework-specific-section>
 
 [//]: # (Vue Section)
@@ -1394,7 +1394,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx" lineNumbers="true">
+```
 |&lt;template>
 |  &lt;ag-grid-vue
 |    style="width: 500px; height: 200px"
@@ -1431,7 +1431,7 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 |  },
 |};
 |&lt;/script>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1523,13 +1523,13 @@ pointing to <a href="http://localhost:3000">localhost:3000</a>
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="bash">
+```
 | npx -p @vue/cli vue create this-place
 | cd this-place
 | npm install --save ag-grid-community
 | npm install --save ag-grid-vue3
 | npm run serve
-</snippet>
+```
 </framework-specific-section> 
 
 <framework-specific-section frameworks="vue">
@@ -1546,12 +1546,12 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "ag-grid-community": "@AG_GRID_VERSION@",
 |    "ag-grid-vue3": "@AG_GRID_VERSION@",
 |    ...
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1565,7 +1565,7 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="html">
+```
 |&lt;template>
 |  &lt;button @click="deselectRows">deselect rows&lt;/button>
 |  &lt;ag-grid-vue
@@ -1644,7 +1644,7 @@ in your browser of choice.
 |&lt;/script>
 |
 |&lt;style lang="scss">&lt;/style>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1664,10 +1664,10 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 |import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1678,10 +1678,10 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 | &lt;ag-grid-vue
 |    class="ag-theme-alpine"
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1697,7 +1697,7 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |  &lt;ag-grid-vue
 |    :rowData="rowData.value"
 |...
@@ -1713,7 +1713,7 @@ in your browser of choice.
 |     .then((remoteRowData) => (rowData.value = remoteRowData));
 | });
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1725,7 +1725,7 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |  &lt;ag-grid-vue
 |    :columnDefs="columnDefs.value"
 |    :defaultColDef="defaultColDef"
@@ -1745,7 +1745,7 @@ in your browser of choice.
 |   flex: 1
 | };
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1756,7 +1756,7 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 | const gridApi = ref(null); // Optional - for accessing Grid's API
 | ...
 |
@@ -1771,7 +1771,7 @@ in your browser of choice.
 |   gridApi.value.deselectAll()
 | }
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1783,10 +1783,10 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |  &lt;ag-grid-vue
 |    @cell-clicked="cellWasClicked"
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1798,17 +1798,17 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |  &lt;ag-grid-vue
 |    rowSelection="multiple"
 |    animateRows="true"
 |    ...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 | ## Getting Started with AG Grid Enterprise
 |
 | We would love for you to try out AG Grid Enterprise. There is no cost to trial.
@@ -1822,13 +1822,13 @@ in your browser of choice.
 | In addition to `ag-grid-community` and `ag-grid-vue3`, AG Grid Enterprise also needs
 | `ag-grid-enterprise`.
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="bash">
+```
 | npm install --save ag-grid-enterprise
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1837,13 +1837,13 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |"dependencies": {
 |    "ag-grid-community": "@AG_GRID_VERSION@",
 |    "ag-grid-enterprise": "@AG_GRID_VERSION@",
 |    "ag-grid-vue3": "@AG_GRID_VERSION@",
 |    ...
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1857,9 +1857,9 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |import 'ag-grid-enterprise';
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -1872,7 +1872,7 @@ in your browser of choice.
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 |// Each Column Definition results in one Column.
 | const columnDefs = reactive({
 |   value: [
@@ -1881,7 +1881,7 @@ in your browser of choice.
 |        { field: "price" }
 |   ]});
 |
-</snippet>
+```
 </framework-specific-section>
 
   

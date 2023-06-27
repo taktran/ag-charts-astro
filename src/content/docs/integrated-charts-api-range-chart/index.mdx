@@ -9,7 +9,7 @@ This section shows how Range Charts can be created via the Grid API.
 
 Range Charts can be created through `gridApi.createRangeChart()` as shown below:
 
-<snippet>
+```
 | gridOptions.api.createRangeChart({
 |     chartType: 'groupedColumn',
 |     cellRange: {
@@ -19,7 +19,7 @@ Range Charts can be created through `gridApi.createRangeChart()` as shown below:
 |     },
 |     // other options...
 | });
-</snippet>
+```
 
 The snippet above creates a Range Chart with the `groupedColumn` chart type using data from the first 4 and the `country`,
 `gold`, `silver` columns. For a full list of options see [Range Chart API](/integrated-charts-api-range-chart/#range-chart-api).
@@ -68,7 +68,7 @@ is supplied.
 
 The `seriesChartTypes` property accepts an array of `SeriesChartType` objects as shown below:
 
-<snippet>
+```
 | api.createRangeChart({
 |     chartType: 'customCombo',
 |     cellRange: {
@@ -81,7 +81,7 @@ The `seriesChartTypes` property accepts an array of `SeriesChartType` objects as
 |     ],
 |     aggFunc: 'sum',
 | });
-</snippet>
+```
 
 The following series chart types are supported with combination charts:
 

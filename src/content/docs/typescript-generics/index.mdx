@@ -10,20 +10,20 @@ Provide a Typescript interface for row data to the grid to enable auto-completio
 
 In the examples below we will use the `ICar` interface to represent row data.
 
-<snippet transform={false} langauge="ts"> 
+``` 
 |// Row Data interface
 |interface ICar {
 |    make: string;
 |    model: string;
 |    price: number;
 |}
-</snippet>
+```
 
 ### Configure via GridOptions
 
 Set the row data type on the grid options interface via `GridOptions<ICar>`. The `ICar` interface will then be used throughout the grid options whenever row data is present. This is true for: properties, callbacks, events and the gridApi.
 
-<snippet transform={false} langauge="ts"> 
+``` 
 |// Pass ICar to GridOptions as a generic
 |const gridOptions: GridOptions&lt;ICar> = {
 |    // rowData is typed as ICar[]
@@ -49,7 +49,7 @@ Set the row data type on the grid options interface via `GridOptions<ICar>`. The
 |  // api.getSelectedRows() : ICar[]
 |  const cars: ICar[] = gridOptions.api!.getSelectedRows();  
 |}
-</snippet>
+```
 
 <note>
 You do not need to explicitly type callbacks and events that are defined as part of `GridOptions`. Typescript will correctly pass the generic type down the interface hierarchy.
@@ -59,14 +59,14 @@ You do not need to explicitly type callbacks and events that are defined as part
 
 Each interface that accepts a generic type of `TData` can also be configured individually. For example, an event handler function can accept the generic parameter on the event `RowSelectedEvent`.
 
-<snippet transform={false} language="ts">
+```
 function onRowSelected(event: RowSelectedEvent&lt;ICar>) {
     if (event.data) {
         // event.data: ICar | undefined
         const price = event.data.price;
     }
 }
-</snippet>
+```
 
 <framework-specific-section frameworks="angular">
 |### Configure via Component
@@ -79,9 +79,9 @@ function onRowSelected(event: RowSelectedEvent&lt;ICar>) {
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="ts">
+```
 |const columnDefs: ColDef&lt;ICar>[] = [...];
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -89,12 +89,12 @@ function onRowSelected(event: RowSelectedEvent&lt;ICar>) {
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="html">
+```
 |&lt;ag-grid-angular 
 |    [columnDefs]="columnDefs"    
 |    (rowSelected)="onRowSelected($event)"
 |>&lt;/ag-grid-angular>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -102,33 +102,33 @@ function onRowSelected(event: RowSelectedEvent&lt;ICar>) {
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="ts">
+```
 |// ERROR: INotACar is not assignable to ICar
 |onRowSelected(event: RowSelectedEvent&lt;INotACar>) {}
 |
 |// SUCCESS: ICar is correct interface
 |onRowSelected(event: RowSelectedEvent&lt;ICar>) {}
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="ts">
+```
 |### Configure via Component
 |
 |The `&lt;AgGridReact>` component accepts a generic parameter as `&lt;AgGridReact&lt;ICar>>`.
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |&lt;AgGridReact&lt;ICar>
 |    ref={gridRef}
 |    rowData={rowData}
 |    onRowSelected={onRowSelected}
 |>
 |&lt;/AgGridReact>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -136,13 +136,13 @@ function onRowSelected(event: RowSelectedEvent&lt;ICar>) {
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="ts">
+```
 |const gridRef = useRef&lt;AgGridReact&lt;ICar>>(null);
 |
 |const [rowData, setRowData] = useState&lt;ICar[]>([ ... ]);
 |
 |const onRowSelected = useCallback((event: RowSelectedEvent&lt;ICar>) => { ... }, [])
-</snippet>
+```
 </framework-specific-section>
 
 ### Type: TData | undefined
@@ -151,7 +151,7 @@ For a number of events and callbacks, when a generic interface is provided, the 
 
 A good example of this is [Row Grouping](/grouping). The `onRowSelected` event is fired for both leaf and group rows. Data is only present on leaf nodes and so the event should be written to handle cases when `data` is undefined for groups.
 
-<snippet transform={false} langauge="ts">
+```
 |function onRowSelected(event: RowSelectedEvent&lt;ICar>) {
 |    // event.data is typed as ICar | undefined
 |    if (event.data) {
@@ -161,7 +161,7 @@ A good example of this is [Row Grouping](/grouping). The `onRowSelected` event i
 |        // This is a group row
 |    }
 |}
-</snippet>
+```
 
 ## Cell Value: \<TValue\>
 
@@ -175,7 +175,7 @@ Set the cell value type directly on the column definition interface via `ColDef<
 
 Each interface that accepts a generic type of `TValue` can also be configured individually. Here is an example of a `valueFormatter` for the price column. The `params.value` property is correctly typed as a `number` due to typing the params argument as `ValueFormatterParams<ICar, number>`.
 
-<snippet transform={false} langauge="ts">
+```
 |const colDefs: ColDef&lt;ICar>[] = [
 |     {
 |        field: 'price',
@@ -185,7 +185,7 @@ Each interface that accepts a generic type of `TValue` can also be configured in
 |        }
 |    }
 |];
-</snippet>
+```
 
 The `TValue` generic type is also supported for cell renderers / editors by `ICellRendererParams<TData, TValue>` and `ICellEditorParams<TData, TValue>` respectively.
 
@@ -201,7 +201,7 @@ The grid options property `context` can be used to provided additional informati
 
 The generic parameter `TContext` needs to be explicitly provided to each interface where it is used.  For example, an event handler function can accept the generic parameter on the event `RowSelectedEvent<TData, TContext>`. 
 
-<snippet transform={false} langauge="ts">
+```
 |// Define the interface for your context
 |interface IDiscountRate {
 |    discount: number;
@@ -221,7 +221,7 @@ The generic parameter `TContext` needs to be explicitly provided to each interfa
 |        const price = event.data.price * event.context.discount;
 |    }
 |}
-</snippet>
+```
 
 
 ## Generic Type Example

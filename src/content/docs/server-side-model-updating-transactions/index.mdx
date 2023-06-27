@@ -16,7 +16,7 @@ The SSRM Transaction API allows rows to be added, removed or updated in the grid
 
 These operations are shown in the snippet below:
 
-<snippet>
+```
 | gridOptions.api.applyServerSideTransaction({ 
 |     add: [ 
 |         { tradeId: 101, portfolio: 'Aggressive', product: 'Aluminium', book: 'GL-62472', current: 57969 }
@@ -28,7 +28,7 @@ These operations are shown in the snippet below:
 |         { tradeId: 103 }
 |     ]
 | });
-</snippet>
+```
 
 The following example demonstrates add / update and remove operations via the Server-Side Transaction API. Note the following:
 
@@ -45,7 +45,7 @@ To use transactions while using row grouping, transactions need to be applied to
 
 The snippet below demonstrates creating a group row transaction for rows which are the first of their group, as the leaf rows will be requested via `getRows` when the group is expanded.
 
-<snippet>
+```
 | // create the group row at the root level (only if it's the first row for this group)
 | gridOptions.api.applyServerSideTransaction({
 | 	route: [],
@@ -57,7 +57,7 @@ The snippet below demonstrates creating a group row transaction for rows which a
 | 	route: ['Aggressive'],
 | 	add: [row]
 | });
-</snippet>
+```
 
 In the example below, note the following:
  - When clicking any of the buttons, the console logs each transaction as it is applied to the grid.
@@ -77,7 +77,7 @@ When using asynchronous transactions, the grid delays any transactions received 
 
 The snippet below demonstrates three asynchronous transactions applied sequentially, however because these transactions are asynchronously batched, the grid would only update the DOM once.
 
-<snippet>
+```
 | // due to asynchronous batching, the following transactions are applied together preventing unnecessary DOM updates
 | gridOptions.api.applyServerSideTransactionAsync({ 
 |     add: [{ tradeId: 101, portfolio: 'Aggressive', product: 'Aluminium', book: 'GL-62472', current: 57969 }],
@@ -90,7 +90,7 @@ The snippet below demonstrates three asynchronous transactions applied sequentia
 | gridOptions.api.applyServerSideTransactionAsync({ 
 |     remove: [{ tradeId: 103 }],
 | });
-</snippet>
+```
 
 In the example below, note the following:
  - After starting the updates, 1 row is created, 10 rows are updated, and 1 rows is deleted every 10 milliseconds.

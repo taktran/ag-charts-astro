@@ -36,7 +36,7 @@ categories.
 
 The Category Axis is configured through the [SparklineAxisOptions](/sparklines-axis-types/#sparklineaxisoptions) as follows:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -54,7 +54,7 @@ const gridOptions = {
         // other column definitions ...
     ],
 };
-</snippet>
+```
 
 In the snippet above, the axis type is set to `'category'` but this is optional as the axis uses the `'category'` axis by default.
 
@@ -74,7 +74,7 @@ with numeric intervals.
 
 The Number Axis is configured through the [SparklineAxisOptions](/sparklines-axis-types/#sparklineaxisoptions) as follows:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -92,7 +92,7 @@ const gridOptions = {
         // other column definitions ...
     ],
 };
-</snippet>
+```
 
 In the snippet above, the axis type is set to `'number'` to select a Number Axis instead of the default
 [Category Axis](/sparklines-axis-types/#category-axis).
@@ -113,7 +113,7 @@ timestamps derived from Unix time.
 
 The Time Axis is configured through the [SparklineAxisOptions](/sparklines-axis-types/#sparklineaxisoptions) as follows:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -131,7 +131,7 @@ const gridOptions = {
         // other column definitions ...
     ],
 };
-</snippet>
+```
 
 In the snippet above, the axis type is set to `'time'` to select a Time Axis instead of the default
 [Category Axis](/sparklines-axis-types/#category-axis).

@@ -11,7 +11,7 @@ Values inside a Set Filter will be sorted by default, where the values are conve
 
 When a different sort order is required, a Comparator can be supplied to the set filter as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -28,7 +28,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 The Comparator used by the Set Filter is only provided the values in the first two parameters, whereas the Comparator for the Column Definition (`colDef`) is also provided the row data as additional parameters. This is because when sorting rows, row data exists. For example, take 100 rows split across the colour values `[white, black]`. The column will be sorting 100 rows, however the filter will be only sorting two values.
 
@@ -54,16 +54,16 @@ Formatting Filter List values will not change the underlying value or Filter Mod
 A [Value Formatter](/value-formatters/) is a good choice when the string value displayed in the Filter List needs to
 be modified, for example adding country codes in parentheses after a country name, as shown below:
 
-<snippet>
+```
 | const countryValueFormatter = params => {
 |     const country = params.value;
 |     return country + ' (' + COUNTRY_CODES[country].toUpperCase() + ')';
 | }
-</snippet>
+```
 
 The following snippet shows how to provide the `countryValueFormatter` to the Set Filter:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         // column definition using the same value formatter to format cell and filter values
@@ -77,7 +77,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 In the code above, the same value formatter is supplied to the Column and Filter params, however separate Value Formatters can be used.
 
@@ -100,7 +100,7 @@ cells have row details that are not present for values inside a Filter List).
 
 Assuming you have a customer Country Cell Renderer, the following snippet shows how to provide the `countryCellRenderer` to the Set Filter:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         // column definition using the same cell renderer to format cell and filter values
@@ -114,7 +114,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 <note>
 A custom [Cell Renderer Component](/component-cell-renderer/#cell-renderer-component) can also be supplied to `filterParams.cellRenderer`.
@@ -141,7 +141,7 @@ It is also possible to provide values for the Filter List. This is necessary whe
 
 The simplest approach is to supply a list of values to `filterParams.values` as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -154,7 +154,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 Note that if there are missing values in the row data, the filter list will display all provided values. This could give users the impression that filtering is broken.
 
@@ -175,7 +175,7 @@ The following example demonstrates providing filter values using `filterParams.v
 
 It is also possible to supply values asynchronously to the set filter. This is done by providing a callback function instead of a list of values as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -194,7 +194,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 Note in the snippet above the values callback receives a parameter object which contains `params.success()`which allows values obtained asynchronously to be supplied to the set filter.
 
@@ -220,20 +220,20 @@ The following example demonstrates loading set filter values asynchronously. Not
 
 By default, when values are passed to the set filter they are only loaded once when the set filter is initially created. It may be desirable to refresh the values at a later point, for example to reflect other filtering that has occurred in the grid. To achieve this, you can call `refreshFilterValues` on the relevant filter that you would like to refresh. This will cause the values used in the filter to be refreshed from the original source, whether that is by looking at the provided `values` array again, or by re-executing the `values` callback. For example, you might use something like the following:
 
-<snippet>
+```
 const gridOptions = {
     onFilterChanged: params => {
         const setFilter = params.api.getFilterInstance('columnName');
         setFilter.refreshFilterValues();
     }
 }
-</snippet>
+```
 
 If you are using the grid as a source of values (i.e. you are not providing values yourself), calling this method will also refresh the filter values using values taken from the grid, but this should not be necessary as the values are automatically refreshed for you whenever any data changes in the grid.
 
 If instead you want to refresh the values every time the Set Filter is opened, you can configure that using `refreshValuesOnOpen`:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -245,7 +245,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 When you refresh the values, any values that were selected in the filter that still exist in the new values will stay selected, but any other selected values will be discarded.
 
@@ -265,7 +265,7 @@ By default the Set Filter treats values as case-insensitive. Practically this me
 
 Case-sensitivity can be enabled by using the `caseSensitive` filter parameter:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -277,7 +277,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 <note>
 The `caseSensitive` option also affects [Mini-Filter](/filter-set-mini-filter/#enabling-case-sensitive-searches) searches and [API](/filter-set-api/#enabling-case-sensitivity) behaviours.
@@ -311,7 +311,7 @@ The Key Creator generates a unique string key from the complex object (note that
 
 The Value Formatter is used to generate the label that is displayed to the user within the Filter List. You can provide the Value Formatter in the filter params.
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -324,7 +324,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 The snippet above shows a Key Creator function that returns the country code from the complex object, and a Value Formatter that returns the name. If the Key Creator or Value Formatter were not provided at all, the Set Filter would not work.
 
@@ -365,7 +365,7 @@ The example below demonstrates this in action. Note the following:
 
 By default, when the Set Filter is created all values are selected. If you would prefer to invert this behaviour and have everything de-selected by default, you can use the following:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -377,7 +377,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 In this case, no filtering will occur until at least one value is selected.
 
@@ -395,7 +395,7 @@ The following example demonstrates different default states. Note the following:
 
 Set filter values that are too long to be displayed are truncated by default with ellipses. To allow users to see the full filter value, tooltips can be enabled as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -407,7 +407,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 The default tooltip component will be used unless a [Custom Tooltip Component](/component-tooltip/) is provided.
 

@@ -18,7 +18,7 @@ You can add CSS styles to each row in the following ways:
 
 <api-documentation source='grid-options/properties.json' section='styling' names='["rowStyle", "getRowStyle"]' ></api-documentation>
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     // set background colour on every row, this is probably bad, should be using CSS classes
     rowStyle: { background: 'black' },
@@ -29,7 +29,7 @@ const gridOptions = {
         }
     }
 }
-</snippet>
+```
 
 ## Row Class
 
@@ -37,7 +37,7 @@ You can add CSS classes to each row in the following ways:
 
 <api-documentation source='grid-options/properties.json' section='styling' names='["rowClass", "getRowClass"]'></api-documentation>
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     // all rows assigned CSS class 'my-green-class'
     rowClass: 'my-green-class',
@@ -48,7 +48,7 @@ const gridOptions = {
         }
     },
 }
-</snippet>
+```
 
 ## Row Class Rules
 
@@ -58,7 +58,7 @@ You can define rules which can be applied to include certain CSS classes via the
 
 The following snippet shows `rowClassRules` that use functions and the value from the year column:
 
-<snippet>
+```
 | const gridOptions = {
 |     rowClassRules: {
 |         // apply green to 2008
@@ -71,7 +71,7 @@ The following snippet shows `rowClassRules` that use functions and the value fro
 |         'rag-red-outer': function(params) { return params.data.year === 2000; }
 |     }
 | }
-</snippet>
+```
 
 All rowStyle, rowClass and rowClassRules functions take a `RowClassParams` params object.
 
@@ -128,14 +128,14 @@ Highlighting Rows is on by default. To turn it off, set the grid property `suppr
 
 Highlighting Columns is off by default. To turn it on, set the grid property `columnHoverHighlight=true`.
 
-<snippet>
+```
 const gridOptions = {
     // turns OFF row hover, it's on by default
     suppressRowHoverHighlight: true,
     // turns ON column hover, it's off by default
     columnHoverHighlight: true
 }
-</snippet>
+```
 
 In this example Rows and Columns are highlighted.
 

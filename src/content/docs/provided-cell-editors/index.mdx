@@ -73,7 +73,7 @@ Specified with `agSelectCellEditor` and configured with `ILargeTextEditorParams`
 
 <interface-documentation interfaceName='ISelectCellEditorParams' names='["values"]'></interface-documentation>
 
-<snippet transform={false}>
+```
 columnDefs: [
     {
         cellEditor: 'agSelectCellEditor',
@@ -83,7 +83,7 @@ columnDefs: [
         // ...other props
     }
 ]
-</snippet>
+```
 
 Note there is no need to specify `cellEditorPopup=true` for Select Cell Editor as the browsers Select widget will appear on top of the grid.
 
@@ -123,7 +123,7 @@ Specified with `agRichSelectCellEditor` and configured with `IRichCellEditorPara
 
 <interface-documentation interfaceName='IRichCellEditorParams' names='["values", "cellHeight", "formatValue", "cellRenderer", "searchDebounceDelay" ]'></interface-documentation>
 
-<snippet transform={false}>
+```
 columnDefs: [
     {
         cellEditor: 'agRichSelectCellEditor',
@@ -138,7 +138,7 @@ columnDefs: [
         // ...other props
     }
 ]
-</snippet>
+```
 
 ## Number Cell Editor
 

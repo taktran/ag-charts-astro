@@ -85,7 +85,7 @@ To handle this scenario, the grid provides `parentKeys` and `level` properties i
 
 These can be used to create unique group id's as shown below:
 
-<snippet>
+```
 | const gridOptions = {
 |    getRowId: params => {
 |        const parentKeysJoined = (params.parentKeys || []).join('-');
@@ -97,7 +97,7 @@ These can be used to create unique group id's as shown below:
 |        parentKeysJoined + params.data[thisGroupCol.getColDef().field];
 |     }
 | }
-</snippet>
+```
 
 ## Debug Info
 

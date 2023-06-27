@@ -11,7 +11,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 | &lt;ag-grid-angular
 |    #myGrid // assign an angular ID to the grid - optional
 |
@@ -34,7 +34,7 @@
 |    (cellClicked)="onCellClicked($event)"
 |    (columnResized)="onColumnEvent($event)">
 | &lt;/ag-grid-angular>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -50,7 +50,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 | &lt;ag-grid-angular
 |    #myGrid // assign an angular ID to the grid - optional
 |
@@ -68,7 +68,7 @@
 |
 | // Then later access api
 | this.grid.api.deselectRows();
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -76,9 +76,9 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 | &lt;button (click)="myGrid.api.deselectAll()">Clear Selection&lt;/button>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -92,7 +92,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 | const gridOptions : GridOptions = {
 |     // PROPERTIES
 |     // Objects like myRowData and myColDefs would be created in your application
@@ -113,7 +113,7 @@
 |
 | &lt;ag-grid-angular
 |     [gridOptions]="gridOptions"
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -121,11 +121,11 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 | // refresh the grid
 | this.gridOptions.api.redrawRows();
 |
 | // resize columns in the grid to fit the available space
 | this.gridOptions.columnApi.sizeColumnsToFit();
-</snippet>
+```
 </framework-specific-section>

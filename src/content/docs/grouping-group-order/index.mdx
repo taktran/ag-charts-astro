@@ -10,7 +10,7 @@ This section provides details on how to control the 'Group By' order and the def
 By default, the grid will group rows based on the order of the supplied column definitions. To explicitly define the
 row 'Group By' order, use `rowGroupIndex` with / without `rowGroup = true` as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         // index = 1, gets grouped second
@@ -19,7 +19,7 @@ const gridOptions = {
         { field: "year", hide: true, rowGroupIndex: 0 },
     ]
 }
-</snippet>
+```
 
 In the snippet above, `year` has a lower `rowGroupIndex` than `country` which means it will be grouped first. The
 `rowGroupIndex` values can be any number that is either positive or zero and gaps are permitted. 

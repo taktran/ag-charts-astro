@@ -35,12 +35,12 @@ Setting Row IDs is done using the `getRowId()` grid callback:
 
 When the row data contains a unique row identifier, such as a Database Primary Key, `getRowId()` can be implemented as follows: 
 
-<snippet>
+```
 const gridOptions = {
     // assumes each data item provided by the application has the ID stored in an attribute called id
     getRowId: params => params.data.id
 }
-</snippet>
+```
 
 The example below has `getRowId()` implemented to return `params.data.id`. The Row ID is displayed inside the first Column.
 

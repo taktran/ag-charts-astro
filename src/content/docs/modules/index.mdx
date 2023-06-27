@@ -95,7 +95,7 @@ A real-world example might be that we wish to use the `Client Side Row Model` (t
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "@ag-grid-community/client-side-row-model": "~@AG_GRID_VERSION@",
 |    "@ag-grid-community/csv-export": "~@AG_GRID_VERSION@",
@@ -103,11 +103,11 @@ A real-world example might be that we wish to use the `Client Side Row Model` (t
 |    "@ag-grid-enterprise/master-detail": "~@AG_GRID_VERSION@",
 |    //...other dependencies...
 |}
-</snippet>  
+```  
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "@ag-grid-community/client-side-row-model": "~@AG_GRID_VERSION@",
 |    "@ag-grid-community/csv-export": "~@AG_GRID_VERSION@",
@@ -116,11 +116,11 @@ A real-world example might be that we wish to use the `Client Side Row Model` (t
 |    "@ag-grid-community/angular": "~@AG_GRID_VERSION@",
 |    //...other dependencies...
 |}
-</snippet>  
+```  
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "@ag-grid-community/client-side-row-model": "~@AG_GRID_VERSION@",
 |    "@ag-grid-community/csv-export": "~@AG_GRID_VERSION@",
@@ -129,11 +129,11 @@ A real-world example might be that we wish to use the `Client Side Row Model` (t
 |    "@ag-grid-community/react": "~@AG_GRID_VERSION@",
 |    //...other dependencies...
 |}
-</snippet>  
+```  
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "@ag-grid-community/client-side-row-model": "~@AG_GRID_VERSION@",
 |    "@ag-grid-community/csv-export": "~@AG_GRID_VERSION@",
@@ -142,7 +142,7 @@ A real-world example might be that we wish to use the `Client Side Row Model` (t
 |    "@ag-grid-community/vue": "~@AG_GRID_VERSION@",
 |    //...other dependencies...
 |}
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -161,7 +161,7 @@ A real-world example might be that we wish to use the `Client Side Row Model` (t
 | We now need to register the Grid modules we wish to use - note that this does not include `@ag-grid-community/vue` as the Vue support is not a Grid feature, but rather a support library:
 </framework-specific-section>
 
-<snippet transform={false}>
+```
 |// @ag-grid-community/core will always be implicitly available
 |import { ModuleRegistry } from '@ag-grid-community/core';
 |import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
@@ -180,7 +180,7 @@ A real-world example might be that we wish to use the `Client Side Row Model` (t
 |// ModuleRegistry.register(ClientSideRowModelModule);
 |// ModuleRegistry.register(CsvExportModule);
 |// etc
-</snippet>
+```
 
 ### Providing Modules To Individual Grids
 
@@ -201,7 +201,7 @@ Using the same real-world example from above the `package.json` dependencies wil
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 |import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 |import { CsvExportModule } from "@ag-grid-community/csv-export";
 |import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
@@ -213,7 +213,7 @@ Using the same real-world example from above the `package.json` dependencies wil
 |    ExcelExportModule,
 |    MasterDetailModule
 |]});
-</snippet>  
+```  
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -221,7 +221,7 @@ Using the same real-world example from above the `package.json` dependencies wil
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false}>
+```
 |import { Component } from '@angular/core';
 |import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 |import { CsvExportModule } from "@ag-grid-community/csv-export";
@@ -240,7 +240,7 @@ Using the same real-world example from above the `package.json` dependencies wil
 |    [columnDefs]="columnDefs"
 |    [modules]="modules"
 |&lt;/ag-grid-angular>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -248,7 +248,7 @@ Using the same real-world example from above the `package.json` dependencies wil
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false}>
+```
 |import React, { useState } from 'react';
 |import { createRoot } from 'react-dom/client';
 |import { AgGridReact } from '@ag-grid-community/react';
@@ -279,11 +279,11 @@ Using the same real-world example from above the `package.json` dependencies wil
 |        &lt;/div>
 |    );
 |};
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false}>
+```
 |import { createApp } from 'vue';
 |import { AgGridVue } from '@ag-grid-community/vue3';
 |import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
@@ -308,7 +308,7 @@ Using the same real-world example from above the `package.json` dependencies wil
 |    :rowData="rowData"
 |    :modules="modules">
 |&lt;/ag-grid-vue>
-</snippet>
+```
 </framework-specific-section>   
 
 The following example shows how you can configure individual grids using a combination of shared Global registrations as well as individual grid module registration. Note the following:
@@ -333,36 +333,36 @@ You'll require the `@ag-grid-community/core` module for Grid related definitions
 
 If we have the following modules specified:
 
-<snippet transform={false}>
+```
 |"dependencies": {
 |    "@ag-grid-community/client-side-row-model": "~@AG_GRID_VERSION@",
 |    "@ag-grid-enterprise/excel-export": "~@AG_GRID_VERSION@",
 |    //...other dependencies...
 |}
-</snippet>
+```
 
 We can then assume the `core` packages are available implicitly and import from them:
 
-<snippet transform={false}>
+```
 |import { ColumnApi, GridApi } from "@ag-grid-community/core";
 |import { LicenseManager } from "@ag-grid-enterprise/core";
 |
 |LicenseManager.setLicenseKey(...your key...);
-</snippet>
+```
 
 ## CSS/SCSS Paths
 
 CSS & SCSS is available in the `@ag-grid-community/styles` module.
 
-<snippet transform={false} language="css">
+```
 |/* CSS Community */
 |import "@ag-grid-community/styles/ag-grid.css";
 |import "@ag-grid-community/styles/ag-theme-alpine.css";
-</snippet>
+```
 
 If using SCSS the theme defaults to `alpine`, so you don't have to explicitly include it.
 
-<snippet transform={false} language="scss">
+```
 |// SCSS Community
 |@use "~@ag-grid-community/styles" as ag;
 |
@@ -370,7 +370,7 @@ If using SCSS the theme defaults to `alpine`, so you don't have to explicitly in
 |@include ag.grid-styles((
 |    theme: balham
 |));
-</snippet>
+```
 
 See [Choosing a Theme](/global-style-customisation-sass/#choosing-a-theme) for full details of how to select a theme.
 

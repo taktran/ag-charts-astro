@@ -10,7 +10,7 @@ Number Filters allow you to filter number data.
 
 The Number Filter can be configured as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -23,7 +23,7 @@ const gridOptions = {
         },
     ],
 }
-</snippet>
+```
 
 ## Example: Number Filter
 
@@ -47,7 +47,7 @@ The default behaviour of the Number Filter is to use a `number` input, however t
 
 Custom number support is enabled by specifying configuration similar to the following:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -63,7 +63,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 The `allowedCharPattern` is a regex of all the characters that are allowed to be typed. This is surrounded by square brackets `[]` and used as a character class to be compared against each typed character individually and prevent the character from appearing in the input if it does not match (in supported browsers).
 

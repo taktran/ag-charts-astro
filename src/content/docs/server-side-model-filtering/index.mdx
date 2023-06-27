@@ -9,7 +9,7 @@ This section covers Filtering using the Server-Side Row Model (SSRM).
 
 Filtering is enabled in the grid via the `filter` column definition attribute.
 
-<snippet>
+```
 | const gridOptions = {
 |     columnDefs: [
 |         // sets the 'text' filter
@@ -22,7 +22,7 @@ Filtering is enabled in the grid via the `filter` column definition attribute.
 |         { field: 'sport' },
 |     ],
 | }
-</snippet>
+```
 
 For more details on filtering configurations see the section on [Column Filtering](/filtering/).
 
@@ -98,7 +98,7 @@ When using the Set Filter with the SSRM it is necessary to supply the values as 
 have all rows loaded. This can be done either synchronously or asynchronously using the `values` filter param as shown below:
 
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     columnDefs: [
         // colDef with Set Filter values supplied synchronously
@@ -122,7 +122,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 For more details on setting values, see [Supplying Filter Values](/filter-set-filter-list/#supplying-filter-values). Once you have supplied values to the Set Filter, they will not change unless you ask for them to be refreshed. See [Refreshing Values](/filter-set-filter-list/#refreshing-values) for more information.
 

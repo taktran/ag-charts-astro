@@ -29,7 +29,7 @@ via `chartDataType='time'` on the column definition.
 
 The following snippet shows how different time series values can be configured to enable a time axis:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         // date objects are treated as time by default
@@ -44,7 +44,7 @@ const gridOptions = {
         // ... more rows
     ]
 }
-</snippet>
+```
 
 Notice that no configuration is necessary for date objects but numeric timestamps and calendar date string require
 that `chartDataType='time'` is set on the column definitions.

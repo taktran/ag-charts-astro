@@ -11,7 +11,7 @@ The key for the group cell renderer is `agGroupCellRenderer`.
 
 The grid's group cell renderer takes many parameters to configure it. Here is an example of a column and its configuration:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         // column definition configured to show group values with the cell renderer set to 'group'
@@ -36,7 +36,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 The full set of parameters for the group cell renderer are defined on `IGroupCellRendererParams` and include:
 
@@ -76,7 +76,7 @@ chevron should not be displayed in certain group cells.
 
 This can be achieved via the `cellRendererSelector` callback function as shown in below:
 
-<snippet>
+```
 const gridOptions = { 
     autoGroupColumnDef: {
         cellRendererSelector: (params) => {
@@ -87,7 +87,7 @@ const gridOptions = {
         },
     },
 };
-</snippet>
+```
 
 In the snippet above group cells that contain 'Australia' or 'Norway' group keys will use the Default Cell Renderer instead
 of the Group Cell Renderer. Note that a [Custom Component Cell Renderer](/component-cell-renderer/) could also be returned.

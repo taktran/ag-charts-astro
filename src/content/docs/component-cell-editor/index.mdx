@@ -55,12 +55,12 @@ md-include:complementing-component-vue.md
 |1. Specify `cellEditorPopup=true` on the [Column Definition](../column-definitions/).
 </framework-specific-section>
 
-<snippet>
+```
  colDef = {
     cellEditorPopup: true,
     // ...other props
 }
-</snippet>
+```
 
 ## Configure Popup Position
 
@@ -76,12 +76,12 @@ By default Popup Editors appear over the editing Cell. It is also possible to ha
 |1. Specify `cellEditorPopupPosition='under'` on the [Column Definition](/column-definitions/).
 </framework-specific-section>
 
-<snippet>
+```
  colDef = {
     cellEditorPopupPosition: 'under',
     // ...other props
 }
-</snippet>
+```
 
 ## Keyboard Navigation While Editing
 
@@ -138,12 +138,12 @@ If you are doing normal editing, then only one cell is editable at any given tim
 
 An example of calling `getCellEditorInstances()` is as follows:
 
-<snippet transform={false}>
+```
 const instances = gridOptions.api.getCellEditorInstances(params);
 if (instances.length > 0) {
     const instance = instances[0];
 }
-</snippet>
+```
 
 The example below shows using `getCellEditorInstances`. The following can be noted:
 

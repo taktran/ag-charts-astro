@@ -19,7 +19,7 @@ Tree List is enabled by setting `filterParams.treeList = true`. There are four d
 
 <interface-documentation interfaceName='ISetFilterParams' names='["treeListPathGetter","keyCreator"]' config='{"description":""}'></interface-documentation>
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -39,7 +39,7 @@ const gridOptions = {
         },
     },
 }
-</snippet>
+```
 
 The following example demonstrates enabling different types of Tree List in the Set Filter. Note the following:
 
@@ -77,7 +77,7 @@ The values can be formatted in the Filter List via `filterParams.treeListFormatt
 
 <interface-documentation interfaceName='ISetFilterParams' names='["treeListFormatter"]' config='{"description":""}'></interface-documentation>
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -95,7 +95,7 @@ const gridOptions = {
         }
     ],
 }
-</snippet>
+```
 
 If a formatter is provided, it will also need to handle [Missing Values](/filter-set-filter-list/#missing-values), which will have a `pathKey` of `null`. Without a formatter, these are displayed as `(Blanks)`.
 

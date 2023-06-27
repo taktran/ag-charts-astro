@@ -29,7 +29,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 </framework-specific-section>
 
 <framework-specific-section frameworks="frameworks">
-<snippet transform={false}>
+```
 | "dependencies": {
 |     "@ag-grid-community/client-side-row-model": "~@AG_GRID_VERSION@",
 |     "@ag-grid-enterprise/excel-export": "~@AG_GRID_VERSION@",
@@ -37,7 +37,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 |
 |     //...other dependencies...
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="frameworks">
@@ -47,14 +47,14 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 </framework-specific-section>
 
 <framework-specific-section frameworks="frameworks">
-<snippet transform={false}>
+```
 | import { ModuleRegistry } from '@ag-grid-community/core';
 | import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 | import { MenuModule } from '@ag-grid-enterprise/menu';
 | import { ExcelExportModule } from '@ag-grid-enterprise/excel-export';
 |
 | ModuleRegistry.registerModules([ClientSideRowModelModule, MenuModule, ExcelExportModule]);
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="frameworks">
@@ -93,7 +93,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | "dependencies": {
 |     "@ag-grid-community/client-side-row-model": "~@AG_GRID_VERSION@",
 |     "@ag-grid-enterprise/excel-export": "~@AG_GRID_VERSION@",
@@ -101,7 +101,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 |
 |     //...other dependencies...
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -118,7 +118,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | export * from '@ag-grid-community/core';
 | export * from '@ag-grid-enterprise/core';
 | export * from '@ag-grid-community/client-side-row-model';
@@ -136,7 +136,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 |
 | import '@ag-grid-community/styles/ag-grid.css';
 | import '@ag-grid-community/styles/ag-theme-alpine.css';
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -147,7 +147,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 | module.exports = {
 |     mode: 'production',
 |     entry: path.resolve(__dirname, '../src/main.js'),
@@ -158,7 +158,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 |         libraryTarget: 'umd'
 |     }
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -172,9 +172,9 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} language="bash">
+```
 | webpack --config config/webpack.prod.js
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
@@ -182,7 +182,7 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 </framework-specific-section>
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false} language="html">
+```
 | &lt;!DOCTYPE html>
 | &lt;html>
 | &lt;head>
@@ -219,5 +219,5 @@ In this section we demonstrate how you can cherry pick modules to provide the fe
 |     &lt;div id="myGrid" style="height: 200px; width:500px;" class="ag-theme-alpine">&lt;/div>
 | &lt;/body>
 | &lt;/html>
-</snippet>
+```
 </framework-specific-section>

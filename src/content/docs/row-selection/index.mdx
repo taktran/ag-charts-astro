@@ -139,7 +139,7 @@ It is possible to have a checkbox in the header for selection. To configure the 
 
 <api-documentation source='column-properties/properties.json' section='header' names='["headerCheckboxSelection"]'></api-documentation>
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         // the name column header always has a checkbox in the header
@@ -157,7 +157,7 @@ const gridOptions = {
         },
     ],
 }
-</snippet>
+```
 
 If `headerCheckboxSelection` is a function, the function will be called every time there is a change to the displayed columns, to check for changes.
 
@@ -263,7 +263,7 @@ To select rows programmatically, use the `node.setSelected(params)` method.
 
 <api-documentation source='row-object/resources/methods.json' section='rowNodeMethods' names='["setSelected", "isSelected"]'></api-documentation>
 
-<snippet>
+```
 | // set selected, keep any other selections
 | node.setSelected(true);
 | 
@@ -275,7 +275,7 @@ To select rows programmatically, use the `node.setSelected(params)` method.
 | 
 | // check status of node selection
 | const selected = node.isSelected();
-</snippet>
+```
 
 The `isSelected()` method returns `true` if the node is selected, or `false` if it is not selected. If the node is a group node and the group selection is set to `'children'`, this will return `true` if all child (and grandchild) nodes are selected, `false` if all unselected, or `undefined` if a mixture.
 
@@ -287,14 +287,14 @@ The grid API has the following methods for selection:
 
 If you want to select only the filtered rows, you could do this using the following:
 
-<snippet transform={false}>
+```
 |// loop through each node after filter
 |const nodes = [];
 |gridOptions.api.forEachNodeAfterFilter(node => {
 |    nodes.push(node);
 |});
 |gridOptions.api.setNodesSelected({ nodes, newValue: true });
-</snippet>
+```
 
 ### Example: Using forEachNode
 
@@ -310,7 +310,7 @@ We need to provide a callback to the `navigateToNextCell` grid option to overrid
 
 <api-documentation source='grid-options/properties.json' section='nav' names='["navigateToNextCell"]'></api-documentation>
 
-<snippet>
+```
 | const gridOptions = {
 |     navigateToNextCell: params => {
 |         const suggestedNextCell = params.nextCellPosition;
@@ -333,7 +333,7 @@ We need to provide a callback to the `navigateToNextCell` grid option to overrid
 |         return suggestedNextCell;
 |     },
 | }
-</snippet>
+```
 
 From the code above you can see that we iterate over each node and call the `setSelected()` method if it matches the current `rowIndex`.
 

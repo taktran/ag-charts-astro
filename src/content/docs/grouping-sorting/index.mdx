@@ -9,7 +9,7 @@ This section provides details on how to configure and customise how row groups a
 
 When using [Single Group Column](../grouping-single-group-column/) or [Multiple Group Columns](../grouping-multiple-group-columns/), sorting can be enabled through the `sortable` column property as shown below:  
 
-<snippet>
+```
 const gridOptions = { 
     defaultColDef: {
         // enable sorting across all columns - including Row Group Columns
@@ -22,7 +22,7 @@ const gridOptions = {
     // also applies to the 'multipleColumns' display type 
     groupDisplayType: 'singleColumn',
 }
-</snippet>
+```
 
 It is common to simply define `defaultColDef.sortable = true` across all columns, which includes row group columns. 
 However, in cases where it is preferable to define sorting on the Row Group Columns directly, 
@@ -30,7 +30,7 @@ However, in cases where it is preferable to define sorting on the Row Group Colu
 
 Sorting is also enabled using the `sortable` column property with [Custom Group Columns](../grouping-custom-group-columns/), as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {   
@@ -46,7 +46,7 @@ const gridOptions = {
     }, 
     groupDisplayType: 'custom',
 };
-</snippet>
+```
 
 The example below demonstrates how sorting is enabled with [Multiple Group Columns](../grouping-multiple-group-columns/). 
 Note that sorting is enabled across all columns, including Row Group Columns, using: `defaultColDef.sortable = true`.
@@ -59,7 +59,7 @@ By default, columns only apply sorting to their leaf level row data, as such to 
 
 This creates the side effect that groups can be sorted in multiple directions simultaneously, the group column reflects this by displaying the multi-sort icon when it does not match one or more of the provided columns sort direction.
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -76,7 +76,7 @@ const gridOptions = {
         },
     ],
 }
-</snippet>
+```
 
 In this snippet, sorting on the year or handset column will sort their respective row groups. As the year and handset column have different sorts applied to them, the group column displays the mixed sort icon.
 
@@ -94,7 +94,7 @@ For example, consider the following column definition:
 
 <api-documentation source='column-properties/properties.json' section='sort' names='["comparator"]'></api-documentation>
 
-<snippet>
+```
 | const gridOptions = {
 |     columnDefs: [
 |         {
@@ -110,7 +110,7 @@ For example, consider the following column definition:
 |         },
 |     ],
 | }
-</snippet>
+```
 
 As `rowGroup = true` is defined on this column, the supplied `comparator` will be used to sort the `month` column and 
 the Group Column.
@@ -131,7 +131,7 @@ This 'shared group comparator' will override over any comparators defined on the
 When sorting on non-group columns it may be desirable to maintain the existing group order. This behaviour can be
 enabled through the `groupMaintainOrder` grid option as shown below:
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     columnDefs: [
         { field: 'assignee', rowGroup: true, hide: true },
@@ -142,7 +142,7 @@ const gridOptions = {
     // preserves current group order when sorting on non-group columns
     groupMaintainOrder: true,
 }
-</snippet>
+```
 
 Note that [Group Order](../grouping-group-order/) is not the same as sorting. Maintaining group order will not preserve
 active group sorts, just the current order of the groups. However, when sorting on group columns the group order will

@@ -9,7 +9,7 @@ This section describes the different ways that aggregated values can be filtered
 
 By default, when using [Filters](/filtering-overview/) and [Aggregations](/aggregation/) the filtering will only apply to the cell values in leaf-level rows, and not to any of the aggregated values in the group rows. Also, when a column filter is applied, the aggregated values shown in the group rows will be updated based on the filtered rows only.
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         { field: 'country', rowGroup: true },
@@ -18,7 +18,7 @@ const gridOptions = {
         { field: 'total', aggFunc: 'sum', filter: 'agNumberColumnFilter' },
     ]
 }
-</snippet>
+```
 
 In the snippet above, rows are grouped by **country** and **athlete**. The [Built-In Function](/aggregation/#enabling-aggregation) `sum` is used to aggregate the **total** values.
 
@@ -32,11 +32,11 @@ The example below demonstrates how aggregated values update to reflect the appli
 
 To prevent the [Default Behaviour](/aggregation-filtering/#default-filtering) of [Aggregated](/aggregation/) values being calculated from the [Filtered](/filtering-overview/) results only, and instead calculate them from the pre-filtered data, enable the `suppressAggFilteredOnly` option.
 
-<snippet>
+```
 const gridOptions = {
     suppressAggFilteredOnly: true,
 }
-</snippet>
+```
 
 The example below demonstrates this behaviour - when a filter is applied, group row aggregated values remain unchanged and show their original values representing the original unfiltered data.
 - Apply a filter for the **year** column with the value **2008**.
@@ -56,11 +56,11 @@ have any data of their own. However when using [Aggregation](/aggregation/), gro
 
 You can filter the grid based on the group row aggregated values by setting the `groupAggFiltering` grid option as shown below:
 
-<snippet>
+```
 const gridOptions = {
     groupAggFiltering: true,
 }
-</snippet>
+```
 
 With this option set, when an aggregated value in a group row matches the filter, the matching group row will be shown as well as:
 
@@ -89,11 +89,11 @@ As seen above, the default behaviour of [Filtering Group Aggregations](/aggregat
 
 See an example implementation of this callback below.
 
-<snippet>
+```
 const gridOptions = {
     groupAggFiltering: (params) => !!params.node.group,
 }
-</snippet>
+```
 
 The snippet above demonstrates how the callback can be used to selectively apply filters. In this example, the filter condition is applied to group level rows only. 
 

@@ -8,7 +8,7 @@ This section covers the Row Group Panel which allows users control which columns
 
 To display the row group panel set `rowGroupPanelShow` as shown below:
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = { 
     columnDefs: [
         { field: 'country', enableRowGroup: true },
@@ -21,7 +21,7 @@ const gridOptions = {
     // possible options: 'never', 'always', 'onlyWhenGrouping'
     rowGroupPanelShow: 'always',
 }
-</snippet>
+```
 
 In the snippet above, the Row Group Panel is configured so that is `'always'` displayed. To only display the Row Group
 Panel when there are active row groups use: `'onlyWhenGrouping'`.

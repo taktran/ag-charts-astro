@@ -102,7 +102,7 @@ By default the order of columns in the Columns Menu Tab is derived from the `col
 
 However, a custom column layout can be provided using the **columnLayout** property in the `colDef.columnsMenuParams`.
 
-<snippet>
+```
 const gridOptions = {
     // original column definitions supplied to the grid
     columnDefs: [
@@ -121,7 +121,7 @@ const gridOptions = {
         { field: 'c' }
     ]
 }
-</snippet>
+```
 
 <note>
 When providing a custom columns layout by setting the **columnLayout** property, the `suppressSyncLayoutWithGrid` will automatically set to true. This means that reordering the columns in the grid will not reorder the columns in the list shown in columns menu tab.

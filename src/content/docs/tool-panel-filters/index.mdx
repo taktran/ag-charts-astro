@@ -55,7 +55,7 @@ interface IFiltersToolPanel {
 
 The code snippet below shows how to expand and collapse filter groups using the Filters Tool Panel instance:
 
-<snippet>
+```
 | // lookup Filters Tool Panel instance by id, in this case using the default filter instance id
 | const filtersToolPanel = gridOptions.api.getToolPanelInstance('filters');
 | 
@@ -70,7 +70,7 @@ The code snippet below shows how to expand and collapse filter groups using the 
 | 
 | // collapses the 'competition' filter group in the Filters Tool Panel
 | filtersToolPanel.collapseFilters(['competitionGroupId']);
-</snippet>
+```
 
 Notice in the snippet above that it's possible to target individual filter groups by supplying `groupId`s.
 
@@ -98,7 +98,7 @@ interface IFiltersToolPanel {
 
 The code snippet below shows how to expand and collapse filters using the Filters Tool Panel instance:
 
-<snippet>
+```
 | // lookup Filters Tool Panel instance by id, in this case using the default filter instance id
 | const filtersToolPanel = gridOptions.api.getToolPanelInstance('filters');
 | 
@@ -113,7 +113,7 @@ The code snippet below shows how to expand and collapse filters using the Filter
 | 
 | // collapses the 'year' filter in the Filters Tool Panel
 | filtersToolPanel.expandFilters(['year']);
-</snippet>
+```
 
 
 Notice in the snippet above that it's possible to target individual filters by supplying `colId`s.
@@ -143,7 +143,7 @@ Notice that the same [Column Definitions](/column-definitions/) that are supplie
 
 The code snippets below show how to set custom filter layouts using the Filters Tool Panel instance:
 
-<snippet>
+```
 const gridOptions = {
     // original column definitions supplied to the grid
     columnDefs: [
@@ -152,9 +152,9 @@ const gridOptions = {
         { field: 'c' },
     ]
 }
-</snippet>
+```
 
-<snippet>
+```
 | // lookup Filters Tool Panel instance by id, in this case using the default columns instance id
 | const filtersToolPanel = gridOptions.api.getToolPanelInstance('filters');
 | 
@@ -168,7 +168,7 @@ const gridOptions = {
 |         ]
 |     }
 | ]);
-</snippet>
+```
 
 Notice from the snippet above that it's possible to define groups in the tool panel that don't exist in the grid. Also note that filters can be omitted or positioned in a different order however note that all referenced columns (that contain filters) must already exist in the grid.
 

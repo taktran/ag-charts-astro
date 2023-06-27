@@ -12,11 +12,11 @@ This section introduces simple ways to work with Tree Data, before covering more
 
 In order to set the grid to work with Tree Data, simply enable Tree Data mode via the Grid Options using:
 
-<snippet>
+```
 const gridOptions = {
     treeData: true
 }
-</snippet>
+```
 
 ## Supplying Tree Data
 
@@ -70,7 +70,7 @@ When the grid is working with Tree Data there is no need to explicitly specify a
 [Auto Group Column](/grouping-single-group-column/#group-column-configuration). However, you will probably want to 
 override some defaults as shown below:
 
-<snippet>
+```
 const gridOptions = {
     autoGroupColumnDef: {
         headerName: "My Group",
@@ -80,7 +80,7 @@ const gridOptions = {
         }
     }
 }
-</snippet>
+```
 
 ### Custom Column Group
 
@@ -169,11 +169,11 @@ This can be seen in the [File Browser](#example-file-browser) example above, whe
 
 To disable Tree Data filtering and use regular filtering instead (which only shows groups where leaf children pass the filter), enable the following Grid Options property:
 
-<snippet>
+```
 const gridOptions = {
     excludeChildrenWhenTreeDataFiltering: true,
 }
-</snippet>
+```
 
 Please note that Tree Data filtering behaves slightly differently to [Filtering Group Aggregations](/aggregation-filtering/#filtering-group-aggregations).
 
@@ -229,7 +229,7 @@ To enable selection set `gridOptions.rowSelection` to 'single' or 'multiple' as 
 
 Click selection is supported with tree data. However when you are displaying tree data, clicking rows for selection is confusing as mouse clicks are also used for expanding / contracting rows. For this reason we recommend not using click selection and using checkbox selection instead.
 
-<snippet spaceBetweenProperties="true">
+```
 | const gridOptions = {
 |     // don't have click select rows
 |     suppressRowClickSelection: true,
@@ -241,7 +241,7 @@ Click selection is supported with tree data. However when you are displaying tre
 |         }
 |     }
 | }
-</snippet>
+```
 
 ### Group Selection
 

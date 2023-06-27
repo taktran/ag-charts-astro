@@ -20,7 +20,7 @@ of CSS styles, or a function returning an object of CSS styles.
 
 <api-documentation source='column-properties/properties.json' section='styling' names='["cellStyle"]' ></api-documentation>
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     columnDefs: [
         // same style for each row
@@ -43,7 +43,7 @@ const gridOptions = {
         },
     ]
 }
-</snippet>
+```
 
 
 ## Cell Class
@@ -54,7 +54,7 @@ Provides a class for the cells in this column. Can be a string (a class), array 
 
 <api-documentation source='column-properties/properties.json' section='styling' names='["cellClass"]' ></api-documentation>
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     columnDefs: [
         // return same class for each row
@@ -85,7 +85,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 ## Cell Class Rules
 
@@ -101,7 +101,7 @@ or a string which is treated as a shorthand for a function by the grid.
 The following snippet is cellClassRules using functions on a year column:
 
 
-<snippet suppressFrameworkContext="true">
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -117,7 +117,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 ## Cell Style, Cell Class & Cell Class Rules Params
 
@@ -172,15 +172,15 @@ effect:
 <note>
 If you are using cellStyle to highlight changing data, then please take note that grid will not remove styles. For example if you are setting text color to 'red' for a condition, then you should explicitly set it back to default eg 'black' when the condition is not met. Otherwise the highlight will remain once it's first applied.
 </note>
-<snippet transform={false}>
+```
 // unsafe, the red will stay after initially applied
 cellStyle: params => params.value > 80 ? { color: 'red' } : null
-</snippet>
+```
 
-<snippet transform={false}>
+```
 // safe, to black will override the red when the condition is not true
 cellStyle: params => params.value > 80 ? { color: 'red' } : { color: 'black' }
-</snippet>
+```
 
 ## Cell Styling Example
 

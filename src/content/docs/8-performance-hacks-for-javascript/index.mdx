@@ -40,7 +40,7 @@ Adding event listeners to the DOM results in a small performance hit. A grid wou
 
 The challenge is then working out which cell caused the event.
 
-<snippet transform={false}>
+```
 |// parentContainer will contain all the cells
 |var parentContainer = document.createElement('div');
 |
@@ -72,7 +72,7 @@ The challenge is then working out which cell caused the event.
 |        domElement = domElement.parentElement;
 |    }
 |}
-</snippet>
+```
 
 You might have noticed that we are attaching arbitrary attributes (`__col` and `__row`) onto the DOM element and might be wondering is this safe? I hope so, as AG Grid is used for air traffic control over Australia as far as I know. In other words, AG Grid has done this for a long time and has been tested in the field.
 
@@ -99,7 +99,7 @@ We have done many tests. The answer is to use `.innerHTML`.
 
 So AG Grid leverages the speed of `.innerHTML` by creating the HTML in one big string and then inserting it into the DOM using the method `element.insertAdjacentHTML()`. The method `element.insertAdjacentHTML()` is similar but slightly less well known equivalent of the property `.innerHTML`. The difference is that `insertAdjacentHTML()` appends to existing HTML where as `.innerHTML()` replacing the current content. Both work just as fast.
 
-<snippet transform={false}>
+```
 |// build up the row's HTML in a string
 |var htmlParts = [];
 |htmlParts.push('&lt;div class="ag-row">');
@@ -113,7 +113,7 @@ So AG Grid leverages the speed of `.innerHTML` by creating the HTML in one big s
 |// append the string into the DOM, one DOM hit for the entire row
 |var rowHtml = htmlParts.join('');
 |eContainer.insertAdjacentHTML(rowHtml);
-</snippet>
+```
 
 This works well when there are no custom cell renderers. So for all cells that do not use cell renderers, the grid will inject the whole row in one HTML string which is the quickest way to render HTML. When a component is used, the grid will then go back and inject the components into the HTML after the row is created.
 

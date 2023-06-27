@@ -16,18 +16,18 @@ md-include:simple-date-vue.md
 By default the grid will use the browser-provided date picker for all [Supported Browsers](/supported-browsers/), but for other browsers it will just provide a simple text field. You can use your own date picker in AG Grid by providing a custom Date Component as follows:
 
 <framework-specific-section frameworks="javascript">
-<snippet transform={false}>
+```
 |const gridOptions = {
 |    // Here is where we specify the component to be used as the date picker widget
 |    components: {
 |        agDateInput: CustomDateComponent
 |    }
 |};
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="ts">
+```
 |@Component({
 |    selector: 'my-app',
 |    template: `
@@ -42,26 +42,26 @@ By default the grid will use the browser-provided date picker for all [Supported
 |    public components = {
 |        agDateInput: CustomDateComponent
 |    };
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 |&lt;AgGridReact
 |    components={{ agDateInput: CustomDateComponent }}
 |    ...other properties...
 |/>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false}>
+```
 |const MyApp = {
 |    components: {
 |        'ag-grid-vue': AgGridVue
 |        agDateInput: CustomDateComponent
 |    },
-</snippet>
+```
 </framework-specific-section>
 
 Please see [Provided Components](../components/#grid-provided-components) for more information about overriding AG Grid provided components (as we're doing here

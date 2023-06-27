@@ -30,7 +30,7 @@ rowItem = {
 }
 ```
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
       // the column definition for country uses a keyCreator
@@ -40,7 +40,7 @@ const gridOptions = {
       }
     ]
 }
-</snippet>
+```
 
 Note in the snippet above that the `colDef.keyCreator(params)` returns the country name to be used as the group key from 
 `country` complex object supplied in the row data.

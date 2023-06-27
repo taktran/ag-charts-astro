@@ -12,7 +12,7 @@ You can export an image for any grid cell using the addImageToCell callback in t
 
 <interface-documentation interfaceName='ExcelExportParams' names='["addImageToCell"]' config='{"description":""}' ></interface-documentation>
 
-<snippet>
+```
 const gridOptions = {
     defaultExcelExportParams: {
         addImageToCell: (rowIndex, column, value) => {
@@ -30,7 +30,7 @@ const gridOptions = {
         }
     }
 }
-</snippet>
+```
 
 It's important to note that images can only be exported as `base64` strings, and the image format must be either `PNG`, `GIF` or `JPG`. You can convert your images to a `base64` string, using third party tools, or using the code in our examples on this page.
 

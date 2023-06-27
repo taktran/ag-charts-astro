@@ -13,7 +13,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 | &lt;ag-grid-vue
 |    // these are attributes, not bound, give explicit values here
 |    rowSelection="multiple"
@@ -34,7 +34,7 @@
 |    @model-updated="onModelUpdated"
 |    @cell-clicked="onCellClicked">
 | &lt;/ag-grid-vue>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -48,7 +48,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 | &lt;ag-grid-vue
 |     // provide gridReady callback to the grid
 |     @grid-ready="onGridReady"
@@ -60,7 +60,7 @@
 |     this.api = params.api;
 |     this.columnApi = params.columnApi;
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -68,9 +68,9 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="html">
+```
 | &lt;button @click="this.api.deselectAll()">Clear Selection&lt;/button>
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -84,7 +84,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 | const gridOptions = {
 |     // PROPERTIES
 |     // Objects like myRowData and myColDefs would be created in your application
@@ -104,7 +104,7 @@
 | }
 | &lt;ag-grid-vue
 |     :gridOptions="gridOptions"
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
@@ -112,11 +112,11 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="jsx">
+```
 | // refresh the grid
 | this.gridOptions.api.redrawRows();
 |
 | // resize columns in the grid to fit the available space
 | this.gridOptions.columnApi.sizeColumnsToFit();
-</snippet>
+```
 </framework-specific-section>

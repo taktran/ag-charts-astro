@@ -66,7 +66,7 @@ There are two ways you can get fix this problem:
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
-<snippet transform={false} language="ts">
+```
 | // let's assume an Angular component as follows
 | @Component({
 |     selector: 'filter-cell',
@@ -88,7 +88,7 @@ There are two ways you can get fix this problem:
 |     const angularFilterInstance = api.getFilterInstance&lt;PartialMatchFilterComponent>('name'); // assume filter on name column
 |     angularFilterInstance.myMethod();
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="angular">
@@ -106,7 +106,7 @@ There are two ways you can get fix this problem:
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="ts">
+```
 | // let's assume a React component as follows
 | class NameFilter extends React.Component {
 |     ... // standard filter methods hidden
@@ -124,7 +124,7 @@ There are two ways you can get fix this problem:
 |         filterInstance.myMethod();
 |     });
 | }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -142,7 +142,7 @@ There are two ways you can get fix this problem:
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">
-<snippet transform={false} language="ts">
+```
 | // let's assume a VueJS component as follows
 | export default {
 |     template: `&lt;input style="height: 20px" :ref="'input'" v-model="text">`,
@@ -161,7 +161,7 @@ There are two ways you can get fix this problem:
 |         const filterInstance = api.getFilterInstance('name'); // assume filter on name column
 |         filterInstance.myMethod();
 |     }
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="vue">

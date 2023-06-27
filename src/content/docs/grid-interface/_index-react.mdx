@@ -12,7 +12,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 | &lt;AgGridReact
 |    ref={gridRef} // useful for accessing the grid's API
 |
@@ -32,7 +32,7 @@
 |    // inside onGridReady, you receive the grid APIs if you want them
 |    onGridReady={onGridReady}
 | />
-</snippet>
+```
 </framework-specific-section>
 
 
@@ -48,7 +48,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 | // React reference
 | const gridRef = useRef();
 |
@@ -71,7 +71,7 @@
 |     ref={gridRef}
 |     //...
 | />
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -80,7 +80,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 | // access API from event object
 | onGridReady = e => {
 |     e.api.sizeColumnsToFit();
@@ -98,7 +98,7 @@
 |     sendToClipboard={sendToClipboard} // register callback
 |     //...
 | />
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -121,7 +121,7 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 | const gridOptions = {
 |     // PROPERTIES
 |     // Objects like myRowData and myColDefs would be created in your application
@@ -142,7 +142,7 @@
 | &lt;AgGridReact
 |     gridOptions={gridOptions}
 |
-</snippet>
+```
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
@@ -153,11 +153,11 @@
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<snippet transform={false} language="jsx">
+```
 | // refresh the grid
 | gridOptions.api.redrawRows();
 |
 | // resize columns in the grid to fit the available space
 | gridOptions.columnApi.sizeColumnsToFit();
-</snippet>
+```
 </framework-specific-section>

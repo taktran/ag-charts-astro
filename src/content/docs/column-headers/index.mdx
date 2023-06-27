@@ -26,7 +26,7 @@ The following example shows how you can provide a unique look and feel to the he
 
 - The header heights have all been changed via grid options:
 
-<snippet spaceBetweenProperties="true">
+```
     const gridOptions = {
         // Group columns
         groupHeaderHeight: 75,
@@ -39,7 +39,7 @@ The following example shows how you can provide a unique look and feel to the he
         // Pivoting, requires turning on pivot mode. Group columns
         pivotGroupHeaderHeight: 50,
     }
-</snippet>
+```
 
 - The grouped column header `Athlete Details` has a specific style applied to it to make it bigger. Note that the style is slightly different depending if pivoting or not:
 
@@ -189,7 +189,7 @@ Templates are not meant to let you configure icons. If you are looking to change
 
 In the following example you can see how we are reusing the default grid template to change the layout of the elements.
 
-<snippet>
+```
 const gridOptions = {
     defaultColDef: {
         width: 100,
@@ -209,7 +209,7 @@ const gridOptions = {
         }
     }
 }
-</snippet>
+```
 
 Note that specifying your own templates is compatible with other configurations:
 

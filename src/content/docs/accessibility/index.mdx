@@ -108,11 +108,11 @@ results when parsed by screen readers.
 
 To force row and column order, enable the following gridOptions property like so:
 
-<snippet>
+```
 const gridOptions = {
     ensureDomOrder: true,
 }
-</snippet>
+```
 
 <note>
 Animations won't work properly when the DOM order is forced, so ensure they are not enabled.
@@ -126,21 +126,21 @@ If your requirement is to use scrolling instead of pagination, you can disable r
 
 Column virtualisation can be disabled as follows:
 
-<snippet>
+```
 const gridOptions = {
     suppressColumnVirtualisation: true,
 }
-</snippet>
+```
 
 This means if you have 100 columns, but only 10 visible due to scrolling, all 100 will always be rendered.
 
 Row virtualisation can be disabled as follows:
 
-<snippet>
+```
 const gridOptions = {
     suppressRowVirtualisation: true,
 }
-</snippet>
+```
 
 However note that lots of rendered rows will mean a very large amount of rendering in the DOM which will slow things down.
 

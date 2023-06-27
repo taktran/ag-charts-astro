@@ -41,7 +41,7 @@ Value Handlers can be used to map keys contained within the row data to their co
 
 The main idea of this approach is to use a `valueFormatter` to convert the code (key) to a value which is displayed in the cell. Then use a `valueParser` to convert the name back to a code (key) when saving it down into the underlying data.
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -61,7 +61,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 <note>
 When editing using Cell Editors it's important to ensure the underlying data is updated with the codes (keys) rather than the values that are displayed in the cells.
@@ -101,7 +101,7 @@ Here we present the same example but this time using the `refData` ColDef proper
 All that is required with this approach is to specify the `refData` and the grid will take care of the
 rest, as shown below:
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         {
@@ -114,7 +114,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 Like in the previous example using Value Handlers, where the underlying data contains codes, the grid will use the specified reference data to display the associated values in the cells and save down the codes (keys) in the data when editing.
 

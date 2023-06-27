@@ -10,7 +10,7 @@ Turn column resizing on for the grid by setting `resizable=true` for each column
 
 The snippet below allows all columns except Address to be resized by explicitly setting each column.
 
-<snippet>
+```
 const gridOptions = {
     columnDefs: [
         { field: 'name', resizable: true },
@@ -18,11 +18,11 @@ const gridOptions = {
         { field: 'address' },
     ],
 }
-</snippet>
+```
 
 The snippet below allows all columns except Address to be resized by setting `resizable=true` on the default column definition and then `resizable=false` on the Address column.
 
-<snippet>
+```
 const gridOptions = {
     defaultColDef: {
         resizable: true,
@@ -33,7 +33,7 @@ const gridOptions = {
         { field: 'address', resizable: false },
     ],
 }
-</snippet>
+```
 
 ## Size Columns to Fit
 

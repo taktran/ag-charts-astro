@@ -9,7 +9,7 @@ This page describes how to sort row data in the grid and how you can customise t
 Enable sorting for columns by setting the `sortable` column definition attribute.
 You can then sort a column by clicking on the column header.
 
-<snippet>
+```
 const gridOptions = {
     // enable sorting on 'name' and 'age' columns only
     columnDefs: [
@@ -18,11 +18,11 @@ const gridOptions = {
         { field: 'address' },
     ],
 }
-</snippet>
+```
 
 To enable sorting for all columns, set sorting in the [default column definition](/column-definitions/).
 
-<snippet>
+```
 const gridOptions = {
     // enable sorting on all columns by default
     defaultColDef: {
@@ -35,7 +35,7 @@ const gridOptions = {
         { field: 'address', sortable: false },
     ],
 }
-</snippet>
+```
 
 ## Custom Sorting
 
@@ -43,7 +43,7 @@ Custom sorting is provided at a column level by configuring a comparator on the 
 
 <api-documentation source='column-properties/properties.json' section='sort' names='["comparator"]' ></api-documentation>
 
-<snippet spaceBetweenProperties="true">
+```
 const gridOptions = {
     // enable sorting on all columns by default
     defaultColDef: {
@@ -65,7 +65,7 @@ const gridOptions = {
         }
     ]
 }
-</snippet>
+```
 
 ### Custom Sorting Example
 
@@ -82,7 +82,7 @@ Example below shows the following:
 When [Row Grouping](/grouping/) it is possible to override the sort order of the Row Group columns. If using the Auto Group Column, provide a comparator via the `autoGroupColumnDef` grid property.
 
 
-<snippet>
+```
 var gridOptions = {
     autoGroupColumnDef: {
         field: 'athlete',
@@ -91,7 +91,7 @@ var gridOptions = {
         },
     }
 };
-</snippet>
+```
 
 <GridExampleRunner title='Custom Sorting Groups' name='custom-sorting-groups' type='generated' options='{ "enterprise": true, "modules": ["clientside", "rowgrouping" ] }'></GridExampleRunner>
 
