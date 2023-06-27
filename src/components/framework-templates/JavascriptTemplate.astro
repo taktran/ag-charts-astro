@@ -37,14 +37,14 @@ const chartScriptPath = getChartScriptPath(options.enterprise);
     <ExampleStyle />
     <Styles
       baseUrl={appLocation}
-      files={isDev
+      files={isDev && styleFiles
         ? styleFiles
             .filter(
               (file: string) =>
                 !file.includes("style.css") && !file.includes("styles.css")
             )
             .map((file: string) => getCacheBustingUrl(file, modifiedTimeMs))
-        : styleFiles}
+        : []}
     />
   </head>
   <body>
@@ -62,10 +62,12 @@ const chartScriptPath = getChartScriptPath(options.enterprise);
     <Scripts baseUrl={appLocation} files={scriptFiles} />
     <Styles
       baseUrl={appLocation}
-      files={styleFiles.filter(
-        (file: string) =>
-          file.includes("style.css") || file.includes("styles.css")
-      )}
+      files={styleFiles
+        ? styleFiles.filter(
+            (file: string) =>
+              file.includes("style.css") || file.includes("styles.css")
+          )
+        : []}
     />
   </body>
 </html>

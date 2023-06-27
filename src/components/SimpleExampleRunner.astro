@@ -31,33 +31,42 @@ const exampleUrl = path.join(
 
 const importType = "packages";
 
-const { files, entryFileName, isEnterprise } = await getGeneratedContents({
+const generatedContents = await getGeneratedContents({
   internalFramework,
   importType,
   pageName,
   exampleName: name,
 });
-const entryFile = files[entryFileName];
+
+const { files, entryFileName, isEnterprise } = generatedContents || {};
+const entryFile = files && entryFileName && files[entryFileName];
 ---
 
-<div class="container">
-  <div class="controls">
-    <a href={exampleUrl} target="_blank">Open in New Tab</a>
+{
+  entryFile ? (
+    <div class="container">
+      <div class="controls">
+        <a href={exampleUrl} target="_blank">
+          Open in New Tab
+        </a>
 
-    <OpenStackblitzButton
-      client:only
-      title={title}
-      framework={framework}
-      internalFramework={internalFramework}
-      entryFileName={entryFileName}
-      entryFile={entryFile}
-      isEnterprise={isEnterprise}
-    />
-  </div>
+        <OpenStackblitzButton
+          client:only
+          title={title}
+          framework={framework}
+          internalFramework={internalFramework}
+          entryFileName={entryFileName}
+          entryFile={entryFile}
+          isEnterprise={isEnterprise}
+        />
+      </div>
 
-  <iframe src={exampleUrl}></iframe>
-</div>
-
+      <iframe src={exampleUrl} />
+    </div>
+  ) : (
+    `No entryfile for ${exampleUrl}`
+  )
+}
 <style>
   .container {
     border: 1px solid gray;

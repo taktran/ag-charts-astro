@@ -24,13 +24,14 @@ export async function get({ params, request }) {
       availableFiles: Object.keys(availableFiles),
     });
   if (internalFramework === "vanilla") {
-    const { files } = await getGeneratedContents({
-      internalFramework,
-      importType,
-      pageName,
-      exampleName,
-    });
-    const entryFile = files[fileName];
+    const { files } =
+      (await getGeneratedContents({
+        internalFramework,
+        importType,
+        pageName,
+        exampleName,
+      })) || {};
+    const entryFile = files && files[fileName];
     return {
       body: entryFile
         ? entryFile
@@ -39,14 +40,15 @@ export async function get({ params, request }) {
         : "Not found",
     };
   } else if (internalFramework === "react") {
-    const { files } = await getGeneratedContents({
-      internalFramework,
-      importType,
-      pageName,
-      exampleName,
-    });
+    const { files } =
+      (await getGeneratedContents({
+        internalFramework,
+        importType,
+        pageName,
+        exampleName,
+      })) || {};
 
-    const entryFile = files[fileName];
+    const entryFile = files && files[fileName];
     return {
       body: entryFile
         ? entryFile
@@ -56,14 +58,15 @@ export async function get({ params, request }) {
     };
   } else {
     // HACK: Use react for the rest of the frameworks
-    const { files } = await getGeneratedContents({
-      internalFramework,
-      importType,
-      pageName,
-      exampleName,
-    });
+    const { files } =
+      (await getGeneratedContents({
+        internalFramework,
+        importType,
+        pageName,
+        exampleName,
+      })) || {};
 
-    const entryFile = files[fileName];
+    const entryFile = files && files[fileName];
     return {
       body: entryFile
         ? entryFile

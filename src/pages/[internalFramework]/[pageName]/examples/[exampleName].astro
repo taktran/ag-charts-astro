@@ -33,13 +33,13 @@ export async function getStaticPaths() {
 }
 
 const { files, scriptFiles, styleFiles, isEnterprise } =
-  await getGeneratedContents({
+  (await getGeneratedContents({
     internalFramework,
     importType,
     pageName,
     exampleName,
-  });
-const indexHtml = files["index.html"];
+  })) || {};
+const indexHtml = files && files["index.html"];
 
 const boilerPlateFramework = getBoilerPlateFramework({
   framework,

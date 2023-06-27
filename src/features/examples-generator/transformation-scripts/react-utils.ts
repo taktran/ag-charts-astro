@@ -9,7 +9,9 @@ function convertStyles(code: string) {
   return code.replace(/style=['"](.+?);?['"]/g, (_, styles) => {
     const parsed = styles.split(";").reduce((obj, declaration) => {
       const [property, value] = declaration.split(":");
-      obj[toCamelCase(property.trim())] = value.trim();
+      if (value) {
+        obj[toCamelCase(property.trim())] = value.trim();
+      }
       return obj;
     }, {});
 
