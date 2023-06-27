@@ -21,7 +21,7 @@ const useTypescript = false;
 const framework = getFrameworkFromInternalFramework(internalFramework);
 
 const importType = "packages";
-const library = "charts";
+const library = pageName.startsWith("charts-") ? "charts" : "grid";
 const type = "generated";
 
 export async function getStaticPaths() {
@@ -64,6 +64,7 @@ const appLocation = getExampleLocation({
       options={{
         enterprise: isEnterprise,
       }}
+      library={library}
       scriptFiles={scriptFiles}
       styleFiles={styleFiles}
       indexFragment={indexHtml}

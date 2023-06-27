@@ -25,6 +25,13 @@ export const getChartScriptPath = (isEnterprise: boolean) => {
 };
 
 // TODO: Figure out how to get proper paths
+export const getGridScriptPath = (isEnterprise: boolean) => {
+  return isEnterprise
+    ? `https://build.ag-grid.com/dev/ag-grid-enterprise/dist/ag-grid-enterprise.min.js`
+    : `https://build.ag-grid.com/dev/ag-grid-community/dist/ag-grid-community.min.js`;
+};
+
+// TODO: Figure out how to get proper paths
 export const getChartReactScriptPath = () =>
   "https://build.ag-grid.com/dev/ag-charts-react/lib/agChartsReact.js";
 

@@ -140,6 +140,9 @@ export const getGeneratedContents = async ({
   if (internalFramework === "vanilla") {
     let mainJs = readAsJsFile(entryFile);
 
+    // replace Typescript new Grid( with Javascript new agGrid.Grid(
+    mainJs = mainJs.replace(/new Grid\(/g, "new agGrid.Grid(");
+
     // Chart classes that need scoping
     const chartImports = typedBindings.imports.find(
       (i: any) =>

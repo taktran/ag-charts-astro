@@ -3,6 +3,7 @@ const {
   modifiedTimeMs,
   isExecuting,
   options,
+  library,
   styleFiles,
   scriptFiles,
   indexFragment,
@@ -13,7 +14,7 @@ import MetaData from "./lib/MetaData";
 import ExampleStyle from "./lib/ExampleStyle";
 import Styles from "./lib/Styles";
 import Scripts from "./lib/Scripts";
-import { getChartScriptPath } from "../../utils/pages";
+import { getChartScriptPath, getGridScriptPath } from "../../utils/pages";
 
 import { getIsDev } from "../../utils/pages";
 
@@ -23,6 +24,10 @@ const getCacheBustingUrl = (url: string, timestamp: string) =>
   `${url}?t=${timestamp}`;
 
 const chartScriptPath = getChartScriptPath(options.enterprise);
+const isCharts = library === "charts";
+
+const gridScriptPath = getGridScriptPath(options.enterprise);
+const isGrid = library === "grid";
 ---
 
 <html lang="en">
@@ -58,7 +63,8 @@ const chartScriptPath = getChartScriptPath(options.enterprise);
     >
       window.__basePath = appLocation;
     </script>
-    {chartScriptPath ? <script src={chartScriptPath} /> : ""}
+    {isCharts && chartScriptPath ? <script src={chartScriptPath} /> : ""}
+    {isGrid && gridScriptPath ? <script src={gridScriptPath} /> : ""}
     <Scripts baseUrl={appLocation} files={scriptFiles} />
     <Styles
       baseUrl={appLocation}
