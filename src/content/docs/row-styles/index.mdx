@@ -8,7 +8,7 @@ Row customisation can be achieved in the following ways:
 - **Row Class:** Providing a CSS class for the rows.
 - **Row Class Rules:** Providing rules for applying CSS classes.
 
-Each of these approaches are presented in the following sections. 
+Each of these approaches are presented in the following sections.
 
 Some row styles may also be overridden with CSS variables. See the [full variable reference](/global-style-customisation-variables/).
 
@@ -63,10 +63,10 @@ The following snippet shows `rowClassRules` that use functions and the value fro
 |     rowClassRules: {
 |         // apply green to 2008
 |         'rag-green-outer': function(params) { return params.data.year === 2008; },
-| 
+|
 |         // apply amber 2004
 |         'rag-amber-outer': function(params) { return params.data.year === 2004; },
-| 
+|
 |         // apply red to 2000
 |         'rag-red-outer': function(params) { return params.data.year === 2000; }
 |     }
@@ -76,7 +76,6 @@ The following snippet shows `rowClassRules` that use functions and the value fro
 All rowStyle, rowClass and rowClassRules functions take a `RowClassParams` params object.
 
 <interface-documentation interfaceName='RowClassParams' ></interface-documentation>
-
 
 As an alternative, you can also provide shorthands of the functions using an expression.
 An expression is evaluated by the grid by executing the string as if it were a Javascript expression. The expression has the following attributes available to it (mapping the the attributes of the equivalent
@@ -110,19 +109,22 @@ If you refresh a row, or a cell is updated due to editing, the `rowStyle`, `rowC
 
 ## Example Row Class Rules
 
-
 The example below demonstrates `rowClassRules`:
 
-- `rowClassRules` are used to apply the class `sick-days-warning` when the number of sick days > 5 and <= 7, and the class `sick-days-breach` is applied when the number of sick days >= 8.
+- `rowClassRules` are used to apply the class `sick-days-warning` when the number of sick days > 5 and &lt;= 7, and the class `sick-days-breach` is applied when the number of sick days >= 8.
 
 - The grid re-evaluates the rowClassRules when the data is changed. The example
-shows changing the data in the three different ways: `rowNode.setDataValue`, `rowNode.setData` and `api.applyTransaction`. See [Updating Data](/data-update/) for details on these update functions.
+  shows changing the data in the three different ways: `rowNode.setDataValue`, `rowNode.setData` and `api.applyTransaction`. See [Updating Data](/data-update/) for details on these update functions.
 
-<GridExampleRunner title='Row Class Rules' name='row-class-rules' type='generated'></GridExampleRunner>
+<GridExampleRunner
+  title="Row Class Rules"
+  name="row-class-rules"
+  type="generated"
+></GridExampleRunner>
 
 ## Highlighting Rows and Columns
 
-The grid can highlight both Rows and Columns as the mouse hovers over them. 
+The grid can highlight both Rows and Columns as the mouse hovers over them.
 
 Highlighting Rows is on by default. To turn it off, set the grid property `suppressRowHoverHighlight=true`.
 
@@ -141,11 +143,19 @@ In this example Rows and Columns are highlighted.
 
 Note if you hover over a header group, all columns in the group will be highlighted.
 
-<GridExampleRunner title='Highlight Rows And Columns' name='highlight-rows-and-columns' type='generated'></GridExampleRunner>
+<GridExampleRunner
+  title="Highlight Rows And Columns"
+  name="highlight-rows-and-columns"
+  type="generated"
+></GridExampleRunner>
 
 In this example both Rows and Columns are not highlighted by setting.
 
-<GridExampleRunner title='No Highlighting Rows And Columns' name='highlight-nothing' type='generated'></GridExampleRunner>
+<GridExampleRunner
+  title="No Highlighting Rows And Columns"
+  name="highlight-nothing"
+  type="generated"
+></GridExampleRunner>
 
 Rows highlight by default as this is a common requirement. Column highlighting is less common and as such needs to be opted it.
 
