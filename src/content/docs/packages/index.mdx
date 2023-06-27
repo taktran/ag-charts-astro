@@ -196,13 +196,13 @@ It is vitally important that you do not mix packages and modules in the same app
  | `ag-grid-enterprise` | `@ag-grid-enterprise/xxxxx` |
 
 
-<snippet transform={false}> 
+``` 
 "dependencies": {
     "ag-grid-community": "~@AG_GRID_VERSION@" <- a package dependency
     "@ag-grid-enterprise/row-grouping": "~@AG_GRID_VERSION@"  <- a module dependency
     //...other dependencies...
 }
-</snippet>
+```
 
 Please refer to the [Modules](/modules/) documentation if you are concerned with bundle size.
 

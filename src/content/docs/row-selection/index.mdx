@@ -218,11 +218,11 @@ It is possible to specify which rows can be selected via the `gridOptions.isRowS
 
 For instance if we only wanted to allow rows where the 'year' property is less than 2007, we could implement the following:
 
-<snippet>
+```
 const gridOptions = {
     isRowSelectable: rowNode => rowNode.data ? rowNode.data.year < 2007 : false,
 }
-</snippet>
+```
 
 ### Example: Selectable Rows with Header Checkbox
 

@@ -175,7 +175,7 @@ This is provided via the `postSortRows` grid callback function as shown below:
 
 <api-documentation source='grid-options/properties.json' section='sort' names='["postSortRows"]' ></api-documentation>
 
-<snippet>
+```
 const gridOptions = {
     postSortRows: params => {
         let rowNodes = params.rowNodes;
@@ -190,7 +190,7 @@ const gridOptions = {
         }
     }
 };
-</snippet>
+```
 
 The following example uses this configuration to perform a post-sort on the rows. The custom function
 puts rows with Ireland at the top always.
