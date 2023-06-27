@@ -192,6 +192,30 @@ async function updateMarkdownFiles({ rootFolder }: { rootFolder: string }) {
 
     console.log(`Replaced ${numReplacements} files`);
   }
+
+  {
+    console.log(`Replace '<!-- ... -->' with '{/* ... */}'`);
+    const regex = /(\<\!--)(((?!--\>).)*)(--\>)/gms;
+    const replacement = "{/*$2*/}";
+    const results = await Promise.all(
+      markdownFiles.map(async (file) => {
+        const contents = (await fs.readFile(file)).toString();
+        const hasSnippet = regex.exec(contents) !== null;
+
+        if (!hasSnippet) {
+          return false;
+        }
+
+        const newContents = contents.replace(regex, replacement);
+        await fs.writeFile(file, newContents);
+
+        return true;
+      })
+    );
+    const numReplacements = results.filter(Boolean).length;
+
+    console.log(`Replaced ${numReplacements} files`);
+  }
 }
 
 async function renameExamplesFolder({ rootFolder }: { rootFolder: string }) {
