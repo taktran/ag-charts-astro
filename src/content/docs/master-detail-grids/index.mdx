@@ -24,7 +24,12 @@ The example below shows configuring a Detail Grid with some additional Grid Opti
 - The Detail Grid Options is provided with a Default Column Definition (`defaultColDef`) that makes all columns sortable and use Flex for sizing.
 - The first Column Definition is configured to use Checkbox Selection.
 
-<GridExampleRunner title='Detail Grid Options' name='grid-options' type='generated' options='{ "enterprise": true, "modules": ["clientside", "masterdetail", "menu", "columnpanel", "range"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Detail Grid Options"
+  name="grid-options"
+  type="generated"
+  options='{ "enterprise": true, "modules": ["clientside", "masterdetail", "menu", "columnpanel", "range"] }'
+></GridExampleRunner>
 
 ## Providing Rows
 
@@ -42,7 +47,12 @@ The following snippet illustrates this using a simple `setTimeout()` function to
 
 Below shows an example using `setTimeout()` to simulate lazying loading of data in the detail.
 
-<GridExampleRunner title='Lazy Load Detail Rows' name='lazy-load-rows' type='generated' options='{ "enterprise": true, "exampleHeight": 550,  "modules": ["clientside", "masterdetail", "menu", "columnpanel"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Lazy Load Detail Rows"
+  name="lazy-load-rows"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 550,  "modules": ["clientside", "masterdetail", "menu", "columnpanel"] }'
+></GridExampleRunner>
 
 ## Dynamic Definitions
 
@@ -52,12 +62,17 @@ This is done by providing a function to `detailCellRendererParams` that in turn 
 
 Below shows an example of this, where the Detail Grids are configured with different columns. Note the following:
 
-- Expanding rows 'Mila Smith' or 'Harper Johnson' will use a detail grid with the columns {Call ID, Number}.
-- Expanding all other rows will use a detail grid with the columns {Call ID, Direction, Duration, Switch Code}.
+- Expanding rows 'Mila Smith' or 'Harper Johnson' will use a detail grid with the columns \{Call ID, Number}.
+- Expanding all other rows will use a detail grid with the columns \{Call ID, Direction, Duration, Switch Code}.
 
-<GridExampleRunner title='Dynamic Params' name='dynamic-params' type='generated' options='{ "enterprise": true, "modules": ["clientside", "masterdetail", "menu", "columnpanel"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Dynamic Params"
+  name="dynamic-params"
+  type="generated"
+  options='{ "enterprise": true, "modules": ["clientside", "masterdetail", "menu", "columnpanel"] }'
+></GridExampleRunner>
 
-md-include:changing-the-template.md 
+md-include:changing-the-template.md
 
 ## Accessing Detail Grids
 
@@ -95,7 +110,12 @@ The following example shows flashing cells on the detail grids by using the Grid
 - Button 'Flash Mila Smith' uses `getDetailGridInfo` to get access to the Grid API for the Mila Smith Detail Grid.
 - Button 'Flash All' uses `forEachDetailGridInfo` to access all existing Detail Grids.
 
-<GridExampleRunner title='Detail Grid API' name='detail-grid-api' type='generated' options='{ "enterprise": true, "exampleHeight": 535, "modules": ["clientside", "masterdetail", "menu", "columnpanel"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Detail Grid API"
+  name="detail-grid-api"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 535, "modules": ["clientside", "masterdetail", "menu", "columnpanel"] }'
+></GridExampleRunner>
 
 ## Detail Grid Lifecycle
 
@@ -112,18 +132,29 @@ The example below demonstrates keeping Detail Rows. Note the following:
 - All the Detail Grids allow moving and sorting columns. If you change the state of a Detail Grid (e.g. by sorting a Detail Grid), that state will be kept if you close the Parent Row and then open the Parent Row again.
 - The maximum number of Detail Rows kept is two. If you open three Detail Rows and apply sorting on each Detail Grid, then close all three Detail Rows (so none are showing) and then open all three again, only two of them will have the sort state kept.
 
-<GridExampleRunner title='Keep Detail Rows' name='keep-detail-rows' type='generated' options='{ "enterprise": true, "exampleHeight": 565, "modules": ["clientside", "masterdetail", "menu", "columnpanel", "filterpanel", "setfilter"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Keep Detail Rows"
+  name="keep-detail-rows"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 565, "modules": ["clientside", "masterdetail", "menu", "columnpanel", "filterpanel", "setfilter"] }'
+></GridExampleRunner>
 
 ## Detail Parameters
 
 {/* Below we don't show 'template' for React, hence listing the properties twice */}
 
 <framework-specific-section frameworks="javascript,angular,vue">
-<interface-documentation interfaceName='IDetailCellRendererParams' names='["detailGridOptions", "getDetailRowData", "template", "refreshStrategy"]' ></interface-documentation>
+  <interface-documentation
+    interfaceName="IDetailCellRendererParams"
+    names='["detailGridOptions", "getDetailRowData", "template", "refreshStrategy"]'
+  ></interface-documentation>
 </framework-specific-section>
 
 <framework-specific-section frameworks="react">
-<interface-documentation interfaceName='IDetailCellRendererParams' names='["detailGridOptions", "getDetailRowData", "refreshStrategy"]' ></interface-documentation>
+  <interface-documentation
+    interfaceName="IDetailCellRendererParams"
+    names='["detailGridOptions", "getDetailRowData", "refreshStrategy"]'
+  ></interface-documentation>
 </framework-specific-section>
 
 The pattern of setting components such as Cell Renderers and providing parameters to those components is consistent across the grid and explained in [Grid Components](/components/).
