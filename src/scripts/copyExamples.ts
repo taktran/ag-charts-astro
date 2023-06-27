@@ -147,7 +147,7 @@ async function updateMarkdownFiles({ rootFolder }: { rootFolder: string }) {
 
   {
     console.log(`Replacing '<snippet>' to triple tick`);
-    const regex = /(\<snippet[^\n]*\>)([^\<]*)(\<\/snippet\>)/gms;
+    const regex = /(\<snippet[^\n]*\>)(((?!\<\/snippet).)*)(\<\/snippet\>)/gms;
     const replacement = `\`\`\`$2\`\`\``;
     const results = await Promise.all(
       markdownFiles.map(async (file) => {
