@@ -72,10 +72,9 @@ async function updateMarkdownFiles({ rootFolder }: { rootFolder: string }) {
     return file.endsWith(".mdx");
   });
 
+  console.log(`Markdown files: ${markdownFiles.length}`);
   {
-    console.log(
-      `Replacing (${markdownFiles.length}) '<grid-example>' to '<GridExampleRunner>'`
-    );
+    console.log(`Replacing '<grid-example>' to '<GridExampleRunner>'`);
     const gridRegex = /(\<)(grid-example)(.*)(grid-example)(\>)/gm;
     const gridReplacement = `$1GridExampleRunner$3GridExampleRunner$5`;
     const results = await Promise.all(
@@ -99,9 +98,7 @@ async function updateMarkdownFiles({ rootFolder }: { rootFolder: string }) {
   }
 
   {
-    console.log(
-      `Replacing (${markdownFiles.length}) '<chart-example>' to '<ChartExampleRunner>'`
-    );
+    console.log(`Replacing '<chart-example>' to '<ChartExampleRunner>'`);
     const chartRegex = /(\<)(chart-example)(.*)(chart-example)(\>)/gm;
     const chartReplacement = `$1ChartExampleRunner$3ChartExampleRunner$5`;
     const results = await Promise.all(
@@ -125,11 +122,57 @@ async function updateMarkdownFiles({ rootFolder }: { rootFolder: string }) {
   }
 
   {
-    console.log(
-      `Replacing (${markdownFiles.length}) '<snippet>' to triple tick`
-    );
+    console.log(`Replacing '<snippet>' to triple tick`);
     const regex = /(\<snippet[^\n]*\>)([^\<]*)(\<\/snippet\>)/gms;
     const replacement = `\`\`\`$2\`\`\``;
+    const results = await Promise.all(
+      markdownFiles.map(async (file) => {
+        const contents = (await fs.readFile(file)).toString();
+        const hasSnippet = regex.exec(contents) !== null;
+
+        if (!hasSnippet) {
+          return false;
+        }
+
+        const newContents = contents.replace(regex, replacement);
+        await fs.writeFile(file, newContents);
+
+        return true;
+      })
+    );
+    const numReplacements = results.filter(Boolean).length;
+
+    console.log(`Replaced ${numReplacements} files`);
+  }
+
+  {
+    console.log(`Replacing '<snippet>' to triple tick`);
+    const regex = /(\<snippet[^\n]*\>)([^\<]*)(\<\/snippet\>)/gms;
+    const replacement = `\`\`\`$2\`\`\``;
+    const results = await Promise.all(
+      markdownFiles.map(async (file) => {
+        const contents = (await fs.readFile(file)).toString();
+        const hasSnippet = regex.exec(contents) !== null;
+
+        if (!hasSnippet) {
+          return false;
+        }
+
+        const newContents = contents.replace(regex, replacement);
+        await fs.writeFile(file, newContents);
+
+        return true;
+      })
+    );
+    const numReplacements = results.filter(Boolean).length;
+
+    console.log(`Replaced ${numReplacements} files`);
+  }
+
+  {
+    console.log(`Removing '<br>'/'<br/>'`);
+    const regex = /(\<br\s*[\/]*\>)/gms;
+    const replacement = "";
     const results = await Promise.all(
       markdownFiles.map(async (file) => {
         const contents = (await fs.readFile(file)).toString();
