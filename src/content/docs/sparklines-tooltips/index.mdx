@@ -30,19 +30,33 @@ sparklineOptions: {
 The default sparkline tooltip has the following template:
 
 ```html
-    <div class="ag-sparkline-tooltip">
-        <span class="ag-sparkline-tooltip-title"></span>
-        <span class="ag-sparkline-tooltip-content"></span>
-    </div>
+<div class="ag-sparkline-tooltip">
+  <span class="ag-sparkline-tooltip-title"></span>
+  <span class="ag-sparkline-tooltip-content"></span>
+</div>
 ```
 
-The tooltip will show the Y value of the hovered item in the __Content__ section of the tooltip, and the X value (if it exists) is displayed in the __Title__ section of the tooltip. Both of these sections are inline <span> elements.
+The tooltip will show the Y value of the hovered item in the **Content** section of the tooltip, and the X value (if it exists) is displayed in the **Title** section of the tooltip. Both of these sections are inline &lt;span> elements.
 
 See the screenshots below for illustrations of these two cases.
 
 <div style="display: flex; justify-content: center;">
-    <image-caption src="resources/tooltip-no-title.png" alt="Tooltip without the title element" width="250px" constrained="true">No Title</image-caption>
-    <image-caption src="resources/tooltip-with-title.png" alt="Tooltip with a title element" width="250px" constrained="true">With Title</image-caption>
+  <image-caption
+    src="resources/tooltip-no-title.png"
+    alt="Tooltip without the title element"
+    width="250px"
+    constrained="true"
+  >
+    No Title
+  </image-caption>
+  <image-caption
+    src="resources/tooltip-with-title.png"
+    alt="Tooltip with a title element"
+    width="250px"
+    constrained="true"
+  >
+    With Title
+  </image-caption>
 </div>
 
 ## Tooltip Data
@@ -53,26 +67,26 @@ The tooltips can be customised using a tooltip `renderer` function supplied to t
 
 ```js
 sparklineOptions: {
-    tooltip: {
-        renderer: tooltipRenderer // Add tooltip renderer callback function to customise tooltip styles and content
-    }
+  tooltip: {
+    renderer: tooltipRenderer; // Add tooltip renderer callback function to customise tooltip styles and content
+  }
 }
 ```
 
 - The `renderer` is a callback function which receives data values associated with the highlighted data point.
-- It returns an object with the `content` and `title` properties containing plain text that is used for the __Content__ and __Title__ sections of the tooltip.
+- It returns an object with the `content` and `title` properties containing plain text that is used for the **Content** and **Title** sections of the tooltip.
 - Alternatively, the `renderer` function could return a string representing HTML content, which can be used to provide completely [Custom Tooltips](/sparklines-tooltips/#custom-tooltip).
 
 Here's an example renderer function.
 
 ```js
 const tooltipRenderer = (params) => {
-    const { yValue, xValue } = params;
-    return {
-        title: new Date(xValue).toLocaleDateString(), // formats date X values
-        content: yValue.toFixed(1), // format Y number values
-    }
-}
+  const { yValue, xValue } = params;
+  return {
+    title: new Date(xValue).toLocaleDateString(), // formats date X values
+    content: yValue.toFixed(1), // format Y number values
+  };
+};
 ```
 
 The following example demonstrates the results of the tooltip renderer above. Note that:
@@ -80,7 +94,12 @@ The following example demonstrates the results of the tooltip renderer above. No
 - The renderer function sets the tooltip `content` to render Y values formatted with 1 digit after the decimal point.
 - The title of the tooltips is set to X values provided in the `params` formatted using the `toLocaleString()` method. This is optional because if X values are provided in the data, they will be formatted and displayed in the tooltip title by default.
 
-<GridExampleRunner title='Sparkline Tooltip Renderer' name='sparkline-tooltip-renderer' type='generated' options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Sparkline Tooltip Renderer"
+  name="sparkline-tooltip-renderer"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'
+></GridExampleRunner>
 
 ### Accessing Row Data
 
@@ -91,16 +110,21 @@ The following snippet shows how values from the **Symbol** column can be shown i
 
 ```js
 const tooltipRenderer = (params) => {
-    const { context } = params;
-    return {
-        title: context.data.symbol, // sets title of tooltips to the value for the 'symbol' field
-    }
-}
+  const { context } = params;
+  return {
+    title: context.data.symbol, // sets title of tooltips to the value for the 'symbol' field
+  };
+};
 ```
 
 The following example demonstrates the above tooltip renderer.
 
-<GridExampleRunner title='Accessing Row Data' name='sparkline-accessing-row-data' type='generated' options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Accessing Row Data"
+  name="sparkline-accessing-row-data"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'
+></GridExampleRunner>
 
 ## Tooltip Styles
 
@@ -108,18 +132,23 @@ The [Tooltip Renderer](/sparklines-tooltips/#tooltip-renderer) function can retu
 
 ```js
 const tooltipRenderer = (params) => {
-    return {
-        // sets styles for tooltip
-        color: 'white',
-        backgroundColor: 'rgb(78,78,255)',
-        opacity: 0.7,
-    }
-}
+  return {
+    // sets styles for tooltip
+    color: "white",
+    backgroundColor: "rgb(78,78,255)",
+    opacity: 0.7,
+  };
+};
 ```
 
 The following example demonstrates the results of the tooltip styles configured via the tooltip renderer above.
 
-<GridExampleRunner title='Styling Sparkline Tooltips' name='sparkline-tooltip-styles' type='generated' options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Styling Sparkline Tooltips"
+  name="sparkline-tooltip-styles"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'
+></GridExampleRunner>
 
 More styling can be applied using the CSS class selector to select the tooltip HTML elements with the following class attributes: `ag-sparkline-tooltip`, `ag-sparkline-tooltip-title`, `ag-sparkline-tooltip-content`, and modifying the style definitions in a stylesheet file.
 
@@ -127,7 +156,12 @@ This is shown in the example below. Note that:
 
 - The default tooltip template is used and the style definitions are overriden in the styles.css file.
 
-<GridExampleRunner title='Styling Sparkline Tooltips' name='sparkline-tooltip-advanced-styles' type='generated' options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Styling Sparkline Tooltips"
+  name="sparkline-tooltip-advanced-styles"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'
+></GridExampleRunner>
 
 ## Tooltip Container and Offset
 
@@ -159,7 +193,12 @@ Here's a live example to demonstrate the configuration above.
 - Note that the tooltip is now positioned underneath the mouse cursor as `xOffset` is set to `0`px and `yOffset` to `20`px.
 - The effect of the tooltip `container` configuration is that the tooltip will not flip to the left of the mouse cursor when it reaches the end of the sparkline cell width, instead it will only flip if the tooltip position surpasses the document body element's width.
 
-<GridExampleRunner title='Sparkline Tooltip Container' name='sparkline-tooltip-container' type='generated' options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'></GridExampleRunner>
+<GridExampleRunner
+  title="Sparkline Tooltip Container"
+  name="sparkline-tooltip-container"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'
+></GridExampleRunner>
 
 ## Custom Tooltip
 
@@ -177,7 +216,7 @@ const tooltipRenderer = (params) => {
                 <div>Volume: ${context.data.volume}</div>
               </div>
           </div>`;
-}
+};
 ```
 
 The tooltip renderer function receives the `params` object as a single parameter. The `xValue` and `yValue` for the highlighted data point as well as the reference to the raw `datum` element from the sparkline data array is provided in the `params` object.
@@ -193,8 +232,12 @@ Note that:
 - The elements have custom CSS class attributes, but the default class names can also be used so that the tooltip gets the default styling.
 - The styles for the elements are defined in the external styles.css file.
 
-<GridExampleRunner title='Custom Tooltips' name='sparkline-tooltip-custom-html' type='generated' options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'></GridExampleRunner>
-
+<GridExampleRunner
+  title="Custom Tooltips"
+  name="sparkline-tooltip-custom-html"
+  type="generated"
+  options='{ "enterprise": true, "exampleHeight": 585, "modules": ["clientside", "sparklines"] }'
+></GridExampleRunner>
 
 ## Interfaces
 
