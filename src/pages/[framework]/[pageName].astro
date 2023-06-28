@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { getDocPages } from "../../utils/pages";
+import { getDocPages, getDocPagesList } from "../../utils/pages";
 import SimpleExampleRunner from "../../components/SimpleExampleRunner.astro";
 import { MenuSidebar } from "../../components/MenuSidebar";
 import { FrameworkSelector } from "../../components/FrameworkSelector";
@@ -15,7 +15,9 @@ const { framework, pageName } = Astro.params;
 const { title, enterprise } = page.data;
 
 const { Content, components } = await page.render();
-const pages = await getCollection("docs");
+
+const allDocPages = await getCollection("docs");
+const pages = getDocPagesList(allDocPages);
 ---
 
 <main>

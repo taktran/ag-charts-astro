@@ -35,9 +35,19 @@ export const getGridScriptPath = (isEnterprise: boolean) => {
 export const getChartReactScriptPath = () =>
   "https://build.ag-grid.com/dev/ag-charts-react/lib/agChartsReact.js";
 
+function ignoreUnderscoreFiles(page: any) {
+  const pageFolders = page.slug.split("/");
+  const pageName = pageFolders[pageFolders.length - 1];
+  return pageName && !pageName.startsWith("_");
+}
+
+export function getDocPagesList(pages: any) {
+  return pages.filter(ignoreUnderscoreFiles);
+}
+
 export function getDocPages(pages: any) {
   return FRAMEWORK_SLUGS.map((framework) => {
-    return pages.map((page: any) => {
+    return getDocPagesList(pages).map((page: any) => {
       return {
         params: {
           framework,
