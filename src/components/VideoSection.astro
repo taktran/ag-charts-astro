@@ -1,0 +1,9 @@
+---
+import { VideoSection } from "./VideoSection";
+
+const html = await Astro.slots.render("default");
+---
+
+<VideoSection {...Astro.props} client:only="react">
+  <Fragment set:html={html} />
+</VideoSection>
