@@ -35,6 +35,8 @@ const pages = getDocPagesList(allDocPages);
   <section class="content">
     <h1>[{framework}]: {title} {enterprise ? "[e]" : ""}</h1>
     <Content
+      framework={framework}
+      page={page}
       components={{
         ...components,
         ChartExampleRunner: SimpleExampleRunner,

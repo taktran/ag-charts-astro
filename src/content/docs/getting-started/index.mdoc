@@ -1,5 +1,5 @@
 ---
-title: "Get Started with AG Grid"
+title: "Get Started with AG Grid!!!"
 ---
 
 ### Quick Look Code Example
@@ -8,18 +8,54 @@ Code example
 
 ## Getting Started with Community Video
 
-{% videoSection id="j-Odsb0EjVo" title="Video Tutorial for Getting Started with AG Grid Community" %}
+{% if equals($framework, "javascript") %}
+  {% videoSection id="j-Odsb0EjVo" title="Video Tutorial for Getting Started with AG Grid Community" %}
+  In this video we detail the steps to get an application working with AG
+  Grid Community. We show how to set up Rows and Columns, set some Grid
+  Properties, use the Grid's API and listen to Grid events.
+  {% /videoSection %}
+{% /if %}
 
-In this video we detail the steps to get an application working with AG
-Grid Community. We show how to set up Rows and Columns, set some Grid
-Properties, use the Grid's API and listen to Grid events.
+{% if equals($framework, "react") %}
+  {% videoSection id="Pr__B6HM_s4" title="Video Tutorial for Getting Started with AG Grid Community" %}
+  In this video we detail the steps to get an application working with React and AG Grid Community. We show how to set up Rows and Columns, set some Grid Properties, use the Grid's API and listen to Grid events.
+  {% /videoSection %}
+{% /if %}
 
-{% /videoSection %}
+{% if equals($framework, "angular") %}
+  {% videoSection id="_cRDVM6NlPk" title="Video Tutorial for Getting Started with AG Grid Community" %}
+  In this video we detail the steps to get an application working with Angular and AG Grid Community. We show how to set up Rows and Columns, set some Grid Properties, use the Grid's API and listen to Grid events.
+  {% /videoSection %}
+{% /if %}
+
+{% if equals($framework, "vue") %}
+  {% videoSection id="V14w_NFuZB4" title="Video Tutorial for Getting Started with AG Grid Community" %}
+  In this video we detail the steps to get an application working with Vue and AG Grid Community. We show how to set up Rows and Columns, set some Grid Properties, use the Grid's API and listen to Grid events.
+  {% /videoSection %}
+{% /if %}
 
 ## Getting Started with Enterprise Video
 
- {% videoSection id="EIkxDliHFYw" title="Getting Started with AG Grid Enterprise" %}
- <p>
-     The video then follows showing how to get started with <a href="../licensing/">AG Grid Enterprise</a>. Please take a look at Enterprise, you don't need a license to trial AG Grid Enterprise, you only need to get in touch if you decide to use it in your project.
- </p>
- {% /videoSection %}
+{% if equals($framework, "javascript") %}
+  {% videoSection id="EIkxDliHFYw" title="Getting Started with AG Grid Enterprise" %}
+  The video then follows showing how to get started with [AG Grid Enterprise](../licensing/). Please take a look at Enterprise, you don't need a license to trial AG Grid Enterprise, you only need to get in touch if you decide to use it in your project.
+  {% /videoSection %}
+{% /if %}
+
+{% if equals($framework, "react") %}
+  {% videoSection id="pKUhYE1VTP4" title="Getting Started with AG Grid Enterprise" %}
+  The video then follows showing how to get started with [AG Grid Enterprise](../licensing/). Please take a look at Enterprise, you don't need a license to trial AG Grid Enterprise, you only need to get in touch if you decide to use it in your project.
+  {% /videoSection %}
+{% /if %}
+
+{% if equals($framework, "angular") %}
+  {% videoSection id="xe6i3W6qW5k" title="Video Tutorial for Getting Started with AG Grid Community" %}
+  The video then follows showing how to get started with [AG Grid Enterprise](../licensing/). Please take a look at Enterprise, you don't need a license to trial AG Grid Enterprise, you only need to get in touch if you decide to use it in your project.
+  {% /videoSection %}
+{% /if %}
+
+{% if equals($framework, "vue") %}
+  {% videoSection id="9WnYqSxTuE8" title="Video Tutorial for Getting Started with AG Grid Community" %}
+  The video then follows showing how to get started with [AG Grid Enterprise](../licensing/). Please take a look at Enterprise, you don't need a license to trial AG Grid Enterprise, you only need to get in touch if you decide to use it in your project.
+  {% /videoSection %}
+{% /if %}
